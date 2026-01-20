@@ -64,6 +64,7 @@ elmo-hikes/
 
 - **Sebastian Abarca** - BCIT CST Student who has a passion for coding and learning new concepts. Fun fact: he is obsessed with futbol club Barcelona.
 - **Rayne Choy** - I like pigeons and boxes
+- **Jacob Surry** - BCIT CST Student with a passion for the World Cup.
 
 ---
 
