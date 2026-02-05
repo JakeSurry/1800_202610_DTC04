@@ -1,33 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <title>My BCIT Project</title>
-    <meta name="comp1800 template" content="My 1800 App">
+  <head>
+    <title>Fans Feast</title>
+    <meta name="comp1800 template" content="My 1800 App" />
 
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Other libraries go here -->
+  </head>
 
-</head>
-
-<body>
-
+  <body class="d-flex flex-column min-vh-100">
     <!------------------------------>
     <!-- Your HTML Layout go here -->
     <!------------------------------>
     <!-- Stuff for body goes here -->
-
-
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-dark"
+      aria-label="Offcanvas navbar large"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="./images/logo.jpg" height="36" /> Fan's Feast
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar2"
+          aria-controls="offcanvasNavbar2"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="offcanvas offcanvas-end text-bg-dark"
+          tabindex="-1"
+          id="offcanvasNavbar2"
+          aria-labelledby="offcanvasNavbar2Label"
+          style="width: 50%"
+        >
+          <div
+            class="offcanvas-header justify-content-end"
+            style="padding: 0.7rem 0.7rem"
+          >
+            <button
+              type="button"
+              class="navbar-toggler"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav flex-grow-1 pe-3 fs-1">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Log In</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Help Center</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main class="flex-grow-1">
+      <div class="px-4 py-5 my-5 text-center">
+        <h1 class="display-5 fw-bold text-body-emphasis">Fan's Feast</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">
+            Bringing Fans together
+          </p>
+        </div>
+      </div>
+    </main>
+    <footer
+      class="d-flex flex-wrap flex-end justify-content-between align-items-center py-3 my-4 border-top"
+    >
+      <div class="col-md-4 d-flex align-items-center">
+        <a
+          href="/"
+          class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1"
+          aria-label="Bootstrap"
+        >
+          <svg class="bi" width="30" height="24" aria-hidden="true">
+            <use xlink:href="#bootstrap"></use>
+          </svg>
+        </a>
+        <span class="mb-3 mb-md-0 text-body-secondary"
+          >© 2026 Fan's Feast, Inc</span
+        >
+      </div>
+    </footer>
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
     <!---------------------------------------------->
 
     <!-- Link to scripts of your own -->
-    <!-- <script type="module" src="./src/main.js"></script> -->
-
-</body>
-
+    <script type="module" src="./src/main.js"></script>
+  </body>
 </html>
