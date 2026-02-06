@@ -10,5 +10,43 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
 
-  <body></body>
+  <body>
+    <!-- Header -->
+    <header class="bg-gray-400 p-6 flex justify-between max-h-19 items-center">
+      <div class="min-h-10 max-h-10 flex items-center">
+        <img class="max-h-14 max-w-full" src="images/fansFeastLogo.png" />
+      </div>
+      <nav class="w-120 flex space-x-10 invisible md:visible">
+        <a href="#" class="font-bold">Home</a>
+        <a href="#" class="font-bold">Events</a>
+        <a href="#" class="font-bold">Log In</a>
+        <a href="#" class="font-bold">Sign Up</a>
+        <a href="#" class="font-bold">Help Center</a>
+      </nav>
+      <div class="min-h-10 max-h-10 flex items-center md:invisible">|||</div>
+    </header>
+    <!-- Search Area -->
+    <div class="relative">
+      <img
+        class="h-60 md:h-90 w-full object-cover grayscale"
+        src="images/hike1.jpg"
+      />
+      <div class="absolute inset-0 bg-white opacity-80"></div>
+      <div class="absolute inset-0 flex items-center">
+        <div
+          class="bg-gray-400 rounded-full w-full mx-15 h-9 flex items-center space-x-4 px-5"
+        >
+          <p class="w-[10%] flex justify-center">icon</p>
+          <p class="w-[80%] text-gray-600">Search</p>
+          <p class="w-[10%] flex justify-center">icon</p>
+        </div>
+      </div>
+    </div>
+    <!---------------------------------------------->
+    <!-- Your own JavaScript functions go here    -->
+    <!---------------------------------------------->
+
+    <!-- Link to scripts of your own -->
+    <!-- <script type="module" src="./src/main.js"></script> -->
+  </body>
 </html>
