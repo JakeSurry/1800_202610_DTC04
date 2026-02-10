@@ -1,108 +1,220 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <title>Fans Feast</title>
     <meta name="comp1800 template" content="My 1800 App" />
 
-    <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Other libraries go here -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
 
-  <body class="d-flex flex-column min-vh-100">
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
-    <!------------------------------>
-    <!-- Stuff for body goes here -->
-    <nav
-      class="navbar navbar-expand-lg navbar-dark bg-dark"
-      aria-label="Offcanvas navbar large"
-    >
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <img src="./images/logo.jpg" height="36" /> Fan's Feast
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasNavbar2"
-          aria-controls="offcanvasNavbar2"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div
-          class="offcanvas offcanvas-end text-bg-dark"
-          tabindex="-1"
-          id="offcanvasNavbar2"
-          aria-labelledby="offcanvasNavbar2Label"
-          style="width: 50%"
-        >
-          <div
-            class="offcanvas-header justify-content-end"
-            style="padding: 0.7rem 0.7rem"
-          >
-            <button
-              type="button"
-              class="navbar-toggler"
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          </div>
-          <div class="offcanvas-body">
-            <ul class="navbar-nav flex-grow-1 pe-3 fs-1">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Log In</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Help Center</a>
-              </li>
-            </ul>
-          </div>
-        </div>
+  <body>
+    <!-- Header -->
+    <header class="bg-gray-400 p-6 flex justify-between max-h-19 items-center">
+      <div class="min-h-10 max-h-10 flex items-center">
+        <img class="max-h-14 max-w-full" src="images/fansFeastLogo.png" />
       </div>
-    </nav>
-    <main class="flex-grow-1">
-      <div class="px-4 py-5 my-5 text-center">
-        <h1 class="display-5 fw-bold text-body-emphasis">Fan's Feast</h1>
-        <div class="col-lg-6 mx-auto">
-          <p class="lead mb-4">
+      <nav class="w-120 flex space-x-10 invisible md:visible">
+        <a href="#" class="font-bold">Home</a>
+        <a href="#" class="font-bold">Events</a>
+        <a href="#" class="font-bold">Log In</a>
+        <a href="#" class="font-bold">Sign Up</a>
+        <a href="#" class="font-bold">Help Center</a>
+      </nav>
+      <div class="min-h-10 max-h-10 flex items-center md:invisible">|||</div>
+    </header>
+    <!-- ============================= -->
+    <!-- Search Area                   -->
+    <!-- ============================= -->
+    <div class="relative mb-5">
+      <img
+        class="h-60 md:h-90 w-full object-cover grayscale"
+        src="images/hike1.jpg"
+      />
+      <div class="absolute inset-0 bg-white opacity-80"></div>
+      <div class="absolute inset-0 flex items-center mx-10">
+        <div class="w-full space-y-5">
+          <h1 class="text-4xl md:text-6xl text-center">
             Bringing Fans together
-          </p>
+          </h1>
+          <div
+            class="bg-gray-400 rounded-full w-full h-9 flex items-center space-x-4 px-5"
+          >
+            <p class="w-[10%] flex justify-center">icon</p>
+            <p class="w-[80%] text-gray-600">Search</p>
+            <p class="w-[10%] flex justify-center">icon</p>
+          </div>
         </div>
       </div>
-    </main>
-    <footer
-      class="d-flex flex-wrap flex-end justify-content-between align-items-center py-3 my-4 border-top"
-    >
-      <div class="col-md-4 d-flex align-items-center">
-        <a
-          href="/"
-          class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1"
-          aria-label="Bootstrap"
-        >
-          <svg class="bi" width="30" height="24" aria-hidden="true">
-            <use xlink:href="#bootstrap"></use>
-          </svg>
-        </a>
-        <span class="mb-3 mb-md-0 text-body-secondary"
-          >© 2026 Fan's Feast, Inc</span
-        >
+    </div>
+    <!-- ============================= -->
+    <!-- Main Content                  -->
+    <!-- ============================= -->
+    <div class="space-y-10">
+      <!-- ============================= -->
+      <!-- Content Suggestion Row        -->
+      <!-- ============================= -->
+      <div class="mx-10">
+        <!-- Content Suggestion Header -->
+        <div class="flex justify-between mb-3 items-center">
+          <h1 class="text-3xl">Happening This Week</h1>
+          <button class="bg-gray-400 rounded-full w-35 max-h-6">
+            See all events
+          </button>
+        </div>
+        <!-- Suggestion Cards -->
+        <div class="flex space-x-3 overflow-x-scroll">
+          <!-- Card -->
+          <div
+            class="bg-gray-400 rounded-3xl min-w-50 h-35 md:min-w-80 md:h-50 p-5"
+          >
+            Lorem ipsum dolor sit amet.
+          </div>
+          <!-- Card -->
+          <div
+            class="bg-gray-400 rounded-3xl min-w-50 h-35 md:min-w-80 md:h-50 p-5"
+          >
+            Lorem ipsum dolor sit amet.
+          </div>
+          <!-- Card -->
+          <div
+            class="bg-gray-400 rounded-3xl min-w-50 h-35 md:min-w-80 md:h-50 p-5"
+          >
+            Lorem ipsum dolor sit amet.
+          </div>
+          <!-- Card -->
+          <div
+            class="bg-gray-400 rounded-3xl min-w-50 h-35 md:min-w-80 md:h-50 p-5"
+          >
+            Lorem ipsum dolor sit amet.
+          </div>
+          <!-- Card -->
+          <div
+            class="bg-gray-400 rounded-3xl min-w-50 h-35 md:min-w-80 md:h-50 p-5"
+          >
+            Lorem ipsum dolor sit amet.
+          </div>
+          <!-- Card -->
+          <div
+            class="bg-gray-400 rounded-3xl min-w-50 h-35 md:min-w-80 md:h-50 p-5"
+          >
+            Lorem ipsum dolor sit amet.
+          </div>
+        </div>
       </div>
+      <!-- ============================= -->
+      <!-- Content Suggestion Row        -->
+      <!-- ============================= -->
+      <div class="mx-10">
+        <!-- Content Suggestion Header -->
+        <div class="flex justify-between mb-3 items-center">
+          <h1 class="text-3xl">Popular</h1>
+          <button class="bg-gray-400 rounded-full w-35 max-h-6">
+            See all events
+          </button>
+        </div>
+        <!-- Suggestion Cards -->
+        <div class="flex space-x-3 overflow-x-scroll">
+          <!-- Card -->
+          <div
+            class="bg-gray-400 rounded-3xl min-w-50 h-35 md:min-w-80 md:h-50 p-5"
+          >
+            Lorem ipsum dolor sit amet.
+          </div>
+          <!-- Card -->
+          <div
+            class="bg-gray-400 rounded-3xl min-w-50 h-35 md:min-w-80 md:h-50 p-5"
+          >
+            Lorem ipsum dolor sit amet.
+          </div>
+          <!-- Card -->
+          <div
+            class="bg-gray-400 rounded-3xl min-w-50 h-35 md:min-w-80 md:h-50 p-5"
+          >
+            Lorem ipsum dolor sit amet.
+          </div>
+          <!-- Card -->
+          <div
+            class="bg-gray-400 rounded-3xl min-w-50 h-35 md:min-w-80 md:h-50 p-5"
+          >
+            Lorem ipsum dolor sit amet.
+          </div>
+          <!-- Card -->
+          <div
+            class="bg-gray-400 rounded-3xl min-w-50 h-35 md:min-w-80 md:h-50 p-5"
+          >
+            Lorem ipsum dolor sit amet.
+          </div>
+          <!-- Card -->
+          <div
+            class="bg-gray-400 rounded-3xl min-w-50 h-35 md:min-w-80 md:h-50 p-5"
+          >
+            Lorem ipsum dolor sit amet.
+          </div>
+        </div>
+      </div>
+      <!-- ============================= -->
+      <!-- Content Suggestion Row        -->
+      <!-- ============================= -->
+      <div class="mx-10">
+        <!-- Content Suggestion Header -->
+        <div class="flex justify-between mb-3 items-center">
+          <h1 class="text-3xl">Near You</h1>
+          <button class="bg-gray-400 rounded-full w-35 max-h-6">
+            See all events
+          </button>
+        </div>
+        <!-- Suggestion Cards -->
+        <div class="flex space-x-3 overflow-x-scroll">
+          <!-- Card -->
+          <div
+            class="bg-gray-400 rounded-3xl min-w-50 h-35 md:min-w-80 md:h-50 p-5"
+          >
+            Lorem ipsum dolor sit amet.
+          </div>
+          <!-- Card -->
+          <div
+            class="bg-gray-400 rounded-3xl min-w-50 h-35 md:min-w-80 md:h-50 p-5"
+          >
+            Lorem ipsum dolor sit amet.
+          </div>
+          <!-- Card -->
+          <div
+            class="bg-gray-400 rounded-3xl min-w-50 h-35 md:min-w-80 md:h-50 p-5"
+          >
+            Lorem ipsum dolor sit amet.
+          </div>
+          <!-- Card -->
+          <div
+            class="bg-gray-400 rounded-3xl min-w-50 h-35 md:min-w-80 md:h-50 p-5"
+          >
+            Lorem ipsum dolor sit amet.
+          </div>
+          <!-- Card -->
+          <div
+            class="bg-gray-400 rounded-3xl min-w-50 h-35 md:min-w-80 md:h-50 p-5"
+          >
+            Lorem ipsum dolor sit amet.
+          </div>
+          <!-- Card -->
+          <div
+            class="bg-gray-400 rounded-3xl min-w-50 h-35 md:min-w-80 md:h-50 p-5"
+          >
+            Lorem ipsum dolor sit amet.
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer class="bg-gray-400 flex items-center justify-center h-10 mt-6">
+      © 2026 Fan's Feast, Inc
     </footer>
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
     <!---------------------------------------------->
-
     <!-- Link to scripts of your own -->
-    <script type="module" src="./src/main.js"></script>
+    <!-- <script type="module" src="./src/main.js"></script> -->
   </body>
 </html>
