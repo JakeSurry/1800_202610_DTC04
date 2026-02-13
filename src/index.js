@@ -1,4 +1,4 @@
-import { renderEvents } from "./components/EventsRow.js"; // Import the renderEvents function
+import { renderEvents } from "./components/EventsRow.js";
 import { renderHeader } from "./components/Header.js";
 
 const dummyEvents = [
@@ -41,15 +41,10 @@ const dummyEvents = [
   },
 ];
 
-function sayHello() {}
-// document.addEventListener('DOMContentLoaded', sayHello);
-
 function setup() {
-  // render the dummy data into the page
   renderEvents(dummyEvents, "happening-this-week");
   renderEvents(dummyEvents, "popular-events");
   renderEvents(dummyEvents, "near-you-events");
-  // render header and all sub-components
   renderHeader("header");
 }
 

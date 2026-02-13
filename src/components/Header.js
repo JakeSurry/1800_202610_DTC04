@@ -1,6 +1,3 @@
-// Done by: Jacob Surry
-// HTML for header by: Rayne Choy 95% Jacob Surry 5%
-
 const sidebarButtons = [
   {
     name: "Home",

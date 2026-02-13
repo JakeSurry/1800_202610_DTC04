@@ -1,5 +1,3 @@
-// Done by: Sebastian Abarca
-// This file contains the functions that render the events on the page
 function renderEvent(event) {
   // This function takes an event object and returns the content html for that event card
   return `
@@ -31,7 +29,6 @@ export function renderEvents(events, eventsContainerId) {
   /* This function takes an array of event objects and the id of the container where 
   the events should be rendered and appends the rendered events to that container */
   const eventsContainer = $(`#${eventsContainerId}`);
-  console.log(eventsContainer);
   for (let event of events) {
     eventsContainer.append(renderEvent(event));
   }
