@@ -97,8 +97,21 @@ const sidebarButtons = [
   },
 ];
 
-function sidebarButton(button) {
-  return `
+class SiteNavbar extends HTMLElement {
+  constructor() {
+    super();
+    this.renderTopBar(sidebarButtons);
+
+    const menuButton = document.getElementById("menu-button");
+    const sidebar = document.getElementById("sidebar");
+    const sidebarDimmer = document.getElementById("sidebarDimmer");
+    menuButton.addEventListener("click", () => {
+      sidebar.classList.toggle("translate-x-full");
+      sidebarDimmer.classList.toggle("hidden");
+    });
+  }
+  sidebarButton(button) {
+    return `
     <a 
       href="${button.href}"
       class="flex items-center cursor-pointer bg-${button.color} hover:bg-${button.hoverColor} active:bg-${button.hoverColor} active:scale-105 rounded-2xl m-4 p-2 text-3xl drop-shadow-xl"    
@@ -111,10 +124,9 @@ function sidebarButton(button) {
       </span>
     </a>
     `;
-}
-
-function renderTopBar(buttons) {
-  return `
+  }
+  renderTopBar(buttons) {
+    this.innerHTML = `
     <header class="bg-gray-400 p-6 flex justify-between max-h-19 items-center relative">
       <a 
        href="./index.html
@@ -155,7 +167,7 @@ function renderTopBar(buttons) {
         id="sidebar"
         class="flex flex-col absolute top-full right-0 z-50 w-1/3 h-[calc(100vh-100%)] bg-gray-400 translate-x-full transition-transform duration-300 ease-in-out overflow-hidden"
       >
-      ${buttons.map(sidebarButton).join("")}
+      ${buttons.map(this.sidebarButton).join("")}
       </div>
       <div
         id="sidebarDimmer"
@@ -165,17 +177,7 @@ function renderTopBar(buttons) {
       </div>
     </header>
     `;
+  }
 }
 
-export function renderHeader() {
-  const header = document.getElementById("header");
-  header.insertAdjacentHTML("beforeend", renderTopBar(sidebarButtons));
-
-  const menuButton = document.getElementById("menu-button");
-  const sidebar = document.getElementById("sidebar");
-  const sidebarDimmer = document.getElementById("sidebarDimmer");
-  menuButton.addEventListener("click", () => {
-    sidebar.classList.toggle("translate-x-full");
-    sidebarDimmer.classList.toggle("hidden");
-  });
-}
+customElements.define("site-navbar", SiteNavbar);
