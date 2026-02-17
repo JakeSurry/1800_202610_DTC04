@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
-.example {
-  @apply text-4xl md:text-6xl text-center;
+@theme {
+  --color-primary: #3b86f6;
+}
+
+@layer base {
+  h1 {
+    @apply text-amber-200;
+  }
 }
