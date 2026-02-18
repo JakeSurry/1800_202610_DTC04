@@ -1,6 +1,13 @@
-function renderEvent(event) {
-  // This function takes an event object and returns the content html for that event card
-  return `
+class Event extends HTMLElement {
+  set event(value) {
+    this._event = value;
+    this.render();
+  }
+
+  render() {
+    const event = this._event;
+    if (!event) return;
+    this.innerHTML = `
         <div
             class="flex flex-col gap-2 bg-gray-400 rounded-3xl min-w-70 h-40 md:min-w-80 md:h-50 p-3"
           >
@@ -23,13 +30,18 @@ function renderEvent(event) {
         <p class="text-xs text-[#fff] font-medium md:text-sm">${event.description}</p>
         </div>
         `;
+  }
 }
+
+customElements.define("event-card", Event);
 
 export function renderEvents(events, eventsContainerId) {
   /* This function takes an array of event objects and the id of the container where 
   the events should be rendered and appends the rendered events to that container */
   const eventsContainer = $(`#${eventsContainerId}`);
   for (let event of events) {
-    eventsContainer.append(renderEvent(event));
+    const eventCard = document.createElement("event-card");
+    eventCard.event = event;
+    eventsContainer.append(eventCard);
   }
 }
