@@ -17,6 +17,10 @@
       <div class="flex flex-col space-y-2 w-1/2">
         <h1 class="text-3xl text-center pb-9">Login</h1>
         <!-- Form Inputs -->
+        <div
+          id="authAlert"
+          class="d-none text-red-600 text-sm text-center"
+        ></div>
         <form id="login" action="# " class="flex flex-col space-y-2 pb-9">
           <label for="email">Email</label>
           <input
@@ -34,7 +38,9 @@
           />
         </form>
         <!-- Action Buttons -->
-        <button form="login" class="bg-gray-400 rounded-full">Login</button>
+        <button form="login" class="bg-gray-400 rounded-full" type="submit">
+          Login
+        </button>
         <button
           onclick="location.href = './signup.html'"
           class="bg-gray-400 rounded-full"
@@ -50,4 +56,5 @@
       </div>
     </div>
   </body>
+  <script type="module" src="./src/login.js"></script>
 </html>

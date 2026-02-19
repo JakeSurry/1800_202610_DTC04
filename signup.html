@@ -17,25 +17,29 @@
       <div class="flex flex-col space-y-2 w-1/2">
         <h1 class="text-3xl text-center pb-9">Sign up</h1>
         <!-- Form Inputs -->
-        <form id="login" action="# " class="flex flex-col space-y-2 pb-9">
-          <label for="email">Full Name</label>
+        <div
+          id="authAlert"
+          class="d-none text-red-600 text-sm text-center"
+        ></div>
+        <form id="signUp" action="# " class="flex flex-col space-y-2 pb-9">
+          <label for="name">Full Name</label>
           <input
             type="text"
             id="full_name"
             name="full_name"
             class="border-2 rounded-full"
           />
-          <label for="password">Email</label>
+          <label for="email">Email</label>
           <input
             type="text"
             id="email"
             name="email"
             class="border-2 rounded-full"
           />
-          <label for="password">Phone Number</label>
+          <label for="phone_number">Phone Number</label>
           <input
             type="text"
-            id="phone_number"
+            id="phoneNumber"
             name="phone_number"
             class="border-2 rounded-full"
           />
@@ -47,8 +51,9 @@
             class="border-2 rounded-full"
           />
         </form>
-        <!-- Action Buttons -->
-        <button form="login" class="bg-gray-400 rounded-full">Sign up</button>
+        <button form="signUp" class="bg-gray-400 rounded-full" type="submit">
+          Sign up
+        </button>
         <button
           onclick="location.href = './login.html'"
           class="bg-gray-400 rounded-full"
@@ -58,4 +63,5 @@
       </div>
     </div>
   </body>
+  <script type="module" src="./src/signUp.js"></script>
 </html>
