@@ -1,7 +1,7 @@
 const sidebarButtons = [
   {
     name: "Home",
-    href: "#",
+    href: "./index.html",
     color: "white",
     hoverColor: "gray-200",
     svg: `
@@ -49,7 +49,7 @@ const sidebarButtons = [
   },
   {
     name: "Log In",
-    href: "#",
+    href: "./login.html",
     color: "white",
     hoverColor: "gray-200",
     svg: `
@@ -135,9 +135,9 @@ class SiteNavbar extends HTMLElement {
         <img class="max-h-14 max-w-full" src="images/fansFeastLogo.png" />
       </a>
       <nav class="w-120 flex space-x-10 invisible md:visible">
-        <a href="#" class="font-bold">Home</a>
+        <a href="./index.html" class="font-bold">Home</a>
         <a href="#" class="font-bold">Events</a>
-        <a href="#" class="font-bold">Log In</a>
+        <a href="./login.html" class="font-bold">Log In</a>
         <a href="#" class="font-bold">Sign Up</a>
         <a href="#" class="font-bold">Help Center</a>
       </nav>
