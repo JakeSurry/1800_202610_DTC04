@@ -1,11 +1,1 @@
 @import "tailwindcss";
-
-@theme {
-  --color-primary: #3b86f6;
-}
-
-@layer base {
-  h1 {
-    @apply text-amber-200;
-  }
-}
