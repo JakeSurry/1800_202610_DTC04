@@ -3,11 +3,29 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   updateProfile,
+  onAuthStateChanged,
   signOut,
 } from "firebase/auth";
 
 export async function loginUser(email, password) {
   return signInWithEmailAndPassword(auth, email, password);
+}
+
+export function onAuthReady(callback) {
+  return onAuthStateChanged(auth, callback);
+}
+
+export function checkAuthState() {
+  onAuthStateChanged(auth, (user) => {
+    if (window.location.pathname.endsWith("main.html")) {
+      if (user) {
+        const displayName = user.displayName || user.email;
+        $("#welcomeMessage").text(`Hello, ${displayName}!`);
+      } else {
+        window.location.href = "index.html";
+      }
+    }
+  });
 }
 
 export async function signupUser(name, email, password) {
