@@ -77,6 +77,30 @@ const sidebarButtons = [
     auth: "both",
   },
   {
+    name: "Profile",
+    href: "./Profile",
+    color: "white",
+    hoverColor: "gray-200",
+    svg: `
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="64"
+        height="64"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#000000"
+        stroke-width="1"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+        <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+        <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+      </svg>
+    `,
+    auth: "user",
+  },
+  {
     name: "Logout",
     href: "#",
     color: "white",
@@ -145,10 +169,22 @@ class SiteNavbar extends HTMLElement {
         <nav class="w-120 flex space-x-10 invisible md:visible">
           <a href="./index.html" class="font-bold">Home</a>
           <a href="#" class="font-bold">Events</a>
-          ${this.isLoggedIn ? "" : `<a href="./login.html" class="font-bold">Log In</a>`}
-          ${this.isLoggedIn ? "" : `<a href="./signup.html" class="font-bold">Sign Up</a>`}
+          ${
+            this.isLoggedIn
+              ? ""
+              : `<a href="./login.html" class="font-bold">Log In</a>`
+          }
+          ${
+            this.isLoggedIn
+              ? ""
+              : `<a href="./signup.html" class="font-bold">Sign Up</a>`
+          }
           <a href="#" class="font-bold">Help Center</a>
-          ${this.isLoggedIn ? `<a href="#" data-action="logout" class="font-bold">Logout</a>` : ""}
+          ${
+            this.isLoggedIn
+              ? `<a href="#" data-action="logout" class="font-bold">Logout</a>`
+              : ""
+          }
         </nav>
 
         <button class="min-h-10 max-h-10 flex items-center cursor-pointer md:invisible" id="menu-button">
