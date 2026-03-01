@@ -62,8 +62,8 @@ const sidebarButtons = [
     auth: "guest",
   },
   {
-    name: "Help",
-    href: "#",
+    name: "Help Center",
+    href: "./help.html",
     color: "white",
     hoverColor: "gray-200",
     svg: `
@@ -179,7 +179,7 @@ class SiteNavbar extends HTMLElement {
               ? ""
               : `<a href="./signup.html" class="font-bold">Sign Up</a>`
           }
-          <a href="#" class="font-bold">Help Center</a>
+          <a href="./help.html" class="font-bold">Help Center</a>
           ${
             this.isLoggedIn
               ? `<a href="#" data-action="logout" class="font-bold">Logout</a>`
