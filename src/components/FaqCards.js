@@ -9,7 +9,7 @@ class Question extends HTMLElement {
     if (!question) return;
     this.innerHTML = `
         <div class="bg-neutral-300 rounded-md p-5">
-          <h2 class="font-bold">${question.question}</h2>
+          <h4>${question.question}</h4>
           <p>${question.answer}</p>
         </div>
         `;

@@ -1,1 +1,22 @@
 @import "tailwindcss";
+
+.title {
+  @apply text-4xl md:text-6xl;
+}
+
+input {
+  @apply border-2 rounded-full;
+}
+
+h1 {
+  @apply text-3xl font-bold;
+}
+h2 {
+  @apply text-2xl font-bold;
+}
+h3 {
+  @apply text-xl font-bold;
+}
+h4 {
+  @apply font-bold;
+}
