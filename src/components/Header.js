@@ -18,7 +18,7 @@ const sidebarButtons = [
   },
   {
     name: "Events",
-    href: "#",
+    href: "./events.html",
     color: "white",
     hoverColor: "gray-200",
     svg: `
@@ -168,7 +168,7 @@ class SiteNavbar extends HTMLElement {
 
         <nav class="w-120 flex space-x-10 invisible md:visible">
           <a href="./index.html" class="font-bold">Home</a>
-          <a href="#" class="font-bold">Events</a>
+          <a href="./events.html" class="font-bold">Events</a>
           ${
             this.isLoggedIn
               ? ""
