@@ -23,47 +23,31 @@ class SearchBar extends HTMLElement {
   render() {
     this.innerHTML = `
       <div class="w-full">
-        <div class="bg-gray-400 rounded-full w-full h-10 flex items-center px-4 gap-3">
-          <button type="button"
-                  id="filterBtn"
-                  class="shrink-0 rounded-full p-2 hover:bg-gray-300 active:scale-95 transition"
-                  aria-label="Open filters">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                width="22" height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round">
-            <line x1="4" y1="6" x2="20" y2="6"></line>
-            <circle cx="9" cy="6" r="2"></circle>
-
-            <line x1="4" y1="12" x2="20" y2="12"></line>
-            <circle cx="15" cy="12" r="2"></circle>
-
-            <line x1="4" y1="18" x2="20" y2="18"></line>
-            <circle cx="11" cy="18" r="2"></circle>
-            </svg>
-          </button>
-
-          <input id="searchInput"
-                 class="w-full bg-transparent outline-none text-gray-700 placeholder:text-gray-600"
-                 type="text"
-                 placeholder="${this._placeholder}"
-                 value="${this._value}" />
-
-          <button type="button"
-                  id="searchBtn"
-                  class="shrink-0 rounded-full p-2 hover:bg-gray-300 active:scale-95 transition"
-                  aria-label="Search">
+        <div class="bg-[#FFFFFF] rounded-full w-full h-7 flex items-center pl-4 gap-3 md:h-10 md:pl-6">
+          <div
+            id="searchBtn"
+            >
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 viewBox="0 0 24 24" fill="none" stroke="#6B7280"
                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="11" cy="11" r="7"></circle>
               <path d="M21 21l-4.3-4.3"></path>
             </svg>
+          </div>
+
+          <input id="searchInput"
+            class="w-full bg-transparent outline-none text-[#374151] placeholder:text-[#9CA3AF] text-xs md:text-base"
+            type="text"
+            placeholder="${this._placeholder}"
+            value="${this._value}" 
+          />
+          <button type="button"
+            id="searchBtn"
+            class="flex justify-center items-center bg-gradient-to-r from-[#4EA3E3] via-[#2563EB] to-[#1D4ED8] text-[#F9FAFB] rounded-r-full px-4 py-1 hover:brightness-110 h-full md:px-6 md:py-3"
+            aria-label="Search">
+            <p class="text-xs md:text-base font-medium">Search</p>
           </button>
+        
         </div>
       </div>
     `;
@@ -72,9 +56,8 @@ class SearchBar extends HTMLElement {
   wire() {
     const input = this.querySelector("#searchInput");
     const searchBtn = this.querySelector("#searchBtn");
-    const filterBtn = this.querySelector("#filterBtn");
 
-    if (!input || !searchBtn || !filterBtn) return;
+    if (!input || !searchBtn) return;
 
     // capture typing
     input.addEventListener("input", (e) => {
@@ -106,15 +89,6 @@ class SearchBar extends HTMLElement {
           }),
         );
       }
-    });
-
-    filterBtn.addEventListener("click", () => {
-      this.dispatchEvent(
-        new CustomEvent("filter:open", {
-          bubbles: true,
-          detail: {},
-        }),
-      );
     });
   }
 }
