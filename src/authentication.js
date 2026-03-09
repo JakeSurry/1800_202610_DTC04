@@ -6,6 +6,8 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
+import { db } from "/src/firebaseConfig.js";
+import { doc, setDoc } from "firebase/firestore";
 
 export async function loginUser(email, password) {
   return signInWithEmailAndPassword(auth, email, password);
@@ -28,14 +30,33 @@ export function checkAuthState() {
   });
 }
 
-export async function signupUser(name, email, password) {
+export async function signupUser(name, email, password, phone) {
   const userCredential = await createUserWithEmailAndPassword(
     auth,
     email,
     password,
   );
-  await updateProfile(userCredential.user, { displayName: name });
-  return userCredential.user;
+  const user = userCredential.user;
+
+  await updateProfile(user, { displayName: name });
+  try {
+    await setDoc(doc(db, "users", user.uid), {
+      name: name,
+      email: email,
+      displayName: name,
+      profilePic: null,
+      age: null,
+      homeTeam: null,
+      registeredEvents: null,
+      phone: phone,
+    });
+    console.log("Firestore user document created successfully!");
+  } catch (error) {
+    alert(
+      `Error creating user document:\n${error.code || ""}\n${error.message || error}`,
+    );
+  }
+  return user;
 }
 
 export async function logoutUser() {

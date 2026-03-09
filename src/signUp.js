@@ -25,12 +25,13 @@ function signUpAuth() {
     const name = document.querySelector("#full_name")?.value?.trim() ?? "";
     const email = document.querySelector("#email")?.value?.trim() ?? "";
     const password = document.querySelector("#password")?.value ?? "";
+    const phone = document.querySelector("#phoneNumber")?.value ?? "";
     if (!name || !email || !password) {
       showError("Please fill in name, email, phone number and password.");
       return;
     }
     try {
-      const res = await signupUser(name, email, password);
+      const res = await signupUser(name, email, password, phone);
       console.log(res);
       location.href = redirectUrl;
     } catch (err) {
