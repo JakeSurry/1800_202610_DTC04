@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Fans Feast</title>
@@ -12,6 +12,7 @@
     <script type="module" src="./src/components/Header.js"></script>
     <link rel="stylesheet" href="main.css" />
     <script type="module" src="./src/components/SearchBar.js"></script>
+    <script type="module" src="./src/events.js"></script>
   </head>
 
   <body>
@@ -28,12 +29,16 @@
             See all events
           </button>
         </div>
-        <div
+        <!-- <div
           id="happening-this-week"
           class="flex space-x-3 overflow-x-scroll"
+        ></div> -->
+        <div
+          id="events-list"
+          class="max-w-6xl mx-auto items-center flex flex-col gap-4"
         ></div>
       </div>
-      <div class="mx-10">
+      <!-- <div class="mx-10">
         <div class="flex justify-between mb-3 items-center">
           <h1 class="text-3xl">Popular</h1>
           <button class="bg-gray-400 rounded-full w-35 max-h-6">
@@ -53,7 +58,7 @@
           id="near-you-events"
           class="flex space-x-3 overflow-x-scroll"
         ></div>
-      </div>
+      </div> -->
     </div>
     <footer class="bg-gray-400 flex items-center justify-center h-10 mt-6">
       © 2026 Fan's Feast, Inc
