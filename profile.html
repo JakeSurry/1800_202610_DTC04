@@ -12,10 +12,46 @@
   </head>
   <body>
     <site-navbar></site-navbar>
+      <!-- ============================== -->
+      <!-- Profile Section -->
+      <!-- ============================== -->
+
     <div class="flex flex-col relative w-5/6 m-auto mt-16">
-      <div class="flex flex-row justify-end">
-        <button class="cursor-pointer">
-          <svg
+      <!-- Edit View -->
+      <div id="editProfileView" class ="hidden">
+        <h1>Edit Profile</h1>
+        <button id="toProfile" class="bg-gray-400 p-3">Cancel</button>
+        <form id="editProfile" action="# " class="flex flex-col space-y-2 pb-9">
+          <label for="displayName">Display Name</label>
+          <input
+            type="text"
+            id="displayName"
+            name="displayName"
+            class="border-2 rounded-full"
+          />
+          <label for="editLocation">Location</label>
+          <input
+            type="text"
+            id="editLocation"
+            name="editLocation"
+            class="border-2 rounded-full"
+          />
+          <label for="editPhone">Phone</label>
+          <input
+            type="text"
+            id="editPhone"
+            name="editPhone"
+            class="border-2 rounded-full"
+          />
+          <button type="submit" class="btn btn-success bg-blue-400">
+            Done
+          </button>
+        </form>
+      </div>
+      <!-- Profile View -->
+      <div id="profileView" class ="">
+        <div class="flex flex-row justify-end">
+            <button id="toEdit"><svg
             xmlns="http://www.w3.org/2000/svg"
             width="48"
             height="48"
@@ -33,49 +69,49 @@
               d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"
             />
             <path d="M16 5l3 3" />
-          </svg>
-        </button>
-      </div>
-      <!-- ============================== -->
-      <!-- Profile Info -->
-      <!-- ============================== -->
-      <div class="flex flex-row h-full">
-        <img
-          src="./images/elmo.jpg"
-          alt="profile-image"
-          class="border-4 border-gray-400 rounded-2xl size-48"
-        />
-        <div class="flex flex-col justify-around ml-8 w-full">
-          <h1>Full Name</h1>
-          <h1 class="bg-gray-400 p-4 rounded-2xl text-2xl">
-            <span id="full-name"></span>
-          </h1>
-          <h1>Display Name</h1>
-          <h1 class="bg-gray-400 p-4 rounded-2xl text-2xl">
-            <span id="display-name"></span>
-          </h1>
+          </svg></button>
+          </div>
+          <!-- ============================== -->
+          <!-- Profile Info -->
+          <!-- ============================== -->
+          <div class="flex flex-row h-full">
+            <img
+              src="./images/elmo.jpg"
+              alt="profile-image"
+              class="border-4 border-gray-400 rounded-2xl size-48"
+            />
+            <div class="flex flex-col justify-around ml-8 w-full">
+              <h1>Full Name</h1>
+              <h1 class="bg-gray-400 p-4 rounded-2xl text-2xl">
+                <span id="full-name"></span>
+              </h1>
+              <h1>Display Name</h1>
+              <h1 class="bg-gray-400 p-4 rounded-2xl text-2xl">
+                <span id="display-name"></span>
+              </h1>
+            </div>
+          </div>
+          <div class="flex flex-col gap-y-2 mt-8 mb-16">
+            <h1 class="bg-gray-400 px-4 py-2 rounded-2xl text-1xl">
+              <span id="location"></span>
+            </h1>
+            <h1 class="bg-gray-400 px-4 py-2 rounded-2xl text-1xl">
+              <span id="email"></span>
+            </h1>
+            <h1 class="bg-gray-400 px-4 py-2 rounded-2xl text-1xl">
+              <span id="phone"></span>
+            </h1>
+          </div>
         </div>
-      </div>
-      <div class="flex flex-col gap-y-2 mt-8 mb-16">
-        <h1 class="bg-gray-400 px-4 py-2 rounded-2xl text-1xl">
-          <span id="location"></span>
-        </h1>
-        <h1 class="bg-gray-400 px-4 py-2 rounded-2xl text-1xl">
-          <span id="email"></span>
-        </h1>
-        <h1 class="bg-gray-400 px-4 py-2 rounded-2xl text-1xl">
-          <span id="phone"></span>
-        </h1>
-      </div>
-      <div class="flex justify-between mb-3 items-center">
-        <h1 class="text-3xl">My Events</h1>
-      </div>
-      <!-- ============================== -->
-      <!-- Events -->
-      <!-- ============================== -->
-      <div class="">
-        <h1><span id="events"></span></h1>
-      </div>
+        <!-- ============================== -->
+        <!-- Events -->
+        <!-- ============================== -->
+        <div class="">
+          <div class="flex justify-between mb-3 items-center">
+            <h1 class="text-3xl">My Events</h1>
+          </div>
+          <h1><span id="events"></span></h1>
+        </div>
       <!-- <div id="near-you-events" class="flex space-x-3 overflow-x-scroll"> -->
       </div>
     </div>

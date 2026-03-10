@@ -1,6 +1,67 @@
 import { onAuthReady } from "./authentication.js";
 import { db } from "./firebaseConfig.js";
-import { doc, onSnapshot, getDoc } from "firebase/firestore";
+import { doc, onSnapshot, getDoc, setDoc } from "firebase/firestore";
+function initAuthUI() {
+  // --- DOM Elements ---
+  const profileView = document.getElementById("profileView");
+  const editProfileView = document.getElementById("editProfileView");
+  const toEditBtn = document.getElementById("toEdit");
+  const toProfileBtn = document.getElementById("toProfile");
+  const editForm = document.getElementById("editProfile");
+
+  function setVisible(el, visible) {
+    el.classList.toggle("hidden", !visible);
+  }
+
+  // Listeners
+  toProfileBtn?.addEventListener("click", (e) => {
+    setVisible(editProfileView, false);
+    setVisible(profileView, true);
+  });
+
+  toEditBtn?.addEventListener("click", (e) => {
+    setVisible(profileView, false);
+    setVisible(editProfileView, true);
+  });
+
+  onAuthReady(async (user) => {
+    if (!user) {
+      location.href = "index.html";
+      return;
+    }
+    console.log("auth ready", user);
+
+    editForm?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const userDocSnap = await getDoc(doc(db, "users", user.uid));
+      const userDoc = userDocSnap.data();
+
+      const newDisplayName =
+        document.querySelector("#displayName")?.value?.trim() ||
+        userDoc.displayName;
+
+      const newLoc =
+        document.querySelector("#editLocation")?.value?.trim() ||
+        userDoc.location;
+
+      const newPhone =
+        document.querySelector("#editPhone")?.value || userDoc.phone;
+
+      await setDoc(
+        doc(db, "users", user.uid),
+        {
+          displayName: newDisplayName,
+          location: newLoc,
+          phone: newPhone,
+        },
+        { merge: true },
+      );
+      setVisible(editProfileView, false);
+      setVisible(profileView, true);
+    });
+  });
+}
 
 function ShowProfileInfo() {
   const nameElement = document.getElementById("full-name");
@@ -14,43 +75,21 @@ function ShowProfileInfo() {
       location.href = "index.html";
       return;
     }
+    onSnapshot(doc(db, "users", user.uid), (userDoc) => {
+      const data = userDoc.data() || {};
 
-    const userDoc = await getDoc(doc(db, "users", user.uid));
+      const name = data.name || user.displayName || user.email;
+      const displayName = data.displayName || "Display Name";
+      const location = data.location || "Location";
+      const email = data.email || "Email";
+      const phone = data.phone || "Phone";
 
-    const name = userDoc.exists()
-      ? userDoc.data().name
-      : user.displayName || user.email;
-    const displayName = userDoc.exists()
-      ? userDoc.data().displayName
-      : "Display Name";
-    const location =
-      userDoc.exists() && userDoc.data().location != null
-        ? userDoc.data().location
-        : "Location";
-    const email =
-      userDoc.exists() && userDoc.data().email != null
-        ? userDoc.data().email
-        : "Email";
-    const phone =
-      userDoc.exists() && userDoc.data().phone != null
-        ? userDoc.data().phone
-        : "Phone";
-
-    if (nameElement) {
-      nameElement.textContent = `${name}`;
-    }
-    if (displayElement) {
-      displayElement.textContent = `${displayName}`;
-    }
-    if (locationElement) {
-      locationElement.textContent = `${location}`;
-    }
-    if (emailElement) {
-      emailElement.textContent = `${email}`;
-    }
-    if (phoneElement) {
-      phoneElement.textContent = `${phone}`;
-    }
+      if (nameElement) nameElement.textContent = name;
+      if (displayElement) displayElement.textContent = displayName;
+      if (locationElement) locationElement.textContent = location;
+      if (emailElement) emailElement.textContent = email;
+      if (phoneElement) phoneElement.textContent = phone;
+    });
   });
 }
 
@@ -77,3 +116,4 @@ function ShowProfileEvents() {
 
 ShowProfileInfo();
 ShowProfileEvents();
+document.addEventListener("DOMContentLoaded", initAuthUI);

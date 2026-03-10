@@ -49,6 +49,7 @@ export async function signupUser(name, email, password, phone) {
       homeTeam: null,
       registeredEvents: null,
       phone: phone,
+      location: null,
     });
     console.log("Firestore user document created successfully!");
   } catch (error) {
