@@ -19,17 +19,22 @@ function initAuthUI() {
     setVisible(profileView, true);
   });
 
-  toEditBtn?.addEventListener("click", (e) => {
-    setVisible(profileView, false);
-    setVisible(editProfileView, true);
-  });
-
   onAuthReady(async (user) => {
     if (!user) {
       location.href = "index.html";
       return;
     }
-    console.log("auth ready", user);
+    toEditBtn?.addEventListener("click", async (e) => {
+      setVisible(profileView, false);
+      setVisible(editProfileView, true);
+
+      const userDocSnap = await getDoc(doc(db, "users", user.uid));
+      const userDoc = userDocSnap.data();
+
+      document.querySelector("#displayName").value = userDoc.displayName || "";
+      document.querySelector("#editLocation").value = userDoc.location || "";
+      document.querySelector("#editPhone").value = userDoc.phone || "";
+    });
 
     editForm?.addEventListener("submit", async (e) => {
       e.preventDefault();
