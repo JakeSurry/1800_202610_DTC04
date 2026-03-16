@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Fans Feast</title>
+    <meta name="comp1800 template" content="My 1800 App" />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- ============================= -->
+    <!-- Add jquery                    -->
+    <!-- ============================= -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/@tabler/icons-sprite@latest/dist/tabler-sprite.js"></script>
+    <script type="module" src="/src/components/Header.js"></script>
+    <script type="module" src="/src/components/HeroBusiness.js"></script>
+    <script type="module" src="/src/components/InfoSectionBusiness.js"></script>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+
+  <body class="bg-[#F5F7FA]">
+    <!-- Header -->
+    <site-navbar></site-navbar>
+    <hero-section-buisness></hero-section-buisness>
+    <info-section></info-section>
+    <div class="flex flex-col px-6 gap-3">
+      <div class="flex justify-between items-center">
+        <h2 class="text-lg font-bold md:text-2xl">Upcoming Hosted Events</h2>
+        <button class="text-xs md:text-base flex items-center gap-1">
+          See all
+          <svg
+            class="w-2.5 h-2.5 md:w-3.25 md:h-3.25"
+            viewBox="-5.5 0 26 26"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+          >
+            <g
+              id="Page-1"
+              stroke="none"
+              stroke-width="1"
+              fill="none"
+              fill-rule="evenodd"
+              sketch:type="MSPage"
+            >
+              <g
+                id="Icon-Set-Filled"
+                sketch:type="MSLayerGroup"
+                transform="translate(-474.000000, -1196.000000)"
+                fill="#000000"
+              >
+                <path
+                  d="M488.404,1207.36 L477.637,1197.6 C476.806,1196.76 475.459,1196.76 474.629,1197.6 C473.798,1198.43 473.798,1199.77 474.629,1200.6 L483.885,1209 L474.629,1217.4 C473.798,1218.23 473.798,1219.57 474.629,1220.4 C475.459,1221.24 476.806,1221.24 477.637,1220.4 L488.404,1210.64 C488.854,1210.19 489.052,1209.59 489.015,1209 C489.052,1208.41 488.854,1207.81 488.404,1207.36"
+                  id="chevron-right"
+                  sketch:type="MSShapeGroup"
+                ></path>
+              </g>
+            </g>
+          </svg>
+        </button>
+      </div>
+      <div
+        id="hosted-event-card"
+        class="flex space-x-3 overflow-x-scroll overflow-y-hidden pr-10"
+      ></div>
+      <div class="flex justify-between items-center">
+        <h2 class="text-lg font-bold md:text-2xl">Match Schedule</h2>
+        <button class="text-xs md:text-base flex items-center gap-1">
+          See all
+          <svg
+            class="w-2.5 h-2.5 md:w-3.25 md:h-3.25"
+            viewBox="-5.5 0 26 26"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+          >
+            <g
+              id="Page-1"
+              stroke="none"
+              stroke-width="1"
+              fill="none"
+              fill-rule="evenodd"
+              sketch:type="MSPage"
+            >
+              <g
+                id="Icon-Set-Filled"
+                sketch:type="MSLayerGroup"
+                transform="translate(-474.000000, -1196.000000)"
+                fill="#000000"
+              >
+                <path
+                  d="M488.404,1207.36 L477.637,1197.6 C476.806,1196.76 475.459,1196.76 474.629,1197.6 C473.798,1198.43 473.798,1199.77 474.629,1200.6 L483.885,1209 L474.629,1217.4 C473.798,1218.23 473.798,1219.57 474.629,1220.4 C475.459,1221.24 476.806,1221.24 477.637,1220.4 L488.404,1210.64 C488.854,1210.19 489.052,1209.59 489.015,1209 C489.052,1208.41 488.854,1207.81 488.404,1207.36"
+                  id="chevron-right"
+                  sketch:type="MSShapeGroup"
+                ></path>
+              </g>
+            </g>
+          </svg>
+        </button>
+      </div>
+      <div id="matches" class="flex flex-col gap-2"></div>
+    </div>
+    <footer
+      class="bg-[#162E5C] text-white flex items-center justify-center h-10 mt-6"
+    >
+      © 2026 Fan's Feast, Inc
+    </footer>
+    <script type="module" src="./src/mainBusiness.js"></script>
+  </body>
+</html>
