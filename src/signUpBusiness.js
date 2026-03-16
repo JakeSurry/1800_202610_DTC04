@@ -3,18 +3,19 @@ import { signupUser, authErrorMessage } from "./authentication.js";
 function signUpAuth() {
   const alertEl = document.getElementById("authAlert");
   const signupForm = document.getElementById("signUp");
-  const redirectUrl = "./main.html";
+  const redirectUrl = "./mainBusiness.html";
 
   let errorTimeout;
+
   function showError(msg) {
     alertEl.textContent = msg || "";
-    alertEl.classList.remove("d-none");
+    alertEl.classList.remove("hidden");
     clearTimeout(errorTimeout);
     errorTimeout = setTimeout(hideError, 5000);
   }
 
   function hideError() {
-    alertEl.classList.add("d-none");
+    alertEl.classList.add("hidden");
     alertEl.textContent = "";
     clearTimeout(errorTimeout);
   }
@@ -22,29 +23,34 @@ function signUpAuth() {
   signupForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     hideError();
-    const name = document.querySelector("#full_name")?.value?.trim() ?? "";
+
+    const businessName =
+      document.querySelector("#businessName")?.value?.trim() ?? "";
     const email = document.querySelector("#email")?.value?.trim() ?? "";
     const password = document.querySelector("#password")?.value ?? "";
-    const phone = document.querySelector("#phoneNumber")?.value ?? "";
-    if (!name || !email || !password) {
-      showError("Please fill in name, email, phone number and password.");
+    const phone = document.querySelector("#phoneNumber")?.value?.trim() ?? "";
+
+    if (!businessName || !email || !phone || !password) {
+      showError(
+        "Please fill in business name, contact name, email, phone number, and password.",
+      );
       return;
     }
+
     try {
       const res = await signupUser({
-        accountType: "personal",
-        name,
+        accountType: "business",
+        businessName,
         email,
         password,
         phone,
       });
+
       console.log(res);
       location.href = redirectUrl;
     } catch (err) {
       showError(authErrorMessage(err));
       console.error(err);
-    } finally {
-      setSubmitDisabled(signupForm, false);
     }
   });
 }

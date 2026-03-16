@@ -1,0 +1,62 @@
+class MatchSchedule extends HTMLElement {
+  set event(value) {
+    this._event = value;
+    this.render();
+  }
+
+  render() {
+    const event = this._event;
+    if (!event) return;
+
+    this.innerHTML = `
+      <div class="w-full rounded-3xl bg-[#FFFFFF] shadow-sm border border-[#E5E7EB] px-4 py-4">
+        <div class="flex items-center justify-between gap-4">
+          
+          <div class="flex items-center gap-3">
+            <img
+              src="../../images/flags/${event.team1}.png"
+              alt="${event.team1}"
+              class="h-10 w-10 object-cover rounded-full shrink-0"
+            />
+
+            <div class="flex flex-col items-center">
+              <p class="text-[#1F2937] text-base md:text-lg font-bold truncate">
+                ${event.team1} vs ${event.team2}
+              </p>
+              <p class="text-[#6B7280] text-sm md:text-base">
+                ${event.date} · ${event.time}
+              </p>
+            </div>
+
+            <img
+              src="../../images/flags/${event.team2}.png"
+              alt="${event.team2}"
+              class="h-10 w-10 object-cover rounded-full shrink-0"
+            />
+          </div>
+
+          <button
+            type="button"
+            id="hostMatch"
+            class="shrink-0 rounded-full bg-linear-to-r from-[#4EA3E3] via-[#2563EB] to-[#1D4ED8] px-4 py-2 text-sm font-semibold text-[#F9FAFB] hover:brightness-110"
+          >
+            Host Match
+          </button>
+        </div>
+      </div>
+    `;
+  }
+}
+
+customElements.define("match-schedule-card", MatchSchedule);
+
+export function renderMatchSchedule(events, containerId) {
+  const matchScheduleContainer = $(`#${containerId}`);
+  matchScheduleContainer.empty();
+
+  for (let event of events) {
+    const matchCard = document.createElement("match-schedule-card");
+    matchCard.event = event;
+    matchScheduleContainer.append(matchCard);
+  }
+}

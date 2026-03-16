@@ -1,4 +1,4 @@
-import { auth } from "/src/firebaseConfig.js";
+import { auth, db } from "/src/firebaseConfig.js";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -6,8 +6,7 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
-import { db } from "/src/firebaseConfig.js";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 export async function loginUser(email, password) {
   return signInWithEmailAndPassword(auth, email, password);
@@ -18,44 +17,114 @@ export function onAuthReady(callback) {
 }
 
 export function checkAuthState() {
-  onAuthStateChanged(auth, (user) => {
-    if (window.location.pathname.endsWith("main.html")) {
-      if (user) {
-        const displayName = user.displayName || user.email;
-        $("#welcomeMessage").text(`Hello, ${displayName}!`);
-      } else {
-        window.location.href = "index.html";
+  onAuthStateChanged(auth, async (user) => {
+    if (!window.location.pathname.endsWith("main.html")) return;
+
+    if (!user) {
+      window.location.href = "index.html";
+      return;
+    }
+
+    try {
+      const businessRef = doc(db, "business_accounts", user.uid);
+      const userRef = doc(db, "users", user.uid);
+
+      const businessSnap = await getDoc(businessRef);
+      const userSnap = await getDoc(userRef);
+
+      if (businessSnap.exists()) {
+        const businessData = businessSnap.data();
+        $("#welcomeMessage").text(
+          `Welcome, ${businessData.displayName || businessData.businessName || user.email}!`,
+        );
+        return;
       }
+
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+        $("#welcomeMessage").text(
+          `Hello, ${userData.displayName || userData.name || user.email}!`,
+        );
+        return;
+      }
+
+      $("#welcomeMessage").text(`Hello, ${user.displayName || user.email}!`);
+    } catch (error) {
+      console.error("Error checking auth state:", error);
+      $("#welcomeMessage").text(`Hello, ${user.displayName || user.email}!`);
     }
   });
 }
 
-export async function signupUser(name, email, password, phone) {
+export async function signupUser(data) {
+  const {
+    accountType,
+    email,
+    password,
+    phone = null,
+    name = null,
+    businessName = null,
+  } = data;
+
+  if (!accountType) {
+    throw new Error("accountType is required.");
+  }
+
   const userCredential = await createUserWithEmailAndPassword(
     auth,
     email,
     password,
   );
+
   const user = userCredential.user;
 
-  await updateProfile(user, { displayName: name });
+  const displayName =
+    accountType === "business" ? (businessName ?? email) : (name ?? email);
+
+  await updateProfile(user, { displayName });
+
   try {
-    await setDoc(doc(db, "users", user.uid), {
-      name: name,
-      email: email,
-      displayName: name,
-      profilePic: null,
-      age: null,
-      homeTeam: null,
-      registeredEvents: null,
-      phone: phone,
-      location: null,
-    });
-    console.log("Firestore user document created successfully!");
+    if (accountType === "personal") {
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        accountType: "personal",
+        name: name,
+        email: email,
+        displayName: displayName,
+        profilePic: null,
+        age: null,
+        homeTeam: null,
+        registeredEvents: [],
+        phone: phone,
+        location: null,
+      });
+    } else if (accountType === "business") {
+      await setDoc(doc(db, "business_accounts", user.uid), {
+        uid: user.uid,
+        accountType: "business",
+        businessName: businessName,
+        email: email,
+        displayName: displayName,
+        phone: phone,
+        profilePic: null,
+        coverImage: null,
+        businessType: null,
+        address: null,
+        description: null,
+        website: null,
+        instagram: null,
+        hostingEvents: [],
+      });
+    } else {
+      throw new Error("Invalid account type.");
+    }
+
+    console.log("Firestore account document created successfully!");
   } catch (error) {
     alert(
-      `Error creating user document:\n${error.code || ""}\n${error.message || error}`,
+      `Error creating account document:\n${error.code || ""}\n${error.message || error}`,
     );
+    throw error;
   }
   return user;
 }

@@ -24,9 +24,8 @@ class SearchBar extends HTMLElement {
     this.innerHTML = `
       <div class="w-full">
         <div class="bg-[#FFFFFF] rounded-full w-full h-7 flex items-center pl-4 gap-3 md:h-10 md:pl-6">
-          <div
-            id="searchBtn"
-            >
+
+          <div id="searchIcon">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                  viewBox="0 0 24 24" fill="none" stroke="#6B7280"
                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -35,19 +34,23 @@ class SearchBar extends HTMLElement {
             </svg>
           </div>
 
-          <input id="searchInput"
-            class="w-full bg-transparent outline-none text-[#374151] placeholder:text-[#9CA3AF] text-xs md:text-base"
+          <input
+            id="searchInput"
+            class="w-full bg-transparent outline-none text-[#1F2937] placeholder:text-[#9CA3AF] text-xs md:text-base"
             type="text"
             placeholder="${this._placeholder}"
-            value="${this._value}" 
+            value="${this._value}"
           />
-          <button type="button"
-            id="searchBtn"
-            class="flex justify-center items-center bg-gradient-to-r from-[#4EA3E3] via-[#2563EB] to-[#1D4ED8] text-[#F9FAFB] rounded-r-full px-4 py-1 hover:brightness-110 h-full md:px-6 md:py-3"
-            aria-label="Search">
+
+          <button
+            type="button"
+            id="searchSubmit"
+            class="flex justify-center items-center bg-linear-to-r from-[#4EA3E3] via-[#2563EB] to-[#1D4ED8] text-[#F9FAFB] rounded-r-full px-4 py-1 hover:brightness-110 h-full md:px-6 md:py-3"
+            aria-label="Search"
+          >
             <p class="text-xs md:text-base font-medium">Search</p>
           </button>
-        
+
         </div>
       </div>
     `;
@@ -55,11 +58,10 @@ class SearchBar extends HTMLElement {
 
   wire() {
     const input = this.querySelector("#searchInput");
-    const searchBtn = this.querySelector("#searchBtn");
+    const searchBtn = this.querySelector("#searchSubmit");
 
     if (!input || !searchBtn) return;
 
-    // capture typing
     input.addEventListener("input", (e) => {
       this._value = e.target.value;
 

@@ -1,9 +1,10 @@
 import { loginUser, authErrorMessage } from "./authentication.js";
+import { db } from "/src/firebaseConfig.js";
+import { doc, getDoc } from "firebase/firestore";
 
 function initLoginAuth() {
   const alertEl = document.getElementById("authAlert");
   const loginForm = document.getElementById("login");
-  const redirectUrl = "main.html";
 
   let errorTimeout;
   function showError(msg) {
@@ -29,13 +30,29 @@ function initLoginAuth() {
       return;
     }
     try {
-      await loginUser(email, password);
-      location.href = redirectUrl;
+      const res = await loginUser(email, password);
+      const user = res.user;
+
+      const businessRef = doc(db, "business_accounts", user.uid);
+      const businessSnap = await getDoc(businessRef);
+
+      if (businessSnap.exists()) {
+        location.href = "./mainBusiness.html";
+        return;
+      }
+
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+        location.href = "./main.html";
+        return;
+      }
+
+      showError("Account profile not found.");
     } catch (err) {
       showError(authErrorMessage(err));
       console.error(err);
-    } finally {
-      setSubmitDisabled(loginForm, false);
     }
   });
 }

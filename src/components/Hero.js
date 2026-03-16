@@ -10,14 +10,14 @@ class Hero extends HTMLElement {
 
     this.innerHTML = `
       <section
-        class="relative min-h-[420px] bg-no-repeat bg-center bg-cover overflow-hidden flex items-center justify-center px-6 py-10"
+        class="relative min-h-105 bg-no-repeat bg-center bg-cover overflow-hidden flex items-center justify-center px-6 py-10"
         style="background-image: url('images/hero.png');"
       >
-        <div class="absolute inset-0 bg-gradient-to-r from-[#1D4ED8]/80 via-[#2563EB]/60 to-[#4EA3E3]/40"></div>
+        <div class="absolute inset-0 bg-linear-to-r from-[#1D4ED8]/80 via-[#2563EB]/60 to-[#4EA3E3]/40"></div>
 
         <div class="relative z-10 max-w-4xl w-full flex flex-col items-center gap-5 text-center text-[#F9FAFB]">
           <div class="flex flex-col items-center gap-3">
-            <h1 class="text-2xl md:text-4xl font-bold">
+            <h1 class="text-2xl md:text-4xl font-bold text-[#F9FAFB]">
               FIND THE BEST PLACES TO WATCH THE WORLD CUP
             </h1>
 
@@ -30,7 +30,7 @@ class Hero extends HTMLElement {
             <search-bar placeholder="Search teams, matches, or bars"></search-bar>
           </div>
 
-          <div class="flex items-center gap-4 rounded-2xl border border-white/20 bg-white/15 px-7 py-4 backdrop-blur-sm">
+          <div class="flex items-center gap-4 rounded-2xl border border-[#F9FAFB]/20 bg-[#FFFFFF]/15 px-7 py-4 backdrop-blur-sm">
             <div class="flex flex-col items-center gap-2 text-center">
               <div class="flex items-center justify-center gap-5">
                 <img
