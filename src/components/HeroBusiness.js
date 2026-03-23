@@ -13,11 +13,11 @@ class HeroBusiness extends HTMLElement {
         class="relative min-h-62.5 bg-no-repeat bg-center bg-cover overflow-hidden flex items-center justify-center px-6 py-10"
         style="background-image: url('images/hero.png');"
       >
-        <div class="absolute inset-0 bg-linear-to-r from-[#1D4ED8]/80 via-[#2563EB]/60 to-[#4EA3E3]/40"></div>
+        <div class="absolute inset-0 hero-blue-gradient"></div>
 
         <div class="relative z-10 max-w-4xl w-full flex flex-col gap-5 text-white">
           <div class="flex flex-col gap-3">
-            <h1 id="title" class="text-2xl md:text-4xl font-bold text-white"></h1>
+            <h1 id="title" class="title font-bold text-white"></h1>
 
             <h3 id="subtitle" class="text-base md:text-xl font-light text-white/90"></h3>
           </div>
@@ -25,12 +25,12 @@ class HeroBusiness extends HTMLElement {
             <button
               type="button"
               id="createEvent"
-              class="flex justify-center items-center main-blue-gradient text-white font-medium rounded-full px-4 py-1 hover:brightness-110 md:px-6 md:py-3"
+              class="main-blue-gradient bright-hover"
             >
               Create Event
             </button>
             <button
-              class="rounded-full px-4 py-1 border border-[#F9FAFB]/20 bg-[#FFFFFF]/10 text-white font-medium hover:bg-[#FFFFFF]/15 transition md:px-6 md:py-3"
+              class="clear-window-color clear-hover"
             >
               Edit my events
             </button>

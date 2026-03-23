@@ -388,7 +388,7 @@ class SiteNavbar extends HTMLElement {
           : ROUTES.guestHome;
 
     this.innerHTML = `
-      <header class="sticky top-0 z-50 flex h-15 items-center justify-between bg-[#162E5C] p-6 text-white md:h-20">
+      <header class="sticky top-0 z-50 flex h-15 items-center justify-between bg-dark-blue p-6 text-white md:h-20">
         <a href="${homeHref}" class="flex items-center">
           <img class="h-10 object-contain md:h-12" src="images/fansFeastLogo.png" alt="Fans Feast Logo" />
         </a>
