@@ -63,7 +63,7 @@
     @apply bg-linear-to-r from-blue-g1 via-blue-g2 to-blue-g3 text-white;
   }
   .hero-blue-gradient {
-    @apply bg-linear-to-r from-blue-hg1/80 via-blue-hg2/60 to-blue-hg3/40;
+    @apply bg-linear-to-r from-blue-hg1/60 via-blue-hg2/60 to-blue-hg3/40;
   }
   .green-gradient {
     @apply bg-linear-to-r from-green to-[#059669];
@@ -78,13 +78,16 @@
 /* ===================================================================== */
 @layer components {
   h1 {
-    @apply text-xl;
+    @apply text-3xl md:text-5xl;
   }
   h2 {
     @apply text-2xl md:text-4xl;
   }
   h3 {
     @apply text-lg md:text-2xl font-light;
+  }
+  .subtitle {
+    @apply text-sm font-light;
   }
 }
 /* ===================================================================== */
@@ -96,19 +99,22 @@
   /* --------------------- */
   /* Default link/button styling */
   a {
-    @apply rounded-full font-medium flex justify-center items-center;
+    @apply rounded-full font-medium flex justify-center items-center p-4;
   }
   button {
-    @apply rounded-full font-medium flex justify-center items-center px-4 py-1 md:px-6 md:py-3;
+    @apply rounded-full font-medium flex justify-center items-center px-5 py-2 md:px-6 md:py-3;
+  }
+  .small-button {
+    @apply text-sm font-normal;
   }
   /* Hovers */
   .bright-hover {
-    @apply hover:brightness-110 transition;
+    @apply hover:brightness-120 transition;
   }
   .clear-hover {
     @apply hover:bg-white-t2 transition;
   }
-  .accent-hover {
+  .accent-hover-text {
     @apply hover:text-blue transition;
   }
 
@@ -117,10 +123,8 @@
   /* --------------------- */
   /* Widgets, cards, popups */
   /* DO NOT DEFINE COLORS: Add a defined color from the colors section in the HTML element */
-  .default-box {
-    @apply rounded-3xl p-4 flex items-center;
-  }
+
   .square-rounded-box {
-    @apply rounded-xl p-4 flex items-center;
+    @apply rounded-lg p-4 flex items-center;
   }
 }

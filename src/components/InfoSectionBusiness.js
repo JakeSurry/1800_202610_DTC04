@@ -14,7 +14,7 @@ class InfoSection extends HTMLElement {
             ${svgs.events(24, 24, "#F9FAFB")}
             <p id="hostedNumber" class="text-2xl font-bold text-white"></p>
           </div>
-          <span class="text-sm text-white-t1">Hosted Events</span>
+          <span class="subtitle text-white-t1">Hosted Events</span>
         </div>
 
         <div class="min-w-[30%] square-rounded-box items-start green-gradient  flex-col gap-2">
@@ -22,7 +22,7 @@ class InfoSection extends HTMLElement {
             ${svgs.people(24, 24, "#F9FAFB")}
             <p id="fansRegistered" class="text-2xl font-bold text-white"></p>
           </div>
-          <span class="text-sm text-white-t1">Fans Registered</span>
+          <span class="subtitle text-white-t1">Fans Registered</span>
         </div>
 
         <div class="min-w-[30%] square-rounded-box items-start black-gradient  flex-col gap-2">
@@ -30,7 +30,7 @@ class InfoSection extends HTMLElement {
             ${svgs.calendar(24, 24, "#F9FAFB")}
             <p id="eventsThisWeek" class="text-2xl font-bold text-white"></p>
           </div>
-          <span class="text-sm text-white-t1">This Week</span>
+          <span class="subtitle text-white-t1">This Week</span>
         </div>
 
       </section>

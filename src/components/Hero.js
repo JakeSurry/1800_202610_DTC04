@@ -30,7 +30,7 @@ class Hero extends HTMLElement {
             <search-bar placeholder="Search teams, matches, or bars"></search-bar>
           </div>
 
-          <div class="flex items-center gap-4 clear-window-color default-box px-7 backdrop-blur-sm">
+          <div class="flex items-center gap-4 clear-window-color square-rounded-box px-7 backdrop-blur-sm">
             <div class="flex flex-col items-center gap-2 text-center">
               <div class="flex items-center justify-center gap-5">
                 <img

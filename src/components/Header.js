@@ -296,7 +296,7 @@ class SiteNavbar extends HTMLElement {
     const { name, subtitle, avatarUrl, avatarFallback } = this.accountInfo;
 
     return `
-      <div class="default-box clear-window-color">
+      <div class="square-rounded-box clear-window-color">
         <div class="flex items-center gap-3">
           ${
             avatarUrl
@@ -338,7 +338,7 @@ class SiteNavbar extends HTMLElement {
       <a
         ${hrefAttr}
         ${actionAttr}
-        class="justify-between default-box text-white clear-hover"
+        class="justify-between text-white clear-hover"
       >
         <div class="flex items-center gap-3">
           <div class="text-white">
@@ -371,7 +371,7 @@ class SiteNavbar extends HTMLElement {
     const actionAttr = button.action ? `data-action="${button.action}"` : "";
 
     return `
-      <a ${hrefAttr} ${actionAttr} class="accent-hover-text">
+      <a ${hrefAttr} ${actionAttr} class="p-0 accent-hover-text">
         ${button.name}
       </a>
     `;
@@ -389,7 +389,7 @@ class SiteNavbar extends HTMLElement {
 
     this.innerHTML = `
       <header class="sticky top-0 z-50 flex h-15 items-center justify-between bg-dark-blue p-6 text-white md:h-20">
-        <a href="${homeHref}" class="flex items-center">
+        <a href="${homeHref}" >
           <img class="h-10 object-contain md:h-12" src="images/fansFeastLogo.png" alt="Fans Feast Logo" />
         </a>
 

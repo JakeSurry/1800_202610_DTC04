@@ -9,8 +9,8 @@ class MatchSchedule extends HTMLElement {
     if (!event) return;
 
     this.innerHTML = `
-      <div class="w-full rounded-3xl bg-[#FFFFFF] shadow-sm border border-[#E5E7EB] px-4 py-4">
-        <div class="flex items-center justify-between gap-4">
+      <div class="w-full square-rounded-box bg-white shadow-sm border border-off-white">
+        <div class="w-full flex items-center justify-between gap-40">
           
           <div class="flex items-center gap-3">
             <img
@@ -20,10 +20,10 @@ class MatchSchedule extends HTMLElement {
             />
 
             <div class="flex flex-col items-center">
-              <p class="text-[#1F2937] text-base md:text-lg font-bold truncate">
+              <p class="text-black text-base md:text-lg font-bold truncate">
                 ${event.team1} vs ${event.team2}
               </p>
-              <p class="text-[#6B7280] text-sm md:text-base">
+              <p class="text-off-black subtitle md:text-base">
                 ${event.date} · ${event.time}
               </p>
             </div>
@@ -38,7 +38,7 @@ class MatchSchedule extends HTMLElement {
           <button
             type="button"
             id="hostMatch"
-            class="shrink-0 rounded-full main-blue-gradient px-4 py-2 text-sm font-semibold text-white hover:brightness-110"
+            class="shrink-0 main-blue-gradient bright-hover small-button"
           >
             Host Match
           </button>
