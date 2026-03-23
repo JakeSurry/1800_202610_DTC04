@@ -1,4 +1,4 @@
-import { svgs } from "./../svgs.js"
+import { svgs } from "./../svgs.js";
 
 export class EventCard extends HTMLElement {
   constructor() {
@@ -33,7 +33,7 @@ export class EventCard extends HTMLElement {
                 </div>
                 <div class="flex items-center gap-2 mt-auto">
                     <div class="min-w-1/4 flex items-center gap-1.5 bg-gray-700 rounded-full px-3 py-2">
-                        ${svgs.addPeople(32, 32, "#e5e7eb")}
+                        ${svgs.signup(32, 32, "#e5e7eb")}
                     </div>
                     <div class="flex items-center gap-1.5 bg-gray-300 rounded-full px-3 py-2">
                         ${svgs.people(32, 32)}
@@ -51,4 +51,3 @@ export class EventCard extends HTMLElement {
     `;
   }
 }
-

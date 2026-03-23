@@ -1,3 +1,5 @@
+import { svgs } from "../svgs.js";
+
 class SearchBar extends HTMLElement {
   constructor() {
     super();
@@ -23,20 +25,15 @@ class SearchBar extends HTMLElement {
   render() {
     this.innerHTML = `
       <div class="w-full">
-        <div class="bg-[#FFFFFF] rounded-full w-full h-7 flex items-center pl-4 gap-3 md:h-10 md:pl-6">
+        <div class="bg-white rounded-full w-full h-7 flex items-center pl-4 gap-3 md:h-10 md:pl-6">
 
           <div id="searchIcon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                 viewBox="0 0 24 24" fill="none" stroke="#6B7280"
-                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="7"></circle>
-              <path d="M21 21l-4.3-4.3"></path>
-            </svg>
+          ${svgs.search(22, 22, "#6B7280")}
           </div>
 
           <input
             id="searchInput"
-            class="w-full bg-transparent outline-none text-[#1F2937] placeholder:text-[#9CA3AF] text-xs md:text-base"
+            class="w-full bg-transparent outline-none text-black placeholder:text-gray text-xs md:text-base"
             type="text"
             placeholder="${this._placeholder}"
             value="${this._value}"
@@ -45,10 +42,10 @@ class SearchBar extends HTMLElement {
           <button
             type="button"
             id="searchSubmit"
-            class="flex justify-center items-center main-blue-gradient text-white rounded-r-full px-4 py-1 hover:brightness-110 h-full md:px-6 md:py-3"
+            class="main-blue-gradient hover:bright-hover h-full rounded-l-none"
             aria-label="Search"
           >
-            <p class="text-xs md:text-base font-medium">Search</p>
+            <p class="text-white">Search</p>
           </button>
 
         </div>

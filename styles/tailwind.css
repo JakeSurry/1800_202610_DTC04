@@ -17,6 +17,8 @@
   --color-black: #0f172a;
   --color-off-black: #1e293b;
 
+  --color-gray: #6b7280;
+
   /* MAIN COLORS */
   /* --------------------- */
   /* Main Blues */
@@ -36,6 +38,9 @@
 @layer components {
   .clear-window-color {
     @apply border border-white-t3 bg-white-t4 text-white;
+  }
+  .white-card {
+    @apply bg-white shadow-sm border-2 border-off-white;
   }
   .main-blue-gradient {
     @apply bg-linear-to-r from-blue via-blue-1 to-blue-2 text-white;
@@ -59,16 +64,22 @@
 /* ===================================================================== */
 @layer components {
   h1 {
-    @apply text-3xl md:text-5xl font-bold;
+    @apply text-3xl md:text-5xl font-bold text-black;
   }
   h2 {
-    @apply text-2xl md:text-4xl font-bold;
+    @apply text-2xl md:text-4xl font-bold text-black;
   }
   h3 {
-    @apply text-xl md:text-2xl font-bold;
+    @apply text-xl md:text-2xl font-bold text-black;
+  }
+  h4 {
+    @apply font-bold text-black;
   }
   .subtitle {
-    @apply text-sm font-light;
+    @apply text-sm font-light text-black;
+  }
+  p {
+    @apply text-black;
   }
 }
 /* ===================================================================== */

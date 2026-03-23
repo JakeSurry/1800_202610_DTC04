@@ -8,7 +8,7 @@ class Question extends HTMLElement {
     const question = this._question;
     if (!question) return;
     this.innerHTML = `
-        <div class="bg-neutral-300 rounded-md p-5">
+        <div class="square-rounded-box white-card flex-col items-start">
           <h4>${question.question}</h4>
           <p>${question.answer}</p>
         </div>

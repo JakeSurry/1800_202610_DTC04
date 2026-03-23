@@ -28,7 +28,7 @@ const ROUTES = {
 const ICONS = {
   home: svgs.home(22, 22, "currentColor"),
   events: svgs.events(22, 22, "currentColor"),
-  login: svgs.login(22, 22, "currentColor"),
+  login: svgs.profile(22, 22, "currentColor"),
   signup: svgs.signup(22, 22, "currentColor"),
   business: svgs.business(22, 22, "currentColor"),
   help: svgs.help(22, 22, "currentColor"),
@@ -398,14 +398,7 @@ class SiteNavbar extends HTMLElement {
         </nav>
 
         <button class="flex cursor-pointer items-center md:hidden" id="menu-button" aria-label="Open menu">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               width="40" height="40" viewBox="0 0 24 24"
-               fill="none" stroke="#F9FAFB" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 6l16 0" />
-            <path d="M4 12l16 0" />
-            <path d="M4 18l16 0" />
-          </svg>
+          ${svgs.menu(40, 40, "#f9fafb")}
         </button>
 
         <div

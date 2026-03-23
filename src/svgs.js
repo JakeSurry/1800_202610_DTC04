@@ -1,26 +1,5 @@
 export const svgs = {
-  addPeople(width = 32, height = 32, stroke = "#000000") {
-    return `
-      <svg 
-        xmlns="http://www.w3.org/2000/svg" 
-        width="${width}" 
-        height="${height}" 
-        viewBox="0 0 24 24"
-        fill="none" 
-        stroke="${stroke}"
-        stroke-width="1" 
-        stroke-linecap="round" 
-        stroke-linejoin="round"
-      >
-        <path d="M5 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-        <path d="M3 21v-2a4 4 0 0 1 4 -4h4c.96 0 1.84 .338 2.53 .901" />
-        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-        <path d="M16 19h6" />
-        <path d="M19 16v6" />
-      </svg>
-    `;
-  },
-
+  // 2 people icon
   people(width = 32, height = 32, stroke = "#000000") {
     return `
       <svg
@@ -42,6 +21,7 @@ export const svgs = {
     `;
   },
 
+  // Calendar icon
   calendar(width = 32, height = 32, stroke = "#000000") {
     return `
       <svg
@@ -65,6 +45,7 @@ export const svgs = {
     `;
   },
 
+  // Ticket icon
   events(width = 32, height = 32, stroke = "#000000") {
     return `
       <svg
@@ -83,6 +64,7 @@ export const svgs = {
     `;
   },
 
+  // house icon
   home(width = 22, height = 22, stroke = "currentColor") {
     return `
       <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 24 24"
@@ -94,17 +76,7 @@ export const svgs = {
     `;
   },
 
-  login(width = 22, height = 22, stroke = "currentColor") {
-    return `
-      <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 24 24"
-           fill="none" stroke="${stroke}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 13a3 3 0 1 0 0 -6a3 3 0 0 0 0 6z" />
-        <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
-        <path d="M6 20.05v-.05a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v.05" />
-      </svg>
-    `;
-  },
-
+  // 1 person with +
   signup(width = 22, height = 22, stroke = "currentColor") {
     return `
       <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 24 24"
@@ -116,6 +88,7 @@ export const svgs = {
     `;
   },
 
+  // buidlings icon
   business(width = 22, height = 22, stroke = "currentColor") {
     return `
       <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 24 24"
@@ -131,6 +104,7 @@ export const svgs = {
     `;
   },
 
+  // question mark inside box
   help(width = 22, height = 22, stroke = "currentColor") {
     return `
       <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 24 24"
@@ -142,6 +116,7 @@ export const svgs = {
     `;
   },
 
+  // 1 person inside circle
   profile(width = 22, height = 22, stroke = "currentColor") {
     return `
       <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 24 24"
@@ -153,6 +128,7 @@ export const svgs = {
     `;
   },
 
+  // exit icon
   logout(width = 22, height = 22, fill = "#1C274C") {
     return `
       <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 24 24" fill="none">
@@ -162,6 +138,7 @@ export const svgs = {
     `;
   },
 
+  // cheveron icon >
   chevron(width = 18, height = 18, stroke = "currentColor") {
     return `
       <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 24 24"
@@ -170,6 +147,8 @@ export const svgs = {
       </svg>
     `;
   },
+
+  // field icon
   stadium(width = 32, height = 32, stroke = "#000000") {
     return `
     <svg
@@ -189,5 +168,148 @@ export const svgs = {
       <path d="M22 17C19.2386 17 17 14.7614 17 12C17 9.23858 19.2386 7 22 7"/>
     </svg>
   `;
+  },
+
+  // clock
+  clock(width = 32, height = 32, stroke = "#000000") {
+    return `
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="${width}"
+      height="${height}"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="${stroke}"
+      stroke-width="1.75"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+      <path d="M12 7v5" />
+      <path d="M12 12l2 -3" />
+    </svg>
+
+    `;
+  },
+
+  // phone
+  phone(width = 32, height = 32, stroke = "#000000") {
+    return `
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="${width}"
+      height="${height}"
+      viewBox="0 0 24 24"
+      fill="${stroke}"
+
+    >
+      <path
+        d="M9 3a1 1 0 0 1 .877 .519l.051 .11l2 5a1 1 0 0 1 -.313 1.16l-.1 .068l-1.674 1.004l.063 .103a10 10 0 0 0 3.132 3.132l.102 .062l1.005 -1.672a1 1 0 0 1 1.113 -.453l.115 .039l5 2a1 1 0 0 1 .622 .807l.007 .121v4c0 1.657 -1.343 3 -3.06 2.998c-8.579 -.521 -15.418 -7.36 -15.94 -15.998a3 3 0 0 1 2.824 -2.995l.176 -.005h4z"
+      />
+    </svg>
+    `;
+  },
+
+  // mail
+  mail(width = 32, height = 32, stroke = "#000000") {
+    return `
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="${width}"
+      height="${height}"
+      viewBox="0 0 24 24"
+      fill="${stroke}"
+
+    >
+      <path
+                d="M22 7.535v9.465a3 3 0 0 1 -2.824 2.995l-.176 .005h-14a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-9.465l9.445 6.297l.116 .066a1 1 0 0 0 .878 0l.116 -.066l9.445 -6.297z"
+              />
+              <path
+                d="M19 4c1.08 0 2.027 .57 2.555 1.427l-9.555 6.37l-9.555 -6.37a2.999 2.999 0 0 1 2.354 -1.42l.201 -.007h14z"
+              />
+    </svg>
+    `;
+  },
+
+  // hamburger menu icon
+  menu(width = 32, height = 32, stroke = "#000000") {
+    return `
+    <svg xmlns="http://www.w3.org/2000/svg"
+    width="${width}"
+    height="${height}"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="${stroke}"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round">
+    <path d="M4 6l16 0" />
+    <path d="M4 12l16 0" />
+    <path d="M4 18l16 0" />
+    </svg>
+    `;
+  },
+
+  // round info icon
+  info(width = 32, height = 32, stroke = "#000000") {
+    return `
+   <svg 
+    width="${width}"
+    height="${height}"
+    viewBox="0 0 24 24" 
+    fill="none" 
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM12 17.75C12.4142 17.75 12.75 17.4142 12.75 17V11C12.75 10.5858 12.4142 10.25 12 10.25C11.5858 10.25 11.25 10.5858 11.25 11V17C11.25 17.4142 11.5858 17.75 12 17.75ZM12 7C12.5523 7 13 7.44772 13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7Z"
+      fill="${stroke}"
+    />
+  </svg>
+    `;
+  },
+
+  // magnifying glass icon
+  search(width = 32, height = 32, stroke = "#000000") {
+    return `
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width="${width}"
+      height="${height}"
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="${stroke}"
+      stroke-width="2" 
+      stroke-linecap="round" 
+      stroke-linejoin="round">
+      <circle cx="11" cy="11" r="7"></circle>
+      <path d="M21 21l-4.3-4.3"></path>
+    </svg>
+    `;
+  },
+
+  // pencil and box icon
+  edit(width = 32, height = 32, stroke = "#000000") {
+    return `
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="${width}"
+      height="${height}"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="${stroke}"
+      stroke-width="1"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path
+        d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"
+      />
+      <path
+        d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"
+      />
+      <path d="M16 5l3 3" />
+    </svg>
+    `;
   },
 };

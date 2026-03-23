@@ -9,7 +9,7 @@ class MatchSchedule extends HTMLElement {
     if (!event) return;
 
     this.innerHTML = `
-      <div class="w-full square-rounded-box bg-white shadow-sm border border-off-white">
+      <div class="w-full square-rounded-box white-card">
         <div class="w-full flex items-center justify-between gap-40">
           
           <div class="flex items-center gap-3">

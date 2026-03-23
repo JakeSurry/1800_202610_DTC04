@@ -14,73 +14,63 @@
     <script type="module" src="/src/components/Header.js"></script>
     <script type="module" src="./src/components/Footer.js"></script>
     <link rel="stylesheet" href="main.css" />
+    <script type="module">
+      import { svgs } from "./src/svgs.js";
+
+      document.getElementById("phone").innerHTML = svgs.phone(
+        22,
+        22,
+        "#f9fafb",
+      );
+      document.getElementById("mail").innerHTML = svgs.mail(22, 22, "#f9fafb");
+    </script>
+
+    <div class="chevron"></div>
   </head>
 
   <body class="bg-off-white">
     <!-- header -->
     <site-navbar></site-navbar>
+
     <!-- main content -->
-    <div class="space-y-6 py-5 md:py-10">
+    <section
+      class="relative bg-no-repeat bg-center bg-cover overflow-hidden flex px-6 py-10"
+      style="background-image: url(&quot;images/hero.png&quot;)"
+    >
+      <div class="absolute inset-0 hero-blue-gradient"></div>
       <!-- Contact Us -->
-      <div class="space-y-4">
-        <h1>Contact us</h1>
+      <div class="relative z-10 space-y-4">
+        <h2 class="text-white">Contact us</h2>
         <div>
           <div class="flex space-x-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path
-                d="M9 3a1 1 0 0 1 .877 .519l.051 .11l2 5a1 1 0 0 1 -.313 1.16l-.1 .068l-1.674 1.004l.063 .103a10 10 0 0 0 3.132 3.132l.102 .062l1.005 -1.672a1 1 0 0 1 1.113 -.453l.115 .039l5 2a1 1 0 0 1 .622 .807l.007 .121v4c0 1.657 -1.343 3 -3.06 2.998c-8.579 -.521 -15.418 -7.36 -15.94 -15.998a3 3 0 0 1 2.824 -2.995l.176 -.005h4z"
-              />
-            </svg>
-            <p>+1 (604) 123 45678</p>
+            <div id="phone"></div>
+            <p class="text-white">+1 (604) 123 45678</p>
           </div>
           <div class="flex space-x-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path
-                d="M22 7.535v9.465a3 3 0 0 1 -2.824 2.995l-.176 .005h-14a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-9.465l9.445 6.297l.116 .066a1 1 0 0 0 .878 0l.116 -.066l9.445 -6.297z"
-              />
-              <path
-                d="M19 4c1.08 0 2.027 .57 2.555 1.427l-9.555 6.37l-9.555 -6.37a2.999 2.999 0 0 1 2.354 -1.42l.201 -.007h14z"
-              />
-            </svg>
-            <p>fanfeast@contact.com</p>
+            <div id="mail"></div>
+            <p class="text-white">fanfeast@contact.com</p>
           </div>
         </div>
       </div>
+    </section>
+    <div class="space-y-6 px-6 py-5 md:py-10">
       <!-- FAQs -->
       <div class="space-y-4">
-        <h1>FAQs</h1>
+        <h2>FAQs</h2>
         <div class="space-y-8">
           <div>
-            <h2 class="font-bold text-2xl">General Questions</h2>
-            <div
-              id="general-questions"
-              class="flex flex-col space-y-5 overflow-auto"
-            ></div>
+            <h3>General Questions</h3>
+            <div id="general-questions" class="flex flex-col space-y-5"></div>
           </div>
           <div>
-            <h2 class="font-bold text-2xl">Fan Questions</h2>
-            <div
-              id="fan-questions"
-              class="flex flex-col space-y-5 overflow-auto"
-            ></div>
+            <h3>Fan Questions</h3>
+            <div id="fan-questions" class="flex flex-col space-y-5"></div>
           </div>
           <div>
-            <h2 class="font-bold text-2xl">Organization Questions</h2>
+            <h3>Organization Questions</h3>
             <div
               id="organization-questions"
-              class="flex flex-col space-y-5 overflow-auto"
+              class="flex flex-col space-y-5"
             ></div>
           </div>
         </div>
