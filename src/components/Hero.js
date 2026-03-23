@@ -17,7 +17,7 @@ class Hero extends HTMLElement {
 
         <div class="relative z-10 max-w-4xl w-full flex flex-col items-center gap-5 text-center text-white">
           <div class="flex flex-col items-center gap-3">
-            <h1 class="title font-bold text-white">
+            <h1 class="font-bold text-white">
               FIND THE BEST PLACES TO WATCH THE WORLD CUP
             </h1>
 
@@ -30,7 +30,7 @@ class Hero extends HTMLElement {
             <search-bar placeholder="Search teams, matches, or bars"></search-bar>
           </div>
 
-          <div class="flex items-center gap-4 rounded-2xl clear-window px-7 py-4 backdrop-blur-sm">
+          <div class="flex items-center gap-4 clear-window-color default-box px-7 backdrop-blur-sm">
             <div class="flex flex-col items-center gap-2 text-center">
               <div class="flex items-center justify-center gap-5">
                 <img
@@ -50,7 +50,7 @@ class Hero extends HTMLElement {
                 />
               </div>
 
-              <p class="text-sm md:text-base text-white/90">
+              <p class="text-sm md:text-base text-white">
                 ${match.date} at ${match.time}
               </p>
             </div>

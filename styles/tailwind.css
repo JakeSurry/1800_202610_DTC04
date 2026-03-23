@@ -6,7 +6,7 @@
 /* Naming Convention Notes */
 /* '*' = required */
 
-/* --color-{*main color family}-{specific color family}{*type}{order number}: {color} */
+/* --color-{*main color family}-{specific color family}{type}{order number}: {color} */
 /* eg. --color-blue-dg2: #1e293b; */
 /* main color family: blue */
 /* specific color family: d = dark */
@@ -16,16 +16,26 @@
 
 /* types */
 /* g = gradient */
-/* b = border */
-/* f = fill */
 
 @theme {
   /* Neutrals */
   --color-white: #f9fafb;
+  --color-off-white: #f5f7fa;
+  /* Transparent Whites */
+  --color-white-t1: rgb(249 250 251 / 0.75);
+  --color-white-t2: rgb(249 250 251 / 0.5);
+  --color-white-t3: rgb(249 250 251 / 0.3);
+  --color-white-t4: rgb(249 250 251 / 0.15);
+
   --color-black: #0e0f12;
+  --color-off-black: #1e293b;
 
   /* Main Blues */
+  --color-blue: #4ea3e3;
   --color-dark-blue: #162e5c;
+
+  /* Accents */
+  --color-green: #34d399;
 
   /* Hero Gradient*/
   --color-blue-hg1: #1d4ed8;
@@ -33,20 +43,21 @@
   --color-blue-hg3: #4ea3e3;
   /* Dark Blue Gradient */
   --color-blue-dg1: var(--color-dark-blue);
-  --color-blue-dg2: #1e293b;
+  --color-blue-dg2: var(--color-off-black);
   --color-blue-dg3: #0f172a;
   /* Main Blue Gradient */
-  --color-blue-g1: #4ea3e3;
+  --color-blue-g1: var(--color-blue);
   --color-blue-g2: #2563eb;
   --color-blue-g3: #1d4ed8;
 }
+
 /* --------------------- */
 /* "Special" Colors */
 /* --------------------- */
 /* Predefined gradients, window colors, overlays, etc. */
 @layer components {
   .clear-window-color {
-    @apply border border-white/20 bg-white/15;
+    @apply border border-white-t3 bg-white-t4 text-white;
   }
   .main-blue-gradient {
     @apply bg-linear-to-r from-blue-g1 via-blue-g2 to-blue-g3 text-white;
@@ -54,32 +65,62 @@
   .hero-blue-gradient {
     @apply bg-linear-to-r from-blue-hg1/80 via-blue-hg2/60 to-blue-hg3/40;
   }
+  .green-gradient {
+    @apply bg-linear-to-r from-green to-[#059669];
+  }
+  .black-gradient {
+    @apply bg-linear-to-r from-off-black to-[#0F172A];
+  }
 }
 
 /* ===================================================================== */
 /* HEADERS */
 /* ===================================================================== */
 @layer components {
-  .title {
+  h1 {
+    @apply text-xl;
+  }
+  h2 {
     @apply text-2xl md:text-4xl;
   }
+  h3 {
+    @apply text-lg md:text-2xl font-light;
+  }
 }
-
 /* ===================================================================== */
 /* ELEMENTS */
 /* ===================================================================== */
-/* --------------------- */
-/* buttons */
-/* --------------------- */
 @layer components {
-  button {
-    @apply rounded-full font-medium flex justify-center items-center  px-4 py-1 md:px-6 md:py-3;
+  /* --------------------- */
+  /* Buttons */
+  /* --------------------- */
+  /* Default link/button styling */
+  a {
+    @apply rounded-full font-medium flex justify-center items-center;
   }
-
+  button {
+    @apply rounded-full font-medium flex justify-center items-center px-4 py-1 md:px-6 md:py-3;
+  }
+  /* Hovers */
   .bright-hover {
-    @apply hover:brightness-110;
+    @apply hover:brightness-110 transition;
   }
   .clear-hover {
-    @apply hover:bg-white/30;
+    @apply hover:bg-white-t2 transition;
+  }
+  .accent-hover {
+    @apply hover:text-blue transition;
+  }
+
+  /* --------------------- */
+  /* Windows */
+  /* --------------------- */
+  /* Widgets, cards, popups */
+  /* DO NOT DEFINE COLORS: Add a defined color from the colors section in the HTML element */
+  .default-box {
+    @apply rounded-3xl p-4 flex items-center;
+  }
+  .square-rounded-box {
+    @apply rounded-xl p-4 flex items-center;
   }
 }

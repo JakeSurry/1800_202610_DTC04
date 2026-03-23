@@ -17,9 +17,9 @@ class HeroBusiness extends HTMLElement {
 
         <div class="relative z-10 max-w-4xl w-full flex flex-col gap-5 text-white">
           <div class="flex flex-col gap-3">
-            <h1 id="title" class="title font-bold text-white"></h1>
+            <h1 id="title" class=" font-bold text-white"></h1>
 
-            <h3 id="subtitle" class="text-base md:text-xl font-light text-white/90"></h3>
+            <h3 id="subtitle" class="text-base md:text-xl font-light text-white"></h3>
           </div>
           <div class="flex gap-3 items-center">
             <button

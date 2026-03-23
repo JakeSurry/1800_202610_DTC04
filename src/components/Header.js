@@ -296,11 +296,11 @@ class SiteNavbar extends HTMLElement {
     const { name, subtitle, avatarUrl, avatarFallback } = this.accountInfo;
 
     return `
-      <div class="rounded-3xl border border-white/10 bg-white/10 p-4">
+      <div class="default-box clear-window-color">
         <div class="flex items-center gap-3">
           ${
             avatarUrl
-              ? `<img src="${avatarUrl}" alt="${name}" class="h-14 w-14 rounded-full object-cover border border-white/15" />`
+              ? `<img src="${avatarUrl}" alt="${name}" class="h-14 w-14 rounded-full object-cover border border-white-t4" />`
               : `<div class="flex h-14 w-14 items-center justify-center rounded-full main-blue-gradient text-sm font-bold text-white">
                   ${avatarFallback}
                 </div>`
@@ -308,7 +308,7 @@ class SiteNavbar extends HTMLElement {
 
           <div class="min-w-0">
             <p class="truncate text-sm font-semibold text-white">${name}</p>
-            <p class="text-xs text-white/75">${subtitle}</p>
+            <p class="text-xs text-white-t1">${subtitle}</p>
           </div>
         </div>
       </div>
@@ -321,9 +321,9 @@ class SiteNavbar extends HTMLElement {
         href="${action.href}"
         class="${
           action.primary
-            ? "main-blue-gradient text-white"
-            : "border border-white/15 bg-white/10 text-white"
-        } flex-1 rounded-full px-4 py-2 text-center text-sm font-semibold transition hover:brightness-110"
+            ? "main-blue-gradient bright-hover"
+            : "clear-window-color clear-hover"
+        } flex-1 px-4 py-2 text-sm"
       >
         ${action.name}
       </a>
@@ -338,7 +338,7 @@ class SiteNavbar extends HTMLElement {
       <a
         ${hrefAttr}
         ${actionAttr}
-        class="flex items-center justify-between rounded-xl px-3 py-3 text-white transition hover:bg-white/10"
+        class="justify-between default-box text-white clear-hover"
       >
         <div class="flex items-center gap-3">
           <div class="text-white">
@@ -346,7 +346,7 @@ class SiteNavbar extends HTMLElement {
           </div>
           <span class="text-sm font-medium">${link.name}</span>
         </div>
-        <div class="text-white/70">
+        <div class="text-white-t1">
           ${link.action === "logout" ? "" : ICONS.chevron}
         </div>
       </a>
@@ -356,7 +356,7 @@ class SiteNavbar extends HTMLElement {
   sectionBlock(section) {
     return `
       <div class="mt-4">
-        <p class="mb-2 px-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
+        <p class="mb-2 px-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white-t1">
           ${section.title}
         </p>
         <div class="flex flex-col">
@@ -371,7 +371,7 @@ class SiteNavbar extends HTMLElement {
     const actionAttr = button.action ? `data-action="${button.action}"` : "";
 
     return `
-      <a ${hrefAttr} ${actionAttr} class="font-bold text-white transition hover:text-[#4EA3E3]">
+      <a ${hrefAttr} ${actionAttr} class="accent-hover-text">
         ${button.name}
       </a>
     `;
@@ -420,7 +420,7 @@ class SiteNavbar extends HTMLElement {
             ${config.quickActions.map((action) => this.quickActionButton(action)).join("")}
           </div>
 
-          <div class="mt-4 border-t border-white/10 pt-2">
+          <div class="mt-4 border-t border-white-t4 pt-2">
             ${config.sections.map((section) => this.sectionBlock(section)).join("")}
           </div>
         </div>
