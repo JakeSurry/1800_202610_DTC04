@@ -45,7 +45,7 @@ class SearchBar extends HTMLElement {
           <button
             type="button"
             id="searchSubmit"
-            class="flex justify-center items-center bg-linear-to-r from-[#4EA3E3] via-[#2563EB] to-[#1D4ED8] text-[#F9FAFB] rounded-r-full px-4 py-1 hover:brightness-110 h-full md:px-6 md:py-3"
+            class="flex justify-center items-center main-blue-gradient text-white rounded-r-full px-4 py-1 hover:brightness-110 h-full md:px-6 md:py-3"
             aria-label="Search"
           >
             <p class="text-xs md:text-base font-medium">Search</p>

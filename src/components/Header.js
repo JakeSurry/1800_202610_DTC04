@@ -301,14 +301,14 @@ class SiteNavbar extends HTMLElement {
           ${
             avatarUrl
               ? `<img src="${avatarUrl}" alt="${name}" class="h-14 w-14 rounded-full object-cover border border-white/15" />`
-              : `<div class="flex h-14 w-14 items-center justify-center rounded-full bg-linear-to-r from-[#4EA3E3] via-[#2563EB] to-[#1D4ED8] text-sm font-bold text-[#F9FAFB]">
+              : `<div class="flex h-14 w-14 items-center justify-center rounded-full main-blue-gradient text-sm font-bold text-white">
                   ${avatarFallback}
                 </div>`
           }
 
           <div class="min-w-0">
-            <p class="truncate text-sm font-semibold text-[#F9FAFB]">${name}</p>
-            <p class="text-xs text-[#F9FAFB]/75">${subtitle}</p>
+            <p class="truncate text-sm font-semibold text-white">${name}</p>
+            <p class="text-xs text-white/75">${subtitle}</p>
           </div>
         </div>
       </div>
@@ -321,8 +321,8 @@ class SiteNavbar extends HTMLElement {
         href="${action.href}"
         class="${
           action.primary
-            ? "bg-linear-to-r from-[#4EA3E3] via-[#2563EB] to-[#1D4ED8] text-[#F9FAFB]"
-            : "border border-white/15 bg-white/10 text-[#F9FAFB]"
+            ? "main-blue-gradient text-white"
+            : "border border-white/15 bg-white/10 text-white"
         } flex-1 rounded-full px-4 py-2 text-center text-sm font-semibold transition hover:brightness-110"
       >
         ${action.name}
@@ -338,15 +338,15 @@ class SiteNavbar extends HTMLElement {
       <a
         ${hrefAttr}
         ${actionAttr}
-        class="flex items-center justify-between rounded-xl px-3 py-3 text-[#F9FAFB] transition hover:bg-white/10"
+        class="flex items-center justify-between rounded-xl px-3 py-3 text-white transition hover:bg-white/10"
       >
         <div class="flex items-center gap-3">
-          <div class="text-[#F9FAFB]">
+          <div class="text-white">
             ${link.svg}
           </div>
           <span class="text-sm font-medium">${link.name}</span>
         </div>
-        <div class="text-[#F9FAFB]/70">
+        <div class="text-white/70">
           ${link.action === "logout" ? "" : ICONS.chevron}
         </div>
       </a>
@@ -356,7 +356,7 @@ class SiteNavbar extends HTMLElement {
   sectionBlock(section) {
     return `
       <div class="mt-4">
-        <p class="mb-2 px-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#F9FAFB]/55">
+        <p class="mb-2 px-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
           ${section.title}
         </p>
         <div class="flex flex-col">
@@ -371,7 +371,7 @@ class SiteNavbar extends HTMLElement {
     const actionAttr = button.action ? `data-action="${button.action}"` : "";
 
     return `
-      <a ${hrefAttr} ${actionAttr} class="font-bold text-[#F9FAFB] transition hover:text-[#4EA3E3]">
+      <a ${hrefAttr} ${actionAttr} class="font-bold text-white transition hover:text-[#4EA3E3]">
         ${button.name}
       </a>
     `;
@@ -388,7 +388,7 @@ class SiteNavbar extends HTMLElement {
           : ROUTES.guestHome;
 
     this.innerHTML = `
-      <header class="sticky top-0 z-50 flex h-15 items-center justify-between bg-[#162E5C] p-6 text-[#F9FAFB] md:h-20">
+      <header class="sticky top-0 z-50 flex h-15 items-center justify-between bg-[#162E5C] p-6 text-white md:h-20">
         <a href="${homeHref}" class="flex items-center">
           <img class="h-10 object-contain md:h-12" src="images/fansFeastLogo.png" alt="Fans Feast Logo" />
         </a>
@@ -410,7 +410,7 @@ class SiteNavbar extends HTMLElement {
 
         <div
           id="sidebar"
-          class="hidden absolute top-full right-0 z-50 h-[calc(100vh-100%)] w-[82%] flex-col overflow-y-auto bg-linear-to-b from-[#162E5C] via-[#1E293B] to-[#0F172A] p-5 translate-x-full transition-transform duration-300 ease-in-out md:hidden"
+          class="hidden absolute top-full right-0 z-50 h-[calc(100vh-100%)] w-[82%] flex-col overflow-y-auto bg-linear-to-b from-blue-dg1 via-blue-dg2 to-blue-dg3 p-5 translate-x-full transition-transform duration-300 ease-in-out md:hidden"
         >
           <div class="mt-5">
             ${this.accountPanel()}

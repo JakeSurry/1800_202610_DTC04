@@ -11,7 +11,7 @@ class MatchCard extends HTMLElement {
     this.innerHTML = `
       <div
         style="background-image: url('${match.image}');"
-        class="relative flex w-50 md:w-80 flex-col gap-2 rounded-3xl bg-cover bg-center pb-4 text-[#F9FAFB] md:h-40"
+        class="relative flex w-50 md:w-80 flex-col gap-2 rounded-3xl bg-cover bg-center pb-4 text-white md:h-40"
       >
         <div class="absolute inset-0 rounded-3xl bg-linear-to-t from-black/75 via-black/45 to-transparent"></div>
 
@@ -23,7 +23,7 @@ class MatchCard extends HTMLElement {
               class="h-10 w-10 object-contain"
             />
 
-            <p class="text-xs font-bold text-[#F9FAFB] md:text-base">
+            <p class="text-xs font-bold text-white md:text-base">
               ${match.team1} vs ${match.team2}
             </p>
 
@@ -45,7 +45,7 @@ class MatchCard extends HTMLElement {
               />
             </svg>
 
-            <p class="text-xs font-medium text-[#F9FAFB]/90 md:text-sm">
+            <p class="text-xs font-medium text-white/90 md:text-sm">
               ${match.date} at ${match.time}
             </p>
           </div>

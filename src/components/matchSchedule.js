@@ -38,7 +38,7 @@ class MatchSchedule extends HTMLElement {
           <button
             type="button"
             id="hostMatch"
-            class="shrink-0 rounded-full bg-linear-to-r from-[#4EA3E3] via-[#2563EB] to-[#1D4ED8] px-4 py-2 text-sm font-semibold text-[#F9FAFB] hover:brightness-110"
+            class="shrink-0 rounded-full main-blue-gradient px-4 py-2 text-sm font-semibold text-white hover:brightness-110"
           >
             Host Match
           </button>

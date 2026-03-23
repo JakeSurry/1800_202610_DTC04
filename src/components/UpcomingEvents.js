@@ -13,7 +13,7 @@ class HostedEvent extends HTMLElement {
     this.innerHTML = `
       <div
         style="background-image: url('${event.image}');"
-        class="relative w-[320px] md:w-105 overflow-hidden rounded-[28px] bg-cover bg-center text-[#F9FAFB] shadow-lg"
+        class="relative w-[320px] md:w-105 overflow-hidden rounded-[28px] bg-cover bg-center text-white shadow-lg"
       >
         <div class="absolute inset-0 bg-linear-to-t from-[#1D4ED8]/85 via-[#2563EB]/65 to-[#4EA3E3]/60"></div>
 
@@ -26,7 +26,7 @@ class HostedEvent extends HTMLElement {
                 class="h-12 w-12 object-contain"
               />
 
-              <p class="text-center text-base font-bold text-[#F9FAFB]">
+              <p class="text-center text-base font-bold text-white">
                 ${event.team1} vs ${event.team2}
               </p>
 
@@ -48,7 +48,7 @@ class HostedEvent extends HTMLElement {
                 />
               </svg>
 
-              <p class="text-sm font-medium text-[#F9FAFB]/90 md:text-base">
+              <p class="text-sm font-medium text-white/90 md:text-base">
                 ${event.date} at ${event.time}
               </p>
             </div>
@@ -57,7 +57,7 @@ class HostedEvent extends HTMLElement {
           <div class="relative flex items-center justify-between bg-[#162E5C]/95 px-5 py-4">
             <div class="flex items-center gap-2">
               ${svgs.people(22, 22, "#F9FAFB")}
-              <p class="text-sm font-medium text-[#F9FAFB]">
+              <p class="text-sm font-medium text-white">
                 <span class="font-bold">${event.fans}</span> Fans Going
               </p>
             </div>
@@ -65,7 +65,7 @@ class HostedEvent extends HTMLElement {
             <button
               type="button"
               id="viewEvent"
-              class="rounded-full bg-linear-to-r from-[#4EA3E3] via-[#2563EB] to-[#1D4ED8] px-5 py-2 text-sm font-semibold text-[#F9FAFB] hover:brightness-110"
+              class="rounded-full main-blue-gradient px-5 py-2 text-sm font-semibold text-white hover:brightness-110"
             >
               View Event
             </button>

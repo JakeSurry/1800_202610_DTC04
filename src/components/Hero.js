@@ -13,15 +13,15 @@ class Hero extends HTMLElement {
         class="relative min-h-105 bg-no-repeat bg-center bg-cover overflow-hidden flex items-center justify-center px-6 py-10"
         style="background-image: url('images/hero.png');"
       >
-        <div class="absolute inset-0 bg-linear-to-r from-[#1D4ED8]/80 via-[#2563EB]/60 to-[#4EA3E3]/40"></div>
+        <div class="absolute inset-0 hero-blue-gradient"></div>
 
-        <div class="relative z-10 max-w-4xl w-full flex flex-col items-center gap-5 text-center text-[#F9FAFB]">
+        <div class="relative z-10 max-w-4xl w-full flex flex-col items-center gap-5 text-center text-white">
           <div class="flex flex-col items-center gap-3">
-            <h1 class="text-2xl md:text-4xl font-bold text-[#F9FAFB]">
+            <h1 class="title font-bold text-white">
               FIND THE BEST PLACES TO WATCH THE WORLD CUP
             </h1>
 
-            <h3 class="text-base md:text-xl font-light text-[#F9FAFB]">
+            <h3 class="text-base md:text-xl font-light text-white">
               Discover top sports bars and restaurants screening the World Cup
             </h3>
           </div>
@@ -39,7 +39,7 @@ class Hero extends HTMLElement {
                   class="w-10 h-10 object-contain"
                 />
 
-                <p class="text-xs font-bold md:text-base text-[#F9FAFB]">
+                <p class="text-xs font-bold md:text-base text-white">
                   ${match.team1} vs ${match.team2}
                 </p>
 
@@ -50,7 +50,7 @@ class Hero extends HTMLElement {
                 />
               </div>
 
-              <p class="text-sm md:text-base text-[#F9FAFB]/90">
+              <p class="text-sm md:text-base text-white/90">
                 ${match.date} at ${match.time}
               </p>
             </div>

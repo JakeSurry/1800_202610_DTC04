@@ -1,21 +1,41 @@
 @import "tailwindcss";
 
 .title {
-  @apply text-4xl md:text-6xl;
-}
-/* 
-h1 {
-  @apply text-xl;
-}
-h2 {
   @apply text-2xl md:text-4xl;
 }
-h3 {
-  @apply text-lg md:text-2xl font-light;
+
+/* =============================================== */
+/* COLORS */
+/* =============================================== */
+@theme {
+  --color-*: initial;
+  /* Neutrals */
+  --color-white: #f9fafb;
+  --color-black: #0e0f12;
+
+  /* Main Blues */
+  --color-dark-blue: #162e5c;
+
+  /* Hero Gradient*/
+  --color-blue-hg1: #1d4ed8;
+  --color-blue-hg2: #2563eb;
+  --color-blue-hg3: #4ea3e3;
+  /* Dark Blue Gradient */
+  --color-blue-dg1: var(--color-dark-blue);
+  --color-blue-dg2: #1e293b;
+  --color-blue-dg3: #0f172a;
+  /* Main Blue Gradient */
+  --color-blue-g1: #4ea3e3;
+  --color-blue-g2: #2563eb;
+  --color-blue-g3: #1d4ed8;
 }
-h4 {
-  @apply font-bold;
+
+.main-blue-gradient {
+  @apply bg-linear-to-r from-blue-g1 via-blue-g2 to-blue-g3;
 }
-p {
-  @apply text-base md:text-lg;
-} */
+.hero-blue-gradient {
+  @apply bg-linear-to-r from-blue-hg1/80 via-blue-hg2/60 to-blue-hg3/40;
+}
+
+/* =============================================== */
+/* =============================================== */
