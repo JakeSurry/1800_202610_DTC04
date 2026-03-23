@@ -410,7 +410,7 @@ class SiteNavbar extends HTMLElement {
 
         <div
           id="sidebar"
-          class="hidden absolute top-full right-0 z-50 h-[calc(100vh-100%)] w-[82%] flex-col overflow-y-auto bg-linear-to-b from-blue-dg1 via-blue-dg2 to-blue-dg3 p-5 translate-x-full transition-transform duration-300 ease-in-out md:hidden"
+          class="hidden absolute top-full right-0 z-50 h-[calc(100vh-100%)] w-[82%] flex-col overflow-y-auto dark-blue-gradient p-5 translate-x-full transition-transform duration-300 ease-in-out md:hidden"
         >
           <div class="mt-5">
             ${this.accountPanel()}

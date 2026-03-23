@@ -3,22 +3,9 @@
 /* ===================================================================== */
 /* COLORS */
 /* ===================================================================== */
-/* Naming Convention Notes */
-/* '*' = required */
-
-/* --color-{*main color family}-{specific color family}{type}{order number}: {color} */
-/* eg. --color-blue-dg2: #1e293b; */
-/* main color family: blue */
-/* specific color family: d = dark */
-/* type: g = gradient */
-/* order number: 2 */
-/* color: #1e293b */
-
-/* types */
-/* g = gradient */
-
 @theme {
-  /* Neutrals */
+  /* NEUTRALS */
+  /* --------------------- */
   --color-white: #f9fafb;
   --color-off-white: #f5f7fa;
   /* Transparent Whites */
@@ -30,25 +17,16 @@
   --color-black: #0e0f12;
   --color-off-black: #1e293b;
 
+  /* MAIN COLORS */
+  /* --------------------- */
   /* Main Blues */
   --color-blue: #4ea3e3;
+  --color-blue-1: #2563eb;
+  --color-blue-2: #1d4ed8;
   --color-dark-blue: #162e5c;
 
   /* Accents */
   --color-green: #34d399;
-
-  /* Hero Gradient*/
-  --color-blue-hg1: #1d4ed8;
-  --color-blue-hg2: #2563eb;
-  --color-blue-hg3: #4ea3e3;
-  /* Dark Blue Gradient */
-  --color-blue-dg1: var(--color-dark-blue);
-  --color-blue-dg2: var(--color-off-black);
-  --color-blue-dg3: #0f172a;
-  /* Main Blue Gradient */
-  --color-blue-g1: var(--color-blue);
-  --color-blue-g2: #2563eb;
-  --color-blue-g3: #1d4ed8;
 }
 
 /* --------------------- */
@@ -60,10 +38,13 @@
     @apply border border-white-t3 bg-white-t4 text-white;
   }
   .main-blue-gradient {
-    @apply bg-linear-to-r from-blue-g1 via-blue-g2 to-blue-g3 text-white;
+    @apply bg-linear-to-r from-blue via-blue-1 to-blue-2 text-white;
   }
   .hero-blue-gradient {
-    @apply bg-linear-to-r from-blue-hg1/60 via-blue-hg2/60 to-blue-hg3/40;
+    @apply bg-linear-to-r from-blue-2/60 via-blue-1/60 to-blue/40;
+  }
+  .dark-blue-gradient {
+    @apply bg-linear-to-b from-dark-blue via-off-black to-[#0f172a];
   }
   .green-gradient {
     @apply bg-linear-to-r from-green to-[#059669];
@@ -117,13 +98,14 @@
   .accent-hover-text {
     @apply hover:text-blue transition;
   }
+}
 
-  /* --------------------- */
-  /* Windows */
-  /* --------------------- */
-  /* Widgets, cards, popups */
-  /* DO NOT DEFINE COLORS: Add a defined color from the colors section in the HTML element */
-
+/* --------------------- */
+/* WINDOWS */
+/* --------------------- */
+/* Widgets, cards, popups */
+/* DO NOT DEFINE COLORS: Add a defined color from the colors section in the HTML element */
+@layer components {
   .square-rounded-box {
     @apply rounded-lg p-4 flex items-center;
   }
