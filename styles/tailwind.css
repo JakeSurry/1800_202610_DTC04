@@ -14,7 +14,7 @@
   --color-white-t3: rgb(249 250 251 / 0.3);
   --color-white-t4: rgb(249 250 251 / 0.15);
 
-  --color-black: #0e0f12;
+  --color-black: #0f172a;
   --color-off-black: #1e293b;
 
   /* MAIN COLORS */
@@ -44,13 +44,13 @@
     @apply bg-linear-to-r from-blue-2/60 via-blue-1/60 to-blue/40;
   }
   .dark-blue-gradient {
-    @apply bg-linear-to-b from-dark-blue via-off-black to-[#0f172a];
+    @apply bg-linear-to-b from-dark-blue via-off-black to-black;
   }
   .green-gradient {
     @apply bg-linear-to-r from-green to-[#059669];
   }
   .black-gradient {
-    @apply bg-linear-to-r from-off-black to-[#0F172A];
+    @apply bg-linear-to-r from-off-black to-black;
   }
 }
 
@@ -59,13 +59,13 @@
 /* ===================================================================== */
 @layer components {
   h1 {
-    @apply text-3xl md:text-5xl;
+    @apply text-3xl md:text-5xl font-bold;
   }
   h2 {
-    @apply text-2xl md:text-4xl;
+    @apply text-2xl md:text-4xl font-bold;
   }
   h3 {
-    @apply text-lg md:text-2xl font-light;
+    @apply text-xl md:text-2xl font-bold;
   }
   .subtitle {
     @apply text-sm font-light;
@@ -108,5 +108,9 @@
 @layer components {
   .square-rounded-box {
     @apply rounded-lg p-4 flex items-center;
+  }
+
+  .scrollbox {
+    @apply flex space-x-3 overflow-x-scroll overflow-y-hidden pr-10;
   }
 }
