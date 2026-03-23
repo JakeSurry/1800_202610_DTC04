@@ -17,7 +17,27 @@
     <script type="module">
       import { svgs } from "./src/svgs.js";
       // indiv
-      document.getElementById("edit").innerHTML = svgs.edit(48, 48, "#0f172a");
+      document.getElementById("edit").innerHTML = svgs.edit(30, 30, "#f9fafb");
+      document.getElementById("chevron").innerHTML = svgs.chevron(
+        22,
+        22,
+        "currentColor",
+      );
+      document.getElementById("location-icon").innerHTML = svgs.location(
+        20,
+        20,
+        "#f9fafb",
+      );
+      document.getElementById("email-icon").innerHTML = svgs.mail(
+        20,
+        20,
+        "#f9fafb",
+      );
+      document.getElementById("phone-icon").innerHTML = svgs.phone(
+        20,
+        20,
+        "#f9fafb",
+      );
     </script>
   </head>
 
@@ -26,89 +46,131 @@
     <site-navbar></site-navbar>
 
     <!-- main content -->
-    <div class="py-5 md:py-10 px-6 flex-1">
+    <div class="flex-1 flex flex-col">
       <!-- Edit View -->
       <div id="editProfileView" class="hidden">
-        <h1>Edit Profile</h1>
-        <button id="toProfile" class="bg-gray">Cancel</button>
-        <form id="editProfile" action="# " class="flex flex-col space-y-2 pb-9">
-          <label for="displayName">Display Name</label>
-          <input
-            type="text"
-            id="displayName"
-            name="displayName"
-            placeholder="display name"
-          />
-          <label for="editLocation">Location</label>
-          <input
-            type="text"
-            id="editLocation"
-            name="editLocation"
-            placeholder="vancouver"
-          />
-          <label for="editPhone">Phone</label>
-          <input
-            type="text"
-            id="editPhone"
-            name="editPhone"
-            placeholder="000-000-0000"
-          />
-          <button type="submit" class="btn btn-success bg-blue">Done</button>
-        </form>
-      </div>
-      <!-- Profile View -->
-      <div id="profileView">
-        <div class="flex flex-row justify-between">
-          <h1>Profile</h1>
+        <div
+          class="fixed inset-0 overlay-black-gradient backdrop-blur-md z-50 flex items-center justify-center"
+        >
+          <div class="clear-window-color rounded-2xl p-6 w-full max-w-md">
+            <div class="flex justify-between items-center mb-5">
+              <h2 class="subheading text-lg">Edit Profile</h2>
+              <button id="toProfile" class="bg-gray small-button">
+                Cancel
+              </button>
+            </div>
 
-          <button id="toEdit">
-            <div id="edit"></div>
-          </button>
-        </div>
-        <!-- ============================== -->
-        <!-- Profile Info -->
-        <!-- ============================== -->
-        <div class="flex flex-row h-full">
-          <img
-            src="./images/elmo.jpg"
-            alt="profile-image"
-            class="white-card rounded-2xl size-48"
-          />
-          <div class="flex flex-col justify-around ml-8 w-full">
-            <p>Full Name</p>
-            <p class="bg-gray-400 p-4 rounded-2xl text-2xl">
-              <span id="full-name"></span>
-            </p>
-            <p>Display Name</p>
-            <p class="bg-gray-400 p-4 rounded-2xl text-2xl">
-              <span id="display-name"></span>
-            </p>
+            <form
+              id="editProfile"
+              action="# "
+              class="flex flex-col space-y-2 pb-3"
+            >
+              <label for="displayName" class="text-white-t2"
+                >Display Name</label
+              >
+              <input
+                type="text"
+                id="displayName"
+                name="displayName"
+                placeholder="display name"
+                class="white-input clear-hover"
+              />
+              <label for="editLocation" class="text-white-t2">Location</label>
+              <input
+                type="text"
+                id="editLocation"
+                name="editLocation"
+                placeholder="vancouver"
+                class="white-input clear-hover"
+              />
+              <label for="editPhone" class="text-white-t2">Phone</label>
+              <input
+                type="text"
+                id="editPhone"
+                name="editPhone"
+                placeholder="000-000-0000"
+                class="white-input clear-hover"
+              />
+              <button
+                type="submit"
+                class="btn btn-success main-blue-gradient mt-9"
+              >
+                Done
+              </button>
+            </form>
           </div>
         </div>
-        <div class="flex flex-col gap-y-2 mt-8 mb-16">
-          <p>Location</p>
-          <p class="bg-gray-400 px-4 py-2 rounded-2xl text-1xl">
-            <span id="location"></span>
-          </p>
-          <p>Email</p>
-          <p class="bg-gray-400 px-4 py-2 rounded-2xl text-1xl">
-            <span id="email"></span>
-          </p>
-          <p>Phone</p>
-          <p class="bg-gray-400 px-4 py-2 rounded-2xl text-1xl">
-            <span id="phone"></span>
-          </p>
-        </div>
       </div>
+      <section
+        class="relative bg-no-repeat bg-center bg-cover pt-2 pb-20 px-6"
+        style="background-image: url(&quot;images/hero.png&quot;)"
+      >
+        <div class="absolute inset-0 hero-blue-gradient"></div>
+        <!-- Profile View -->
+        <div id="profileView" class="relative z-10">
+          <div class="flex justify-between items-center mb-5">
+            <h2 class="subheading text-lg">Profile</h2>
+            <button id="toEdit">
+              <div id="edit"></div>
+            </button>
+          </div>
+          <!-- ============================== -->
+          <!-- Profile Info -->
+          <!-- ============================== -->
+          <div class="flex">
+            <img
+              src="./images/elmo.jpg"
+              alt="profile-image"
+              class="white-card rounded-2xl size-30"
+            />
+            <div class="flex flex-col justify-around ml-8 space-y-2">
+              <div class="border-b border-white-t2 space-y-1 pb-2">
+                <h1 class="text-white">
+                  <span id="display-name"></span>
+                </h1>
+                <p class="text-white font-semibold">
+                  <span id="full-name"></span>
+                </p>
+              </div>
+              <div class="flex gap-2 items-center">
+                <div id="location-icon"></div>
+                <p class="text-white">
+                  <span id="location"></span>
+                </p>
+              </div>
+              <div class="flex gap-2 items-center">
+                <div id="email-icon"></div>
+                <p class="text-white">
+                  <span id="email"></span>
+                </p>
+              </div>
+              <div class="flex gap-2 items-center">
+                <div id="phone-icon"></div>
+                <p class="text-white">
+                  <span id="phone"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <!-- ============================== -->
       <!-- Events -->
       <!-- ============================== -->
-      <div>
+      <div
+        class="flex-1 bg-off-white rounded-t-3xl -mt-6 relative z-10 py-5 md:py-10 px-6"
+      >
         <div class="flex justify-between mb-3 items-center">
-          <h1 class="text-3xl">My Events</h1>
+          <div class="flex justify-between mb-3 items-center w-full">
+            <h3>My Events</h3>
+            <button class="accent-hover-text">
+              See all
+              <div id="chevron"></div>
+            </button>
+          </div>
         </div>
+        <div id="near-you-events" class="scrollbox"></div>
       </div>
-      <div id="near-you-events" class="flex space-x-3 overflow-x-scroll"></div>
     </div>
 
     <!-- footer -->

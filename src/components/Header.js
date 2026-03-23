@@ -356,7 +356,7 @@ class SiteNavbar extends HTMLElement {
   sectionBlock(section) {
     return `
       <div class="mt-4">
-        <p class="mb-2 px-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white-t1">
+        <p class="mb-2 px-3 subheading">
           ${section.title}
         </p>
         <div class="flex flex-col">
