@@ -1,12 +1,31 @@
 @import "tailwindcss";
 
+/* ===================================================================== */
+/* HEADERS */
+/* ===================================================================== */
 .title {
   @apply text-2xl md:text-4xl;
 }
 
-/* =============================================== */
+/* ===================================================================== */
 /* COLORS */
-/* =============================================== */
+/* ===================================================================== */
+/* Naming Convention Notes */
+/* '*' = required */
+
+/* --color-{*main color family}-{specific color family}{*type}{order number}: {color} */
+/* eg. --color-blue-dg2: #1e293b; */
+/* main color family: blue */
+/* specific color family: d = dark */
+/* type: g = gradient */
+/* order number: 2 */
+/* color: #1e293b */
+
+/* types */
+/* g = gradient */
+/* b = border */
+/* f = fill */
+
 @theme {
   --color-*: initial;
   /* Neutrals */
@@ -30,6 +49,14 @@
   --color-blue-g3: #1d4ed8;
 }
 
+/* --------------------- */
+/* "Special" Colors */
+/* --------------------- */
+/* Predefined gradients, window colors, overlays, etc. */
+
+.blur-window {
+  @apply border-white/20 bg-white/15 backdrop-blur-sm;
+}
 .main-blue-gradient {
   @apply bg-linear-to-r from-blue-g1 via-blue-g2 to-blue-g3;
 }
@@ -37,5 +64,5 @@
   @apply bg-linear-to-r from-blue-hg1/80 via-blue-hg2/60 to-blue-hg3/40;
 }
 
-/* =============================================== */
-/* =============================================== */
+/* ===================================================================== */
+/* ===================================================================== */
