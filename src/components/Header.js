@@ -9,7 +9,7 @@ const ROUTES = {
   businessDashboard: "./mainBusiness.html",
 
   events: "./events.html",
-  helpCenter: "./HELP_CENTER_URL",
+  helpCenter: "./help",
 
   login: "./login.html",
   personalSignup: "./signup.html",

@@ -1,24 +1,26 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Fans Feast</title>
+    <title>Help</title>
     <meta name="comp1800 template" content="My 1800 App" />
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- ============================= -->
-    <!-- Add jquery                    -->
-    <!-- ============================= -->
+    <!-- scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/@tabler/icons-sprite@latest/dist/tabler-sprite.js"></script>
+    <!-- module scripts -->
     <script type="module" src="/src/components/Header.js"></script>
+    <script type="module" src="./src/components/Footer.js"></script>
     <link rel="stylesheet" href="main.css" />
   </head>
-  <body>
-    <!-- Header -->
+
+  <body class="bg-off-white">
+    <!-- header -->
     <site-navbar></site-navbar>
-    <div class="space-y-6 mx-5 mt-8">
+    <!-- main content -->
+    <div class="space-y-6 py-5 md:py-10">
       <!-- Contact Us -->
       <div class="space-y-4">
         <h1>Contact us</h1>
@@ -84,6 +86,11 @@
         </div>
       </div>
     </div>
+
+    <!-- footer -->
+    <site-footer></site-footer>
+
+    <!-- scripts -->
     <script type="module" src="./src/help.js"></script>
   </body>
 </html>

@@ -6,26 +6,24 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- ============================= -->
-    <!-- Add jquery                    -->
-    <!-- ============================= -->
+    <!-- scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- module scripts -->
+    <script type="module" src="./src/components/Header.js"></script>
+    <script type="module" src="./src/components/Footer.js"></script>
     <link rel="stylesheet" href="main.css" />
   </head>
 
-  <body class="bg-[#F5F7FA]">
-    <!-- Header -->
+  <body class="bg-off-white">
+    <!-- header -->
     <site-navbar></site-navbar>
 
-    <div class="py-5 md:py-10">
-      <!-- Content goes here -->
-    </div>
-    <!-- Footer -->
-    <footer
-      class="bg-[#162E5C] text-white flex items-center justify-center h-10 mt-6"
-    >
-      © 2026 Fan's Feast, Inc
-    </footer>
-    <!-- Link to scripts -->
+    <!-- main content -->
+    <div class="py-5 md:py-10"></div>
+
+    <!-- footer -->
+    <site-footer></site-footer>
+
+    <!-- scripts -->
   </body>
 </html>

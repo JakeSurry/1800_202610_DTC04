@@ -1,21 +1,26 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Business Signup</title>
+    <meta name="comp1800 template" content="My 1800 App" />
 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/@tabler/icons-sprite@latest/dist/tabler-sprite.js"></script>
-
+    <!-- module scripts -->
     <script type="module" src="/src/components/Header.js"></script>
+    <script type="module" src="./src/components/Footer.js"></script>
     <link rel="stylesheet" href="main.css" />
   </head>
 
-  <body>
+  <body class="bg-off-white">
+    <!-- header -->
     <site-navbar></site-navbar>
 
+    <!-- main content -->
     <div class="flex justify-center p-10">
       <div class="flex flex-col space-y-3 w-1/2 max-w-md">
         <h1 class="text-3xl text-center pb-6">Create Business Account</h1>
@@ -76,6 +81,10 @@
       </div>
     </div>
 
+    <!-- footer -->
+    <site-footer></site-footer>
+
+    <!-- scripts -->
     <script type="module" src="./src/signUpBusiness.js"></script>
   </body>
 </html>

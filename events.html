@@ -1,68 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <title>Fans Feast</title>
+    <title>Evemts</title>
     <meta name="comp1800 template" content="My 1800 App" />
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/@tabler/icons-sprite@latest/dist/tabler-sprite.js"></script>
+    <!-- module scripts -->
     <script type="module" src="./src/components/Header.js"></script>
-    <link rel="stylesheet" href="main.css" />
+    <script type="module" src="./src/components/Footer.js"></script>
     <script type="module" src="./src/components/SearchBar.js"></script>
     <script type="module" src="./src/events.js"></script>
+    <link rel="stylesheet" href="main.css" />
+    <script type="module">
+      import { svgs } from "./src/svgs.js";
+
+      document.querySelectorAll(".chevron").forEach((el) => {
+        el.innerHTML = svgs.chevron(22, 22, "currentColor");
+      });
+    </script>
   </head>
 
-  <body>
+  <body class="bg-off-white">
+    <!-- header -->
     <site-navbar></site-navbar>
+
+    <!-- main content -->
     <div class="my-5 px-10 flex flex-col gap-5">
-      <h1 class="text-4xl md:text-6xl text-primary">Events</h1>
+      <h1>Events</h1>
       <search-bar></search-bar>
     </div>
     <div class="space-y-10">
       <div class="mx-10">
         <div class="flex justify-between mb-3 items-center">
-          <h1 class="text-3xl">Happening This Week</h1>
-          <button class="bg-gray-400 rounded-full w-35 max-h-6">
-            See all events
+          <h3>Happening This Week</h3>
+          <button class="accent-hover-text">
+            See all
+            <div class="chevron"></div>
           </button>
         </div>
-        <!-- <div
-          id="happening-this-week"
-          class="flex space-x-3 overflow-x-scroll"
-        ></div> -->
+
         <div
           id="events-list"
           class="max-w-6xl mx-auto items-center flex flex-col gap-4"
         ></div>
       </div>
-      <!-- <div class="mx-10">
-        <div class="flex justify-between mb-3 items-center">
-          <h1 class="text-3xl">Popular</h1>
-          <button class="bg-gray-400 rounded-full w-35 max-h-6">
-            See all events
-          </button>
-        </div>
-        <div id="popular-events" class="flex space-x-3 overflow-x-scroll"></div>
-      </div>
-      <div class="mx-10">
-        <div class="flex justify-between mb-3 items-center">
-          <h1 class="text-3xl">Near You</h1>
-          <button class="bg-gray-400 rounded-full w-35 max-h-6">
-            See all events
-          </button>
-        </div>
-        <div
-          id="near-you-events"
-          class="flex space-x-3 overflow-x-scroll"
-        ></div>
-      </div> -->
     </div>
-    <footer class="bg-gray-400 flex items-center justify-center h-10 mt-6">
-      © 2026 Fan's Feast, Inc
-    </footer>
-    <script type="module" src="./src/index.js"></script>
+
+    <!-- footer -->
+    <site-footer></site-footer>
+
+    <!-- scripts -->
   </body>
 </html>

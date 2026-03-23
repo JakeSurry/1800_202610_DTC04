@@ -3,7 +3,7 @@ import { signupUser, authErrorMessage } from "./authentication.js";
 function signUpAuth() {
   const alertEl = document.getElementById("authAlert");
   const signupForm = document.getElementById("signUp");
-  const redirectUrl = "./main.html";
+  const redirectUrl = "./index.html";
 
   let errorTimeout;
   function showError(msg) {

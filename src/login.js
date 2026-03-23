@@ -45,7 +45,7 @@ function initLoginAuth() {
       const userSnap = await getDoc(userRef);
 
       if (userSnap.exists()) {
-        location.href = "./main.html";
+        location.href = "./index.html";
         return;
       }
 
