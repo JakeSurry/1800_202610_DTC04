@@ -50,7 +50,10 @@
     @apply bg-linear-to-r from-blue-2/60 via-blue-1/60 to-blue/40;
   }
   .overlay-black-gradient {
-    @apply bg-linear-to-t from-black/75 via-black/45 to-transparent;
+    @apply bg-linear-to-t from-black/75 via-black/45 to-black/10;
+  }
+  .overlay-green-gradient {
+    @apply bg-linear-to-t from-green/75  to-green/40;
   }
   .dark-blue-gradient {
     @apply bg-linear-to-b from-dark-blue via-off-black to-black;
@@ -111,6 +114,9 @@
   }
   .white-input {
     @apply rounded-full text-white placeholder:text-white-t3 text-xs md:text-base p-2 bg-white-t4 border border-white-t3;
+  }
+  .blue-input {
+    @apply rounded-full text-black placeholder:text-gray text-xs md:text-base p-2 bg-blue/15;
   }
   .small-button {
     @apply text-sm font-normal;
