@@ -21,46 +21,46 @@
     </script>
   </head>
 
-  <body class="bg-off-white">
+  <body class="bg-off-white min-h-screen flex flex-col">
     <!-- header -->
     <site-navbar></site-navbar>
 
     <!-- main content -->
-    <div class="flex flex-col relative w-5/6 m-auto mt-16">
+    <div class="py-5 md:py-10 px-6 flex-1">
       <!-- Edit View -->
       <div id="editProfileView" class="hidden">
         <h1>Edit Profile</h1>
-        <button id="toProfile" class="bg-gray-400 p-3">Cancel</button>
+        <button id="toProfile" class="bg-gray">Cancel</button>
         <form id="editProfile" action="# " class="flex flex-col space-y-2 pb-9">
           <label for="displayName">Display Name</label>
           <input
             type="text"
             id="displayName"
             name="displayName"
-            class="border-2 rounded-full"
+            placeholder="display name"
           />
           <label for="editLocation">Location</label>
           <input
             type="text"
             id="editLocation"
             name="editLocation"
-            class="border-2 rounded-full"
+            placeholder="vancouver"
           />
           <label for="editPhone">Phone</label>
           <input
             type="text"
             id="editPhone"
             name="editPhone"
-            class="border-2 rounded-full"
+            placeholder="000-000-0000"
           />
-          <button type="submit" class="btn btn-success bg-blue-400">
-            Done
-          </button>
+          <button type="submit" class="btn btn-success bg-blue">Done</button>
         </form>
       </div>
       <!-- Profile View -->
-      <div id="profileView" class="">
-        <div class="flex flex-row justify-end">
+      <div id="profileView">
+        <div class="flex flex-row justify-between">
+          <h1>Profile</h1>
+
           <button id="toEdit">
             <div id="edit"></div>
           </button>
@@ -72,39 +72,41 @@
           <img
             src="./images/elmo.jpg"
             alt="profile-image"
-            class="border-4 border-gray-400 rounded-2xl size-48"
+            class="white-card rounded-2xl size-48"
           />
           <div class="flex flex-col justify-around ml-8 w-full">
-            <h1>Full Name</h1>
-            <h1 class="bg-gray-400 p-4 rounded-2xl text-2xl">
+            <p>Full Name</p>
+            <p class="bg-gray-400 p-4 rounded-2xl text-2xl">
               <span id="full-name"></span>
-            </h1>
-            <h1>Display Name</h1>
-            <h1 class="bg-gray-400 p-4 rounded-2xl text-2xl">
+            </p>
+            <p>Display Name</p>
+            <p class="bg-gray-400 p-4 rounded-2xl text-2xl">
               <span id="display-name"></span>
-            </h1>
+            </p>
           </div>
         </div>
         <div class="flex flex-col gap-y-2 mt-8 mb-16">
-          <h1 class="bg-gray-400 px-4 py-2 rounded-2xl text-1xl">
+          <p>Location</p>
+          <p class="bg-gray-400 px-4 py-2 rounded-2xl text-1xl">
             <span id="location"></span>
-          </h1>
-          <h1 class="bg-gray-400 px-4 py-2 rounded-2xl text-1xl">
+          </p>
+          <p>Email</p>
+          <p class="bg-gray-400 px-4 py-2 rounded-2xl text-1xl">
             <span id="email"></span>
-          </h1>
-          <h1 class="bg-gray-400 px-4 py-2 rounded-2xl text-1xl">
+          </p>
+          <p>Phone</p>
+          <p class="bg-gray-400 px-4 py-2 rounded-2xl text-1xl">
             <span id="phone"></span>
-          </h1>
+          </p>
         </div>
       </div>
       <!-- ============================== -->
       <!-- Events -->
       <!-- ============================== -->
-      <div class="">
+      <div>
         <div class="flex justify-between mb-3 items-center">
           <h1 class="text-3xl">My Events</h1>
         </div>
-        <h1><span id="events"></span></h1>
       </div>
       <div id="near-you-events" class="flex space-x-3 overflow-x-scroll"></div>
     </div>

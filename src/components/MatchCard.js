@@ -13,9 +13,9 @@ class MatchCard extends HTMLElement {
     this.innerHTML = `
       <div
         style="background-image: url('${match.image}');"
-        class="relative flex w-50 md:w-80 flex-col gap-2 rounded-3xl bg-cover bg-center pb-4 text-white md:h-40"
+        class="relative square-rounded-box w-50 md:w-80 flex-col gap-2 bg-cover bg-center pb-4 md:h-40"
       >
-        <div class="absolute inset-0 rounded-3xl bg-linear-to-t from-black/75 via-black/45 to-transparent"></div>
+        <div class="absolute inset-0 square-rounded-box overlay-black-gradient"></div>
 
         <div class="z-10">
           <div class="flex items-center gap-3 p-4">

@@ -13,7 +13,7 @@ class HostedEvent extends HTMLElement {
     this.innerHTML = `
       <div
         style="background-image: url('${event.image}');"
-        class="relative w-[320px] md:w-105 overflow-hidden square-rounded-box p-0 justify-center bg-cover bg-center text-white shadow-lg"
+        class="relative w-[320px] md:w-105 overflow-hidden square-rounded-box p-0 bg-cover bg-center"
       >
         <div class="absolute inset-0 hero-blue-gradient"></div>
 
@@ -40,7 +40,7 @@ class HostedEvent extends HTMLElement {
             <div class="mt-1 flex items-center gap-2">
                ${svgs.clock(18, 18, "#F9FAFB")}
 
-              <p class="subtitle text-white md:text-base">
+              <p class="subtitle text-white">
                 ${event.date} at ${event.time}
               </p>
             </div>

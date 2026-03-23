@@ -10,12 +10,12 @@ class Event extends HTMLElement {
     if (!event) return;
     this.innerHTML = `
         <div
-            class="flex flex-col gap-2 bg-white rounded-3xl w-50 md:w-50 pb-4 md:h-70"
+            class="white-card square-rounded-box p-0 flex-col gap-2 w-50 md:w-50 pb-4 md:h-70"
           >
           <img
             src="${event.image}"
             alt="${event.name}"
-            class="w-full object-contain rounded-t-xl"/>
+            class="w-full object-contain rounded-t-lg"/>
           <div class="flex flex-col gap-3 px-4 text-black">
             <h3 class="text-sm font-bold">${event.name}</h3>
             <div class="flex gap-2 items-center">

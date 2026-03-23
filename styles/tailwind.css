@@ -29,6 +29,7 @@
 
   /* Accents */
   --color-green: #34d399;
+  --color-red: #ff0033;
 }
 
 /* --------------------- */
@@ -47,6 +48,9 @@
   }
   .hero-blue-gradient {
     @apply bg-linear-to-r from-blue-2/60 via-blue-1/60 to-blue/40;
+  }
+  .overlay-black-gradient {
+    @apply bg-linear-to-t from-black/75 via-black/45 to-transparent;
   }
   .dark-blue-gradient {
     @apply bg-linear-to-b from-dark-blue via-off-black to-black;
@@ -81,6 +85,9 @@
   p {
     @apply text-black;
   }
+  label {
+    @apply text-black;
+  }
 }
 /* ===================================================================== */
 /* ELEMENTS */
@@ -95,6 +102,9 @@
   }
   button {
     @apply rounded-full font-medium flex justify-center items-center px-5 py-2 md:px-6 md:py-3;
+  }
+  input {
+    @apply rounded-full text-black placeholder:text-gray text-xs md:text-base p-2;
   }
   .small-button {
     @apply text-sm font-normal;

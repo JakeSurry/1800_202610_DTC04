@@ -33,7 +33,7 @@ class SearchBar extends HTMLElement {
 
           <input
             id="searchInput"
-            class="w-full bg-transparent outline-none text-black placeholder:text-gray text-xs md:text-base"
+            class="w-full"
             type="text"
             placeholder="${this._placeholder}"
             value="${this._value}"

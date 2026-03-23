@@ -307,7 +307,7 @@ class SiteNavbar extends HTMLElement {
           }
 
           <div class="min-w-0">
-            <p class="truncate text-sm font-semibold text-white">${name}</p>
+            <p class="truncate font-semibold text-white">${name}</p>
             <p class="text-xs text-white-t1">${subtitle}</p>
           </div>
         </div>
@@ -323,7 +323,7 @@ class SiteNavbar extends HTMLElement {
           action.primary
             ? "main-blue-gradient bright-hover"
             : "clear-window-color clear-hover"
-        } flex-1 px-4 py-2 text-sm"
+        } flex-1 px-4 py-2 small-button"
       >
         ${action.name}
       </a>
@@ -338,7 +338,7 @@ class SiteNavbar extends HTMLElement {
       <a
         ${hrefAttr}
         ${actionAttr}
-        class="justify-between text-white clear-hover"
+        class="justify-between text-white clear-hover hover:bg-white-t4"
       >
         <div class="flex items-center gap-3">
           <div class="text-white">
@@ -420,7 +420,7 @@ class SiteNavbar extends HTMLElement {
 
         <div
           id="sidebarDimmer"
-          class="hidden absolute top-full left-0 z-40 h-[calc(100vh-100%)] w-full bg-black/45 backdrop-blur-[2px]"
+          class="hidden absolute top-full left-0 z-40 h-[calc(100vh-100%)] w-full overlay-black-gradient backdrop-blur-[2px]"
         ></div>
       </header>
     `;
