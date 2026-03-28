@@ -10,17 +10,13 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-/*
-THIS IS TO TEST NEW CONFIG WITHOUT MESSING UP FIRESTORE. BE SURE TO REMOVE!!!!!!!!!!!!!!!!!!!!!
- */
-import { connectFirestoreEmulator } from "firebase/firestore";
-
-// NORMAL FIRESTORE DB. DELETE EVERYTHING BUT THIS LINE
 export const db = getFirestore(app);
 
-if (location.hostname === "localhost") {
-  connectFirestoreEmulator(db, "localhost", 8080);
-}
+// uncomment below if you want to test locally with firestore emulator (ensure you install firestbasecli first)
+// import { connectFirestoreEmulator } from "firebase/firestore";
+// if (location.hostname === "localhost") {
+//   connectFirestoreEmulator(db, "localhost", 8080);
+// }
 // end firestore emulator stuff
 export const auth = getAuth(app);
 
