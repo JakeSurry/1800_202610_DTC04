@@ -10,6 +10,13 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
-export const auth = getAuth(app);
 export const db = getFirestore(app);
+
+// uncomment below if you want to test locally with firestore emulator (ensure you install firestbasecli first)
+// import { connectFirestoreEmulator } from "firebase/firestore";
+// if (location.hostname === "localhost") {
+//   connectFirestoreEmulator(db, "localhost", 8080);
+// }
+// end firestore emulator stuff
+export const auth = getAuth(app);
+
