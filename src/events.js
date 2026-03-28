@@ -121,8 +121,6 @@ export async function getEvent(eventId) {
 
 // Query events with optional filters
 export async function queryEvents(filters = {}) {
-  const constraints = [];
-
   if (filters.team) {
     constraints.push(where("teams", "array-contains", filters.team));
   }
@@ -140,6 +138,17 @@ export async function queryEvents(filters = {}) {
   try {
     const snapshot = await getDocs(q);
     return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+  } catch (error) {
+    console.error("Error querying events:", error);
+    return [];
+  }
+}
+
+export async function getRandEvent() {
+  const q = query(collection(db, "events"));
+  try {
+    const snapshot = await getDocs(q);
+    return snapshot.docs[Math.floor(Math.random() * snapshot.docs.length)];
   } catch (error) {
     console.error("Error querying events:", error);
     return [];
@@ -164,4 +173,4 @@ export async function getNumAttendees(eventId) {
   return regLink.attendees.length;
 }
 
-seedEventsAndRegLinks()
+seedEventsAndRegLinks();
