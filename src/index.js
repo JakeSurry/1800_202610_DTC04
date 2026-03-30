@@ -43,8 +43,6 @@ const dummyEvents = [
   },
 ];
 
-
-
 const matches = [
   {
     image: "images/stadium1.png",
@@ -78,8 +76,8 @@ const matches = [
 
 function addMatch() {
   const match = {
-    team1: "Canada",
-    team2: "Mexico",
+    team1: "Brazil",
+    team2: "germany",
     date: "June 18, 2026",
     time: "11:00 AM",
   };
@@ -94,7 +92,6 @@ function setup() {
   renderEvents(dummyEvents, "near-you-events");
   renderMatches(matches, "matches-row");
   addMatch();
-  //   renderHeader("header");
 }
 
 $(document).ready(function () {

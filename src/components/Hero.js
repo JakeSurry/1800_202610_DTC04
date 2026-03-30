@@ -29,30 +29,29 @@ class Hero extends HTMLElement {
           <div class="w-full max-w-xl">
             <search-bar placeholder="Search teams, matches, or bars"></search-bar>
           </div>
-
-          <div class="flex items-center gap-4 clear-window-color square-rounded-box px-7 ">
-            <div class="flex flex-col items-center gap-2 text-center">
-              <div class="flex items-center justify-center gap-5">
-                <img
-                  src="../../images/flags/${match.team1}.png"
-                  alt="${match.team1}"
-                  class="w-10 h-10 object-contain"
-                />
-
-                <p class="text-xs font-bold md:text-base text-white">
-                  ${match.team1} vs ${match.team2}
+          <div>
+            <h4 class="text-white uppercase">Next Match</h4>
+            <div class="flex items-center gap-4 clear-window-color square-rounded-box px-7 ">
+              <div class="flex flex-col items-center gap-2 text-center">
+                <div class="flex items-center justify-center gap-5">
+                  <img
+                    src="../../images/flags/${match.team1}.png"
+                    alt="${match.team1}"
+                    class="w-10 h-10 object-contain"
+                  />
+                  <p class="text-xs font-bold md:text-base text-white">
+                    ${match.team1} vs ${match.team2}
+                  </p>
+                  <img
+                    src="../../images/flags/${match.team2}.png"
+                    alt="${match.team2}"
+                    class="w-10 h-10 object-contain"
+                  />
+                </div>
+                <p class="text-sm md:text-base text-white">
+                  ${match.date} at ${match.time}
                 </p>
-
-                <img
-                  src="../../images/flags/${match.team2}.png"
-                  alt="${match.team2}"
-                  class="w-10 h-10 object-contain"
-                />
               </div>
-
-              <p class="text-sm md:text-base text-white">
-                ${match.date} at ${match.time}
-              </p>
             </div>
           </div>
         </div>

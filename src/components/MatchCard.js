@@ -13,38 +13,38 @@ class MatchCard extends HTMLElement {
     this.innerHTML = `
       <div
         style="background-image: url('${match.image}');"
-        class="relative square-rounded-box w-50 md:w-80 flex-col gap-2 bg-cover bg-center pb-4 md:h-40"
-      >
+        class="relative square-rounded-box flex flex-col bg-cover bg-center p-5 min-w-70 md:min-w-0 flex-1">
         <div class="absolute inset-0 square-rounded-box overlay-black-gradient"></div>
-
-        <div class="z-10">
-          <div class="flex items-center gap-3 p-4">
+        
+        <div class="z-10 flex flex-col items-center justify-center space-y-4 p-3">
+          <div class="flex items-center gap-6">
             <img
               src="../../images/flags/${match.team1}.png"
               alt="${match.team1}"
-              class="h-10 w-10 object-contain"
+              class="w-1/6 max-w-20 min-w-6 object-contain"
             />
 
-            <p class="text-xs font-bold text-white md:text-base">
+            <h3 class="text-shadow-md font-bold text-white md:text-3xl text-center">
               ${match.team1} vs ${match.team2}
-            </p>
+            </h3>
 
             <img
               src="../../images/flags/${match.team2}.png"
               alt="${match.team2}"
-              class="h-10 w-10 object-contain"
+              class="w-1/6 max-w-20 min-w-6 object-contain"
             />
           </div>
 
-          <div class="flex items-center gap-2 px-4">
+          <div class="flex items-center gap-2">
           ${svgs.clock(14, 14, "#F9FAFB")}
-            <p class="text-xs font-medium text-white/90 md:text-sm">
+            <p class="text-xs font-medium text-white/90 md:text-lg">
               ${match.date} at ${match.time}
             </p>
           </div>
 
-          <button class="absolute right-5 bottom-2 flex items-center justify-center">
-          ${svgs.info(24, 24, "#BFBFBF")}
+          <button class="main-blue-gradient text-xs md:text-lg">
+          Find Events ${svgs.chevron(20, 20, "#F9FAFB")}
+
           </button>
         </div>
       </div>
