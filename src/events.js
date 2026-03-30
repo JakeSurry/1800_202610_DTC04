@@ -91,4 +91,25 @@ export async function getNumAttendees(eventId) {
   return regLink.attendees.length;
 }
 
+// get the venue ID from the reglink
+export async function getVenueID(eventId) {
+  const regLink = await getEventRegLink(eventId);
+  if (!regLink) return 0;
+  return regLink.host;
+}
+
+// get the venue obj
+export async function getVenue(eventId) {
+  const venueID = await getVenueID(eventId);
+  const venueRef = doc(db, "business_accounts", venueID);
+  const snap = await getDoc(venueRef);
+  if (!snap.exists()) return null;
+  return { id: snap.id, ...snap.data() };
+}
+
+//get venue location
+export async function getEventLocation(eventId) {
+  const venue = await getVenue(eventId);
+  return `${venue.address}, ${venue.city}, ${venue.province}, ${venue.postalCode}`;
+}
 seedEventsAndRegLinks();

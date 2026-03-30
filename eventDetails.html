@@ -6,7 +6,10 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- module scripts -->
     <script type="module" src="./src/components/Header.js"></script>
     <script type="module" src="./src/components/Footer.js"></script>
     <link rel="stylesheet" href="main.css" />
@@ -40,17 +43,17 @@
           <div
             class="clear-window-color square-rounded-box flex-col items-start"
           >
-            <h2 class="text-white">Event Name Goes Here</h2>
+            <h2 id="event-name" class="text-white">Event Name Goes Here</h2>
             <h3 class="text-white font-light">Location Address</h3>
             <div class="flex items-center text-white">
               <div class="flex gap-3 items-center justify-center">
-                <p id="atendees" class="subtitle font-semibold text-white">
-                  Atendees
+                <p class="attendees subtitle font-semibold text-white">
+                  Attendees
                 </p>
                 <span>•</span>
-                <p id="date" class="subtitle font-semibold text-white">Date</p>
+                <p class="date subtitle font-semibold text-white">Date</p>
                 <span>•</span>
-                <p id="time" class="subtitle font-semibold text-white">Time</p>
+                <p class="time subtitle font-semibold text-white">Time</p>
               </div>
             </div>
           </div>
@@ -78,7 +81,10 @@
               <p id="time" class="subtitle font-semibold">Time</p>
             </div>
           </div>
-          <button class="default-button main-blue-gradient bright-hover w-full">
+          <button
+            id="join"
+            class="default-button main-blue-gradient bright-hover w-full"
+          >
             Join Event
           </button>
         </div>

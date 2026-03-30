@@ -1,6 +1,10 @@
 import { onAuthReady } from "./authentication.js";
 import { db } from "./firebaseConfig.js";
 import { doc, onSnapshot, getDoc, setDoc } from "firebase/firestore";
+import { queryEvents, getEvent } from "./events";
+
+import { renderEvents } from "./components/EventsRow.js";
+
 function initAuthUI() {
   // --- DOM Elements ---
   const profileView = document.getElementById("profileView");
@@ -98,23 +102,24 @@ function ShowProfileInfo() {
   });
 }
 
-function ShowProfileEvents() {
-  const eventsElement = document.getElementById("events");
+async function ShowProfileEvents() {
   onAuthReady(async (user) => {
-    if (!user) {
-      location.href = "index.html";
-      return;
-    }
+    if (!user) return;
 
-    const userDoc = await getDoc(doc(db, "users", user.uid));
+    try {
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      const registeredEventIds = userDoc.data()?.registeredEvents || [];
 
-    const events =
-      userDoc.exists() && userDoc.data().events != null
-        ? userDoc.data().events
-        : "Events";
+      if (registeredEventIds.length === 0) return;
 
-    if (eventsElement) {
-      eventsElement.textContent = `${events}`;
+      const allEvents = await queryEvents();
+      const myEvents = allEvents.filter((e) =>
+        registeredEventIds.includes(e.id),
+      );
+
+      renderEvents(myEvents, "events", "compact");
+    } catch (err) {
+      console.error("Error loading profile events:", err);
     }
   });
 }

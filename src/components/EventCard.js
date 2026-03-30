@@ -1,5 +1,5 @@
 import { svgs } from "./../svgs.js";
-import { getNumAttendees } from "../events.js";
+import { getNumAttendees, getEventLocation } from "../events.js";
 
 export class EventCard extends HTMLElement {
   constructor() {
@@ -30,7 +30,6 @@ export class EventCard extends HTMLElement {
     } else {
       styleClass = "min-w-0";
     }
-    console.log(this._visualStyle);
 
     this.innerHTML = `
         <button class="outline-hover rounded-lg" id="viewEvent">
@@ -44,7 +43,7 @@ export class EventCard extends HTMLElement {
               <h4>${event.name}</h4>
               <div class="flex gap-2 items-center">
                 ${svgs.location(14, 14, "#000000")}
-                <p class="subtitle font-semibold">LOCATION</p>
+                <p class="subtitle font-semibold">${await getEventLocation(event.id)}</p>
               </div>
               <div class="flex gap-2 items-center">
                 ${svgs.people(14, 14, "#000000")}
