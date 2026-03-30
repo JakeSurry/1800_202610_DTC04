@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Fans Feast</title>
+    <meta name="comp1800 template" content="My 1800 App" />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script type="module" src="./src/components/Header.js"></script>
+    <script type="module" src="./src/components/Footer.js"></script>
+    <link rel="stylesheet" href="main.css" />
+    <script type="module">
+      import { svgs } from "./src/svgs.js";
+      document.querySelectorAll(".clock").forEach((el) => {
+        el.innerHTML = svgs.clock(22, 22, "currentColor");
+      });
+    </script>
+  </head>
+
+  <body class="bg-off-white min-h-screen flex flex-col">
+    <site-navbar></site-navbar>
+
+    <!-- main content -->
+    <div class="w-full md:w-[70%] mx-auto md:px-0 py-5 md:py-10 mb-20 flex-1">
+      <section
+        id="event-bg"
+        class="relative bg-no-repeat bg-center bg-cover overflow-hidden flex p-6"
+        style="background-image: url(&quot;images/dummyImage.jpg&quot;)"
+      >
+        <div
+          class="absolute top-0 left-0 right-0 rotate-180 overlay-black-gradient h-20"
+        ></div>
+        <!-- Header content -->
+        <div class="relative z-10 flex flex-col h-90 justify-between">
+          <!-- Top -->
+          <h1 class="subheading text-white/90">EVENT</h1>
+
+          <!-- Bottom -->
+          <div
+            class="clear-window-color square-rounded-box flex-col items-start"
+          >
+            <h2 class="text-white">Event Name Goes Here</h2>
+            <h3 class="text-white font-light">Location Address</h3>
+            <div class="flex items-center text-white">
+              <div class="flex gap-3 items-center justify-center">
+                <p id="atendees" class="subtitle font-semibold text-white">
+                  Atendees
+                </p>
+                <span>•</span>
+                <p id="date" class="subtitle font-semibold text-white">Date</p>
+                <span>•</span>
+                <p id="time" class="subtitle font-semibold text-white">Time</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div
+        class="p-6 md:p-0 mx-auto m-6 md:flex md:flex-row-reverse justify-between items-start space-y-4"
+      >
+        <!-- action -->
+        <div
+          class="md:w-[35%] white-card square-rounded-box md:sticky md:top-0 flex-col items-start"
+        >
+          <h4 id="atendees" class="w-full text-center">Join Event Name</h4>
+          <div class="p-5">
+            <div class="flex gap-2">
+              <div class="clock"></div>
+              <p id="atendees" class="subtitle font-semibold">Atendees</p>
+            </div>
+            <div class="flex gap-2">
+              <div class="clock"></div>
+              <p id="date" class="subtitle font-semibold">Date</p>
+            </div>
+            <div class="flex gap-2">
+              <div class="clock"></div>
+              <p id="time" class="subtitle font-semibold">Time</p>
+            </div>
+          </div>
+          <button class="default-button main-blue-gradient bright-hover w-full">
+            Join Event
+          </button>
+        </div>
+        <!-- details -->
+        <div class="md:w-[60%] space-y-6">
+          <!-- Match Header -->
+          <div
+            class="w-full square-rounded-box white-card items-center justify-center"
+          >
+            <div class="w-[70%] flex items-center justify-between gap-4">
+              <img
+                src="../../images/flags/canada.png"
+                class="w-1/6 max-w-20 min-w-6 object-contain"
+              />
+              <div class="flex flex-col items-center">
+                <h3 class="">Team VS Team</h3>
+              </div>
+              <img
+                src="../../images/flags/canada.png"
+                class="w-1/6 max-w-20 min-w-6 object-contain"
+              />
+            </div>
+          </div>
+          <!-- Venue Info -->
+          <hr class="border-gray/30" />
+          <h3 class="pt-3">About this event</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Perspiciatis, et. Tempore porro exercitationem necessitatibus
+            quisquam repellendus. Odit possimus, quod distinctio temporibus
+            rerum eos, culpa minus dolor iste aut quas deleniti!
+          </p>
+          <h3 class="pt-3">About this venue</h3>
+          <p id="description">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit,
+            accusamus?
+          </p>
+          <div class="flex gap-2">
+            <div class="clock"></div>
+            <p id="atendees" class="subtitle font-semibold">Address</p>
+          </div>
+          <div class="flex gap-2">
+            <div class="clock"></div>
+            <p id="atendees" class="subtitle font-semibold">Business Type</p>
+          </div>
+          <div class="flex gap-2">
+            <div class="clock"></div>
+            <p id="atendees" class="subtitle font-semibold">Phone</p>
+          </div>
+          <div class="flex gap-2">
+            <div class="clock"></div>
+            <p id="atendees" class="subtitle font-semibold">Website</p>
+          </div>
+          <div class="flex gap-2">
+            <div class="clock"></div>
+            <p id="atendees" class="subtitle font-semibold">Instagram</p>
+          </div>
+          <h4>Other events from this venue</h4>
+          <div id="venue-events" class="scrollbox"></div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./src/eventDetails.js"></script>
+    <site-footer></site-footer>
+  </body>
+</html>

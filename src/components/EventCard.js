@@ -21,11 +21,20 @@ export class EventCard extends HTMLElement {
     const event = this._event;
     if (!event) return;
 
-    const styleClass = this._visualStyle === "compact" ? "max-w-70" : "";
+    let styleClass = "";
+
+    if (this._visualStyle === "compact") {
+      styleClass = "max-w-50";
+    } else if (this._visualStyle === "long") {
+      styleClass = "min-w-90";
+    } else {
+      styleClass = "min-w-0";
+    }
+    console.log(this._visualStyle);
 
     this.innerHTML = `
-        <button class="outline-hover rounded-lg">
-          <div class="white-card square-rounded-box items-start p-0 border-0 flex flex-col gap-2 pb-4 h-full min-w-50 md:min-w-0 ${styleClass}" >
+        <button class="outline-hover rounded-lg" id="viewEvent">
+          <div class="white-card square-rounded-box items-start p-0 border-0 flex flex-col gap-2 pb-4 h-full  ${styleClass}" >
             <img
             src="${event.image ? event.image : "../images/dummyImage.jpg"}"
             alt="${event.name}"
@@ -33,6 +42,10 @@ export class EventCard extends HTMLElement {
             />
             <div class="space-y-2 px-5">
               <h4>${event.name}</h4>
+              <div class="flex gap-2 items-center">
+                ${svgs.location(14, 14, "#000000")}
+                <p class="subtitle font-semibold">LOCATION</p>
+              </div>
               <div class="flex gap-2 items-center">
                 ${svgs.people(14, 14, "#000000")}
                 <p class="subtitle font-semibold">${await getNumAttendees(event.id)}</p>
@@ -48,6 +61,15 @@ export class EventCard extends HTMLElement {
             </div>
           </div>
         </button>
-        `;
+      `;
+
+    this.querySelector("#viewEvent")?.addEventListener("click", () => {
+      if (!event.id) {
+        console.error("Event ID missing");
+        return;
+      }
+
+      window.location.href = `/eventDetails.html?eventId=${event.id}`;
+    });
   }
 }

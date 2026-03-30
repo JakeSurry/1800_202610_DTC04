@@ -9,6 +9,7 @@ export function renderEvents(events, eventsContainerId) {
   for (let event of events) {
     const eventCard = document.createElement("event-card");
     eventCard.event = event;
+
     eventsContainer.append(eventCard);
   }
 }

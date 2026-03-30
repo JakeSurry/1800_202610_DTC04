@@ -1,11 +1,5 @@
 import { db } from "/src/firebaseConfig.js";
-import {
-  doc,
-  getDoc,
-  updateDoc,
-  deleteDoc,
-  serverTimestamp,
-} from "firebase/firestore";
+import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 
 function getEventIdFromUrl() {
   const params = new URLSearchParams(window.location.search);

@@ -64,14 +64,22 @@ class HostedEvent extends HTMLElement {
                 <span class="font-bold">${event.fans}</span> Fans Going
               </p>
             </div>
-
-            <button
-              type="button"
-              id="viewEvent"
-              class="default-button main-blue-gradient bright-hover small-button"
-            >
-              Edit
-            </button>
+            <div class="flex gap-2">
+              <button
+                type="button"
+                id="viewEvent"
+                class="default-button main-blue-gradient bright-hover small-button"
+              >
+                Edit
+              </button>
+              <button
+                type="button"
+                id="viewEventPage"
+                class="default-button clear-window-color clear-hover small-button"
+              >
+                View Event Page
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -84,6 +92,14 @@ class HostedEvent extends HTMLElement {
       }
 
       window.location.href = `/editEvent.html?eventId=${event.id}`;
+    });
+    this.querySelector("#viewEventPage")?.addEventListener("click", () => {
+      if (!event.id) {
+        console.error("Event ID missing");
+        return;
+      }
+
+      window.location.href = `/eventDetails.html?eventId=${event.id}`;
     });
   }
 }
