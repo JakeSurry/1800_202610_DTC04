@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Business Profile</title>
+    <meta name="comp1800 template" content="My 1800 App" />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script type="module" src="/src/components/Header.js"></script>
+    <script type="module" src="./src/components/Footer.js"></script>
+    <script type="module" src="./src/components/Loader.js"></script>
+    <link rel="stylesheet" href="main.css" />
+    <script type="module">
+      import { svgs } from "./src/svgs.js";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("edit-icon").innerHTML = svgs.edit(
+          26,
+          26,
+          "#F9FAFB",
+        );
+        document.getElementById("location-icon").innerHTML = svgs.location(
+          20,
+          20,
+          "#F9FAFB",
+        );
+        document.getElementById("email-icon").innerHTML = svgs.mail(
+          20,
+          20,
+          "#F9FAFB",
+        );
+        document.getElementById("phone-icon").innerHTML = svgs.phone(
+          20,
+          20,
+          "#F9FAFB",
+        );
+        document.getElementById("website-icon").innerHTML = svgs.link(
+          20,
+          20,
+          "#F9FAFB",
+        );
+        document.getElementById("instagram-icon").innerHTML = svgs.instagram(
+          20,
+          20,
+          "#F9FAFB",
+        );
+        document.getElementById("business-icon").innerHTML = svgs.business(
+          20,
+          20,
+          "#F9FAFB",
+        );
+      });
+    </script>
+  </head>
+
+  <body class="bg-off-white min-h-screen flex flex-col">
+    <page-loader></page-loader>
+    <site-navbar></site-navbar>
+
+    <div class="flex-1 flex flex-col">
+      <!-- EDIT MODAL -->
+      <div id="editBusinessView" class="hidden">
+        <div
+          class="fixed inset-0 overlay-black-gradient backdrop-blur-md z-50 flex items-center justify-center px-6 py-8"
+        >
+          <div
+            class="clear-window-color square-rounded-box flex-col items-stretch w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+          >
+            <div class="flex justify-between items-center mb-5">
+              <h2 class="subheading text-lg">Edit Business Profile</h2>
+              <button
+                id="toProfile"
+                type="button"
+                class="bg-gray text-white small-button"
+              >
+                Cancel
+              </button>
+            </div>
+
+            <div
+              id="formAlert"
+              class="hidden mb-4 rounded-2xl border border-red bg-red/10 px-4 py-3 text-sm text-red"
+            ></div>
+
+            <form id="editBusinessProfile" class="flex flex-col gap-4 pb-3">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-2">
+                  <label for="displayName" class="text-white-t2"
+                    >Display Name</label
+                  >
+                  <input
+                    id="displayName"
+                    name="displayName"
+                    type="text"
+                    class="white-input clear-hover"
+                  />
+                </div>
+
+                <div class="flex flex-col gap-2">
+                  <label for="businessName" class="text-white-t2"
+                    >Business Name</label
+                  >
+                  <input
+                    id="businessName"
+                    name="businessName"
+                    type="text"
+                    class="white-input clear-hover"
+                  />
+                </div>
+
+                <div class="flex flex-col gap-2">
+                  <label for="phone" class="text-white-t2">Phone</label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="text"
+                    class="white-input clear-hover"
+                  />
+                </div>
+
+                <div class="flex flex-col gap-2">
+                  <label for="businessType" class="text-white-t2"
+                    >Business Type</label
+                  >
+                  <input
+                    id="businessType"
+                    name="businessType"
+                    type="text"
+                    class="white-input clear-hover"
+                    placeholder="Sports Bar, Restaurant..."
+                  />
+                </div>
+
+                <div class="flex flex-col gap-2">
+                  <label for="website" class="text-white-t2">Website</label>
+                  <input
+                    id="website"
+                    name="website"
+                    type="text"
+                    class="white-input clear-hover"
+                  />
+                </div>
+
+                <div class="flex flex-col gap-2">
+                  <label for="instagram" class="text-white-t2">Instagram</label>
+                  <input
+                    id="instagram"
+                    name="instagram"
+                    type="text"
+                    class="white-input clear-hover"
+                  />
+                </div>
+
+                <div class="flex flex-col gap-2 md:col-span-2">
+                  <label for="description" class="text-white-t2"
+                    >Description</label
+                  >
+                  <textarea
+                    id="description"
+                    name="description"
+                    rows="4"
+                    class="white-input clear-hover rounded-lg"
+                    placeholder="Tell users what makes your venue special."
+                  ></textarea>
+                </div>
+
+                <div class="flex flex-col gap-2 md:col-span-2">
+                  <label for="address" class="text-white-t2">Address</label>
+                  <input
+                    id="address"
+                    name="address"
+                    type="text"
+                    class="white-input clear-hover"
+                  />
+                </div>
+
+                <div class="flex flex-col gap-2">
+                  <label for="city" class="text-white-t2">City</label>
+                  <input
+                    id="city"
+                    name="city"
+                    type="text"
+                    class="white-input clear-hover"
+                  />
+                </div>
+
+                <div class="flex flex-col gap-2">
+                  <label for="province" class="text-white-t2">Province</label>
+                  <input
+                    id="province"
+                    name="province"
+                    type="text"
+                    class="white-input clear-hover"
+                  />
+                </div>
+
+                <div class="flex flex-col gap-2">
+                  <label for="postalCode" class="text-white-t2"
+                    >Postal Code</label
+                  >
+                  <input
+                    id="postalCode"
+                    name="postalCode"
+                    type="text"
+                    class="white-input clear-hover"
+                  />
+                </div>
+              </div>
+
+              <button type="submit" class="main-blue-gradient mt-6">
+                Save Changes
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO PROFILE -->
+      <section
+        class="relative bg-no-repeat bg-center bg-cover pt-2 pb-20 px-6"
+        style="background-image: url(&quot;images/hero.png&quot;)"
+      >
+        <div class="absolute inset-0 hero-blue-gradient"></div>
+
+        <div id="profileView" class="relative z-10">
+          <div class="flex justify-between items-center mb-5">
+            <h2 class="subheading text-lg">Business Profile</h2>
+            <button id="toEdit" type="button">
+              <div id="edit-icon"></div>
+            </button>
+          </div>
+
+          <div class="flex flex-col md:flex-row md:items-start gap-6">
+            <img
+              id="profile-image"
+              src="./images/hero.png"
+              alt="business-image"
+              class="white-card rounded-2xl size-30 object-cover"
+            />
+
+            <div class="flex flex-col justify-around space-y-3">
+              <div class="border-b border-white-t2 space-y-1 pb-3">
+                <h1 class="text-white">
+                  <span id="display-name-text"></span>
+                </h1>
+                <p class="text-white font-semibold">
+                  <span id="business-name-text"></span>
+                </p>
+              </div>
+
+              <div class="flex gap-2 items-center">
+                <div id="business-icon"></div>
+                <p class="text-white">
+                  <span id="business-type-text"></span>
+                </p>
+              </div>
+
+              <div class="flex gap-2 items-center">
+                <div id="location-icon"></div>
+                <p class="text-white">
+                  <span id="location-text"></span>
+                </p>
+              </div>
+
+              <div class="flex gap-2 items-center">
+                <div id="email-icon"></div>
+                <p class="text-white">
+                  <span id="email-text"></span>
+                </p>
+              </div>
+
+              <div class="flex gap-2 items-center">
+                <div id="phone-icon"></div>
+                <p class="text-white">
+                  <span id="phone-text"></span>
+                </p>
+              </div>
+
+              <div class="flex gap-2 items-center">
+                <div id="website-icon"></div>
+                <p class="text-white">
+                  <span id="website-text"></span>
+                </p>
+              </div>
+
+              <div class="flex gap-2 items-center">
+                <div id="instagram-icon"></div>
+                <p class="text-white">
+                  <span id="instagram-text"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DETAILS -->
+      <div
+        class="flex-1 bg-off-white rounded-t-3xl -mt-6 relative z-10 py-5 md:py-10 px-6 flex flex-col gap-6"
+      >
+        <section
+          class="white-card rounded-[28px] p-5 md:p-8 flex flex-col gap-4"
+        >
+          <div class="flex flex-col gap-1">
+            <h3>Business Description</h3>
+            <p class="subtitle">How your venue appears to users.</p>
+          </div>
+          <p id="description-text">No description added yet.</p>
+        </section>
+
+        <section
+          class="white-card rounded-[28px] p-5 md:p-8 flex flex-col gap-4"
+        >
+          <div class="flex flex-col gap-1">
+            <h3>Business Details</h3>
+            <p class="subtitle">Reference information for your account.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <p class="font-semibold">Address</p>
+              <p id="address-text" class="subtitle">Not added</p>
+            </div>
+
+            <div>
+              <p class="font-semibold">City</p>
+              <p id="city-text" class="subtitle">Not added</p>
+            </div>
+
+            <div>
+              <p class="font-semibold">Province</p>
+              <p id="province-text" class="subtitle">Not added</p>
+            </div>
+
+            <div>
+              <p class="font-semibold">Postal Code</p>
+              <p id="postal-code-text" class="subtitle">Not added</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <site-footer></site-footer>
+
+    <script type="module" src="./src/businessProfile.js"></script>
+  </body>
+</html>

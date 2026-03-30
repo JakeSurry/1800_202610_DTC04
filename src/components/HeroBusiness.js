@@ -22,19 +22,20 @@ class HeroBusiness extends HTMLElement {
             <h3 id="subtitle" class="text-base md:text-xl font-light text-white"></h3>
           </div>
           <div class="flex gap-3 items-center">
-            <button
-              type="button"
+            <a
+              href="./createEvent.html"
               id="createEvent"
-              class="main-blue-gradient bright-hover"
+              class="main-blue-gradient bright-hover inline-flex items-center justify-center"
             >
               Create Event
-            </button>
-            <button
-              class="clear-window-color clear-hover"
+            </a>
+
+            <a
+              href="./hostedEvents.html"
+              class="clear-window-color clear-hover inline-flex items-center justify-center"
             >
               Edit my events
-            </button>
-
+            </a>
           </div>
         </div>
       </section>

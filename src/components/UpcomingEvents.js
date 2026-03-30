@@ -6,20 +6,27 @@ class HostedEvent extends HTMLElement {
     this.render();
   }
 
+  set fullWidth(value) {
+    this._fullWidth = value;
+    this.render();
+  }
+
   render() {
     const event = this._event;
     if (!event) return;
 
+    const widthClass = this._fullWidth ? "w-full" : "w-[320px] md:w-105";
+
     this.innerHTML = `
       <div
         style="background-image: url('${event.image}');"
-        class="relative w-[320px] md:w-105 overflow-hidden square-rounded-box p-0 bg-cover bg-center"
+        class="relative ${widthClass} overflow-hidden square-rounded-box p-0 bg-cover bg-center"
       >
         <div class="absolute inset-0 hero-blue-gradient"></div>
 
         <div class="relative z-10 flex min-h-50 flex-col justify-between w-full">
           <div class="px-5 pt-5">
-            <div class="flex items-center justify-between gap-3">
+            <div class="flex items-center justify-between gap-3 max-w-80">
               <img
                 src="../../images/flags/${event.team1}.png"
                 alt="${event.team1}"
@@ -37,8 +44,12 @@ class HostedEvent extends HTMLElement {
               />
             </div>
 
+            <h4 class="text-white font-semibold">
+              ${event.name}
+            </h4>
+
             <div class="mt-1 flex items-center gap-2">
-               ${svgs.clock(18, 18, "#F9FAFB")}
+              ${svgs.clock(18, 18, "#F9FAFB")}
 
               <p class="subtitle text-white">
                 ${event.date} at ${event.time}
@@ -59,22 +70,40 @@ class HostedEvent extends HTMLElement {
               id="viewEvent"
               class="main-blue-gradient bright-hover small-button"
             >
-              View Event
+              Edit
             </button>
           </div>
         </div>
       </div>
     `;
+
+    this.querySelector("#viewEvent")?.addEventListener("click", () => {
+      if (!event.id) {
+        console.error("Event ID missing");
+        return;
+      }
+
+      window.location.href = `/editEvent.html?eventId=${event.id}`;
+    });
   }
 }
 
 customElements.define("hosted-event-card", HostedEvent);
 
-export function renderHostedEvents(events, hostedEvents) {
-  const eventsContainer = $(`#${hostedEvents}`);
+export function renderHostedEvents(events, containerId, options = {}) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  container.innerHTML = "";
+
   for (let event of events) {
-    const eventCard = document.createElement("hosted-event-card");
-    eventCard.event = event;
-    eventsContainer.append(eventCard);
+    const card = document.createElement("hosted-event-card");
+
+    if (options.fullWidth) {
+      card.fullWidth = true;
+    }
+
+    card.event = event;
+    container.appendChild(card);
   }
 }

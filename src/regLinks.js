@@ -19,8 +19,8 @@ Returns the new reg_link's document ID.
 @param {Array}  regLinkData.attendees – array of attendee objects
  */
 export async function createRegLink(regLinkData) {
-    const docRef = await addDoc(collection(db, "reg_links"), regLinkData);
-    return docRef.id;
+  const docRef = await addDoc(collection(db, "reg_links"), regLinkData);
+  return docRef.id;
 }
 
 // Fetch a single reg_link by its document ID
@@ -55,10 +55,7 @@ export async function getRegLinkHost(regLinkId) {
 
 // Get all reg_links for a given event ID
 export async function getRegLinksByEvent(eventId) {
-  const q = query(
-    collection(db, "reg_links"),
-    where("event", "==", eventId)
-  );
+  const q = query(collection(db, "reg_links"), where("event", "==", eventId));
 
   const snapshot = await getDocs(q);
   return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
@@ -66,10 +63,7 @@ export async function getRegLinksByEvent(eventId) {
 
 // Get all reg_links hosted by a given business
 export async function getRegLinksByHost(busActId) {
-  const q = query(
-    collection(db, "reg_links"),
-    where("host", "==", busActId)
-  );
+  const q = query(collection(db, "reg_links"), where("host", "==", busActId));
 
   const snapshot = await getDocs(q);
   return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
