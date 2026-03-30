@@ -42,7 +42,7 @@ class SearchBar extends HTMLElement {
           <button
             type="button"
             id="searchSubmit"
-            class="main-blue-gradient hover:bright-hover h-full rounded-l-none"
+            class="default-button main-blue-gradient bright-hover h-full rounded-l-none"
             aria-label="Search"
           >
             <p class="text-white">Search</p>

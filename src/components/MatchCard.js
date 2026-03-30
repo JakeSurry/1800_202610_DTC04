@@ -42,7 +42,7 @@ class MatchCard extends HTMLElement {
             </p>
           </div>
 
-          <button class="main-blue-gradient text-xs md:text-lg">
+          <button class="default-button main-blue-gradient bright-hover text-xs md:text-lg">
           Find Events ${svgs.chevron(20, 20, "#F9FAFB")}
 
           </button>

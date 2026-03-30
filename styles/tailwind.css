@@ -29,7 +29,7 @@
 
   /* Accents */
   --color-green: #34d399;
-  --color-red: #ff0033;
+  --color-red: #db0d3a;
 }
 
 /* --------------------- */
@@ -106,7 +106,7 @@
   a {
     @apply rounded-full font-medium flex justify-center items-center p-4;
   }
-  button {
+  .default-button {
     @apply rounded-full font-medium flex justify-center items-center px-5 py-2 md:px-6 md:py-3;
   }
   input {
@@ -127,6 +127,9 @@
   }
   .clear-hover {
     @apply hover:bg-white-t2 transition;
+  }
+  .outline-hover {
+    @apply hover:shadow-lg hover:ring-4 hover:ring-blue/10 transition;
   }
   .accent-hover-text {
     @apply hover:text-blue transition;

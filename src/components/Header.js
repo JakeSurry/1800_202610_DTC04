@@ -390,7 +390,7 @@ class SiteNavbar extends HTMLElement {
           ${config.desktop.map((button) => this.desktopLink(button)).join("")}
         </nav>
 
-        <button class="flex cursor-pointer items-center md:hidden" id="menu-button" aria-label="Open menu">
+        <button class="default-button flex cursor-pointer items-center md:hidden" id="menu-button" aria-label="Open menu">
           ${svgs.menu(40, 40, "#f9fafb")}
         </button>
 

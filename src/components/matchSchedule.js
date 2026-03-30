@@ -37,7 +37,7 @@ class MatchSchedule extends HTMLElement {
           <button
             type="button"
             id="hostMatch"
-            class="shrink-0 main-blue-gradient bright-hover small-button"
+            class="default-button shrink-0 main-blue-gradient bright-hover small-button"
           >
             Host Match
           </button>

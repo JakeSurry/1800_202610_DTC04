@@ -57,7 +57,10 @@
           >
             <div class="flex justify-between items-center mb-5">
               <h2 class="subheading text-lg">Edit Profile</h2>
-              <button id="toProfile" class="bg-gray small-button">
+              <button
+                id="toProfile"
+                class="default-button bg-gray small-button"
+              >
                 Cancel
               </button>
             </div>
@@ -95,7 +98,7 @@
               />
               <button
                 type="submit"
-                class="btn btn-success main-blue-gradient mt-9"
+                class="default-button btn btn-success main-blue-gradient mt-9"
               >
                 Done
               </button>
@@ -112,7 +115,7 @@
         <div id="profileView" class="relative z-10">
           <div class="flex justify-between items-center mb-5">
             <h2 class="subheading text-lg">Profile</h2>
-            <button id="toEdit">
+            <button id="toEdit" class="default-button">
               <div id="edit"></div>
             </button>
           </div>
@@ -165,10 +168,10 @@
         <div class="flex justify-between mb-3 items-center">
           <div class="flex justify-between mb-3 items-center w-full">
             <h3>My Events</h3>
-            <button class="accent-hover-text">
+            <a class="accent-hover-text">
               See all
               <div id="chevron"></div>
-            </button>
+            </a>
           </div>
         </div>
         <div id="near-you-events" class="scrollbox"></div>

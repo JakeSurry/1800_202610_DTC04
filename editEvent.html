@@ -112,14 +112,17 @@
           </div>
 
           <div class="flex flex-col md:flex-row gap-3 pt-2">
-            <button type="submit" class="main-blue-gradient bright-hover">
+            <button
+              type="submit"
+              class="default-button main-blue-gradient bright-hover"
+            >
               Save Changes
             </button>
 
             <button
               type="button"
               onclick="history.back()"
-              class="white-card clear-hover"
+              class="default-button white-card bright-hover"
             >
               Cancel
             </button>
@@ -127,7 +130,7 @@
             <button
               type="button"
               id="deleteEventBtn"
-              class="bg-[#FF0000] text-white bright-hover"
+              class="bg-red default-button text-white bright-hover"
             >
               Delete Event
             </button>

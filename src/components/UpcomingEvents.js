@@ -68,7 +68,7 @@ class HostedEvent extends HTMLElement {
             <button
               type="button"
               id="viewEvent"
-              class="main-blue-gradient bright-hover small-button"
+              class="default-button main-blue-gradient bright-hover small-button"
             >
               Edit
             </button>
