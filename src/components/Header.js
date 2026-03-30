@@ -18,11 +18,10 @@ const ROUTES = {
   myEvents: "./",
   userProfile: "./profile.html",
 
-  matchSchedule: "./",
-  hostedEvents: "./",
-  businessProfile: "./",
+  hostedEvents: "./hostedEvents.html",
+  businessProfile: "./businessProfile.html",
 
-  createEvent: "./",
+  createEvent: "./createEvent.html",
 };
 
 const ICONS = {
@@ -144,11 +143,6 @@ const NAV_CONFIG = {
             svg: ICONS.home,
           },
           {
-            name: "Match Schedule",
-            href: ROUTES.matchSchedule,
-            svg: ICONS.matches,
-          },
-          {
             name: "Hosted Events",
             href: ROUTES.hostedEvents,
             svg: ICONS.events,
@@ -180,7 +174,6 @@ const NAV_CONFIG = {
     ],
     desktop: [
       { name: "Dashboard", href: ROUTES.businessDashboard },
-      { name: "Match Schedule", href: ROUTES.matchSchedule },
       { name: "Hosted Events", href: ROUTES.hostedEvents },
       { name: "Business Profile", href: ROUTES.businessProfile },
       { name: "Help Center", href: ROUTES.helpCenter },

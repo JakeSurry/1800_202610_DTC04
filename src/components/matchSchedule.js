@@ -10,8 +10,7 @@ class MatchSchedule extends HTMLElement {
 
     this.innerHTML = `
       <div class="w-full square-rounded-box white-card">
-        <div class="w-full flex items-center justify-between gap-40">
-          
+        <div class="w-full flex items-center justify-between gap-4">
           <div class="flex items-center gap-3">
             <img
               src="../../images/flags/${event.team1}.png"
@@ -45,18 +44,31 @@ class MatchSchedule extends HTMLElement {
         </div>
       </div>
     `;
+
+    this.querySelector("#hostMatch")?.addEventListener("click", () => {
+      const params = new URLSearchParams({
+        team1: event.team1,
+        team2: event.team2,
+        date: event.date,
+        time: event.time,
+      });
+
+      window.location.href = `/createEvent.html?${params.toString()}`;
+    });
   }
 }
 
 customElements.define("match-schedule-card", MatchSchedule);
 
 export function renderMatchSchedule(events, containerId) {
-  const matchScheduleContainer = $(`#${containerId}`);
-  matchScheduleContainer.empty();
+  const matchScheduleContainer = document.getElementById(containerId);
+  if (!matchScheduleContainer) return;
+
+  matchScheduleContainer.innerHTML = "";
 
   for (let event of events) {
     const matchCard = document.createElement("match-schedule-card");
     matchCard.event = event;
-    matchScheduleContainer.append(matchCard);
+    matchScheduleContainer.appendChild(matchCard);
   }
 }

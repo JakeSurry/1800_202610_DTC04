@@ -16,47 +16,30 @@
     <script type="module" src="/src/components/HeroBusiness.js"></script>
     <script type="module" src="/src/components/InfoSectionBusiness.js"></script>
     <link rel="stylesheet" href="main.css" />
-    <script type="module">
-      import { svgs } from "./src/svgs.js";
-
-      document.querySelectorAll(".chevron").forEach((el) => {
-        el.innerHTML = svgs.chevron(22, 22, "currentColor");
-      });
-    </script>
+    <script type="module" src="./src/components/Loader.js"></script>
   </head>
 
   <body class="bg-off-white min-h-screen flex flex-col">
-    <!-- header -->
+    <page-loader></page-loader>
+
     <site-navbar></site-navbar>
     <hero-section-buisness></hero-section-buisness>
 
-    <!-- main content -->
     <info-section></info-section>
-    <!-- Upcoming Hosted Events -->
+
     <div class="py-5 md:py-10 px-6 flex-1 gap-3">
       <div class="flex justify-between items-center">
-        <h3>Upcoming Hosted Events</h3>
-        <button class="accent-hover-text">
-          See all
-          <div class="chevron"></div>
-        </button>
+        <h3 class="py-3">Upcoming Hosted Events</h3>
       </div>
       <div id="hosted-event-card" class="scrollbox"></div>
-      <!-- Match Schedule -->
+
       <div class="flex justify-between items-center">
-        <h3>Match Schedule</h3>
-        <button class="accent-hover-text">
-          See all
-          <div class="chevron"></div>
-        </button>
+        <h3 class="py-3">Match Schedule</h3>
       </div>
       <div id="matches" class="flex flex-col gap-2"></div>
     </div>
 
-    <!-- Footer -->
     <site-footer></site-footer>
-
-    <!-- scripts -->
     <script type="module" src="./src/mainBusiness.js"></script>
   </body>
 </html>
