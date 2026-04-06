@@ -15,7 +15,7 @@ const ROUTES = {
   personalSignup: "./signup.html",
   businessSignup: "./signUpBusiness.html",
 
-  myEvents: "./",
+  myEvents: "./myEvents",
   userProfile: "./profile.html",
 
   hostedEvents: "./hostedEvents.html",
