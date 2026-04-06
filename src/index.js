@@ -64,6 +64,8 @@ async function getEventsAfterHour(hourAfter = 19, limitCount = 4) {
 
   const afterHour = events
     .filter((e) => {
+      if (!e.time) return false;
+
       const hour = parseInt(e.time.split(":")[0], 10);
       return hour >= hourAfter;
     })
