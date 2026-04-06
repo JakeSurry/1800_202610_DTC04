@@ -1,3 +1,8 @@
+export function buildIconRow(size = 24) {
+  return Object.values(svgs)
+    .map((fn) => fn(size, size, "currentColor"))
+    .join("");
+}
 export const svgs = {
   // 2 people icon
   people(width = 32, height = 32, stroke = "#000000") {
