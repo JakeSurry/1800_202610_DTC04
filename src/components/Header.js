@@ -5,7 +5,7 @@ import { svgs } from "../svgs.js";
 
 const ROUTES = {
   guestHome: "./index.html",
-  userHome: "./main.htm",
+  userHome: "./main.html",
   businessDashboard: "./mainBusiness.html",
 
   events: "./events.html",
@@ -186,6 +186,9 @@ const NAV_CONFIG = {
 class SiteNavbar extends HTMLElement {
   constructor() {
     super();
+
+    this.classList.add("block", "sticky", "top-0", "z-50");
+
     this.accountState = "guest";
     this.accountInfo = {
       name: "Welcome to Fans Feast",
@@ -382,7 +385,7 @@ class SiteNavbar extends HTMLElement {
           : ROUTES.guestHome;
 
     this.innerHTML = `
-      <header class="sticky top-0 z-50 flex h-15 items-center justify-between bg-dark-blue p-6 text-white md:h-20">
+      <header class="flex h-15 items-center justify-between bg-dark-blue p-6 text-white md:h-20">
         <a href="${homeHref}" >
           <img class="h-10 object-contain md:h-12" src="images/fansFeastLogo.png" alt="Fans Feast Logo" />
         </a>
@@ -397,7 +400,7 @@ class SiteNavbar extends HTMLElement {
 
         <div
           id="sidebar"
-          class="hidden absolute top-full right-0 z-50 h-[calc(100vh-100%)] w-[82%] flex-col overflow-y-auto dark-blue-gradient p-5 translate-x-full transition-transform duration-300 ease-in-out md:hidden"
+          class="hidden fixed top-0 right-0 z-60 h-screen w-[82%] max-w-105 flex-col overflow-y-auto dark-blue-gradient p-5 pt-24 translate-x-full transition-transform duration-300 ease-in-out md:hidden"
         >
           <div class="mt-5">
             ${this.accountPanel()}
@@ -414,7 +417,7 @@ class SiteNavbar extends HTMLElement {
 
         <div
           id="sidebarDimmer"
-          class="hidden absolute top-full left-0 z-40 h-[calc(100vh-100%)] w-full overlay-black-gradient backdrop-blur-[2px]"
+          class="hidden fixed inset-0 z-55 overlay-black-gradient backdrop-blur-[2px] md:hidden"
         ></div>
       </header>
     `;
@@ -430,6 +433,7 @@ class SiteNavbar extends HTMLElement {
     const openSidebar = () => {
       sidebar.classList.remove("hidden");
       sidebar.classList.add("flex");
+      document.body.classList.add("overflow-hidden");
 
       requestAnimationFrame(() => {
         sidebar.classList.remove("translate-x-full");
@@ -441,6 +445,7 @@ class SiteNavbar extends HTMLElement {
     const closeSidebar = () => {
       sidebar.classList.add("translate-x-full");
       dimmer.classList.add("hidden");
+      document.body.classList.remove("overflow-hidden");
 
       setTimeout(() => {
         if (sidebar.classList.contains("translate-x-full")) {

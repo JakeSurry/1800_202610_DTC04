@@ -13,6 +13,7 @@
     <!-- module scripts -->
     <script type="module" src="/src/components/Header.js"></script>
     <script type="module" src="./src/components/Footer.js"></script>
+    <script type="module" src="./src/components/SelectTeamDropdown.js"></script>
     <link rel="stylesheet" href="main.css" />
     <script type="module">
       import { svgs } from "./src/svgs.js";
@@ -80,6 +81,7 @@
                 placeholder="display name"
                 class="white-input clear-hover"
               />
+
               <label for="editLocation" class="text-white-t2">Location</label>
               <input
                 type="text"
@@ -88,6 +90,7 @@
                 placeholder="vancouver"
                 class="white-input clear-hover"
               />
+
               <label for="editPhone" class="text-white-t2">Phone</label>
               <input
                 type="text"
@@ -96,6 +99,16 @@
                 placeholder="000-000-0000"
                 class="white-input clear-hover"
               />
+
+              <team-select
+                name="favoriteTeam"
+                label="Favorite Team"
+                wrapper-class="flex flex-col gap-2 mt-2"
+                label-class="text-white-t2"
+                select-wrapper-class="relative"
+                select-class="w-full appearance-none rounded-full border border-white/20 bg-white/12 px-5 py-4 pr-14 text-base text-white outline-none transition focus:border-white/30 focus:bg-white/16"
+              ></team-select>
+
               <button
                 type="submit"
                 class="default-button btn btn-success main-blue-gradient mt-9"
@@ -123,11 +136,7 @@
           <!-- Profile Info -->
           <!-- ============================== -->
           <div class="flex">
-            <img
-              src="./images/elmo.jpg"
-              alt="profile-image"
-              class="white-card rounded-2xl size-30"
-            />
+            <div id="profile-avatar" class="size-30"></div>
             <div class="flex flex-col justify-around ml-8 space-y-2">
               <div class="border-b border-white-t2 space-y-1 pb-2">
                 <h1 class="text-white">
@@ -137,23 +146,49 @@
                   <span id="full-name"></span>
                 </p>
               </div>
+
               <div class="flex gap-2 items-center">
                 <div id="location-icon"></div>
                 <p class="text-white">
                   <span id="location"></span>
                 </p>
               </div>
+
               <div class="flex gap-2 items-center">
                 <div id="email-icon"></div>
                 <p class="text-white">
                   <span id="email"></span>
                 </p>
               </div>
+
               <div class="flex gap-2 items-center">
                 <div id="phone-icon"></div>
                 <p class="text-white">
                   <span id="phone"></span>
                 </p>
+              </div>
+
+              <div
+                id="favorite-team-card"
+                class="hidden clear-window-color rounded-full px-3 py-2 w-fit items-center gap-3"
+              >
+                <img
+                  id="favorite-team-flag"
+                  src=""
+                  alt="Favorite team flag"
+                  class="h-8 w-8 rounded-full object-cover"
+                />
+                <div class="flex flex-col leading-tight">
+                  <span
+                    class="text-[10px] uppercase tracking-[0.18em] text-white-t1"
+                  >
+                    Favorite Team
+                  </span>
+                  <span
+                    id="favorite-team"
+                    class="text-sm text-white font-medium"
+                  ></span>
+                </div>
               </div>
             </div>
           </div>
