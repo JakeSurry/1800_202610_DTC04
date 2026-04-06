@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Evemts</title>
+    <title>Events</title>
     <meta name="comp1800 template" content="My 1800 App" />
 
     <meta charset="utf-8" />
@@ -16,13 +16,12 @@
     <script type="module" src="./src/components/SearchBar.js"></script>
     <script type="module" src="./src/events.js"></script>
     <link rel="stylesheet" href="main.css" />
-    <script type="module">
-      import { svgs } from "./src/svgs.js";
-
-      document.querySelectorAll(".chevron").forEach((el) => {
-        el.innerHTML = svgs.chevron(22, 22, "currentColor");
-      });
-    </script>
+    <style>
+      #events-list event-card > div {
+        width: 100% !important;
+        height: auto !important;
+      }
+    </style>
   </head>
 
   <body class="bg-off-white min-h-screen flex flex-col">
@@ -33,27 +32,13 @@
     <div class="py-5 md:py-10 px-6 flex-1">
       <h1>Events</h1>
       <search-bar></search-bar>
-    </div>
-    <div class="space-y-10">
-      <div class="mx-10">
-        <div class="flex justify-between mb-3 items-center">
-          <h3>Happening This Week</h3>
-          <button class="accent-hover-text">
-            See all
-            <div class="chevron"></div>
-          </button>
-        </div>
 
-        <div
-          id="events-list"
-          class="max-w-6xl mx-auto items-center flex flex-col gap-4"
-        ></div>
+      <div class="mt-6">
+        <div id="events-list" class="flex flex-col gap-4"></div>
       </div>
     </div>
 
     <!-- footer -->
     <site-footer></site-footer>
-
-    <!-- scripts -->
   </body>
 </html>

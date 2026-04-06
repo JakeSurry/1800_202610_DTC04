@@ -53,7 +53,7 @@ export async function getRegLinkHost(regLinkId) {
   return { id: snap.id, ...snap.data() };
 }
 
-// Get all reg_links for a given event ID
+// Get reg_links for a given event ID
 export async function getRegLinksByEvent(eventId) {
   const q = query(collection(db, "reg_links"), where("event", "==", eventId));
 

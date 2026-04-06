@@ -97,6 +97,17 @@ function setup() {
   //   renderHeader("header");
 }
 
+document.addEventListener("search:submit", (e) => {
+  const { value, filters } = e.detail;
+  const params = new URLSearchParams();
+  if (value) params.set("q", value);
+  if (filters?.team) params.set("team", filters.team);
+  if (filters?.orderBy) params.set("orderBy", filters.orderBy);
+
+  const qs = params.toString();
+  window.location.href = qs ? `events.html?${qs}` : "events.html";
+});
+
 $(document).ready(function () {
   setup();
 });

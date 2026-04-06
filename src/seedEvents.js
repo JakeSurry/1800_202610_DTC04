@@ -57,7 +57,7 @@ export async function seedEventsAndRegLinks() {
     // 2. Create event with the reg_link ID
     const eventId = await createEvent({
       ...entry.event,
-      reg_link: regLinkId,
+      regLink: regLinkId,
     });
   
     // 3. Update reg_link with the real event ID
