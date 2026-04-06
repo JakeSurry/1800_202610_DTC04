@@ -77,7 +77,7 @@ class HostedEvent extends HTMLElement {
                 id="viewEventPage"
                 class="default-button clear-window-color clear-hover small-button"
               >
-                View Event Page
+                View
               </button>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { auth, db } from "/src/firebaseConfig.js";
+import { db } from "/src/firebaseConfig.js";
 import { onAuthReady } from "./authentication.js";
 import { doc, getDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 
@@ -22,6 +22,37 @@ function hideError() {
 
 function safeText(value, fallback = "Not added") {
   return value && String(value).trim() ? value : fallback;
+}
+
+function getInitials(name) {
+  if (!name) return "FF";
+  const parts = String(name).trim().split(/\s+/).slice(0, 2);
+  return parts.map((part) => part[0]?.toUpperCase() || "").join("") || "FF";
+}
+
+function renderBusinessAvatar(data) {
+  const avatarContainer = document.getElementById("business-avatar");
+  if (!avatarContainer) return;
+
+  const displayName =
+    data.displayName || data.businessName || data.email || "Business Account";
+  const profilePic = data.profilePic || "";
+
+  avatarContainer.innerHTML = profilePic
+    ? `
+      <img
+        src="${profilePic}"
+        alt="${displayName}"
+        class="h-30 w-30 rounded-2xl object-cover border-2 border-white"
+      />
+    `
+    : `
+      <div
+        class="h-30 w-30 flex items-center justify-center rounded-2xl main-blue-gradient text-white text-3xl font-bold border-2 border-white"
+      >
+        ${getInitials(displayName)}
+      </div>
+    `;
 }
 
 async function loadBusinessProfile(user) {
@@ -78,11 +109,8 @@ async function loadBusinessProfile(user) {
     data.postalCode,
   );
 
-  if (data.profilePic) {
-    document.getElementById("profile-image").src = data.profilePic;
-  }
+  renderBusinessAvatar(data);
 
-  // Prefill form
   document.getElementById("displayName").value = data.displayName || "";
   document.getElementById("businessName").value = data.businessName || "";
   document.getElementById("phone").value = data.phone || "";

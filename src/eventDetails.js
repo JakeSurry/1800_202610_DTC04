@@ -64,6 +64,11 @@ function initEventDetails(user) {
       document.querySelectorAll(".attendees").forEach((el) => {
         el.textContent = attendeesCount ?? "0";
       });
+
+      if (event.image) {
+        document.getElementById("event-bg").style.backgroundImage =
+          `url("${event.image}")`;
+      }
     } catch (error) {
       console.error(error);
       showError("Unable to load event.");
