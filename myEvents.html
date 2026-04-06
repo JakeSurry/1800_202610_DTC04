@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Fans Feast</title>
+    <meta name="comp1800 template" content="My 1800 App" />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- module scripts -->
+    <script type="module" src="./src/components/Header.js"></script>
+    <script type="module" src="./src/components/Footer.js"></script>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+
+  <body class="bg-off-white min-h-screen flex flex-col">
+    <!-- header -->
+    <site-navbar></site-navbar>
+
+    <!-- main content -->
+    <div class="bg-black p-7 sticky top-0">
+      <h1 class="text-white">My Events</h1>
+    </div>
+    <div class="py-5 md:py-10 px-6 flex-1">
+      <div
+        id="events"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4"
+      ></div>
+    </div>
+    <!-- footer -->
+    <site-footer></site-footer>
+
+    <!-- scripts -->
+    <script type="module" src="./src/myEvents.js"></script>
+  </body>
+</html>
