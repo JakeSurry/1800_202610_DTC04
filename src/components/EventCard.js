@@ -41,9 +41,9 @@ export class EventCard extends HTMLElement {
             />
             <div class="space-y-2 px-5">
               <h4>${event.name}</h4>
-              <div class="flex gap-2 items-center">
+              <div class="flex gap-2 items-start">
                 ${svgs.location(14, 14, "#000000")}
-                <p class="subtitle font-semibold">${await getEventLocation(event.id)}</p>
+                <p class="subtitle font-semibold text-left line-clamp-1">${await getEventLocation(event.id)}</p>
               </div>
               <div class="flex gap-2 items-center">
                 ${svgs.people(14, 14, "#000000")}
@@ -55,7 +55,7 @@ export class EventCard extends HTMLElement {
               </div>
               <div class="flex gap-2 items-center">
                 ${svgs.clock(14, 14, "#000000")}
-                <p class="subtitle font-semibold">${event.time}</p>
+                <p class="subtitle font-semibold">${formatTime(event.time)}</p>
               </div>
             </div>
           </div>
@@ -71,4 +71,17 @@ export class EventCard extends HTMLElement {
       window.location.href = `/eventDetails.html?eventId=${event.id}`;
     });
   }
+}
+
+export function formatTime(time) {
+  if (!time) return "TBD";
+  const [hoursStr, minutes] = time.split(":");
+  let hours = parseInt(hoursStr, 10);
+
+  const period = hours >= 12 ? "pm" : "am";
+
+  hours = hours % 12;
+  hours = hours === 0 ? 12 : hours;
+
+  return `${hours}:${minutes}${period}`;
 }
