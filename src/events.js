@@ -30,6 +30,7 @@ export async function createEvent(eventData) {
 // Fetch a single event by its document ID
 export async function getEvent(eventId) {
   const eventRef = doc(db, "events", eventId);
+
   const snap = await getDoc(eventRef);
   if (!snap.exists()) return null;
   return { id: snap.id, ...snap.data() };
@@ -37,6 +38,8 @@ export async function getEvent(eventId) {
 
 // Query events with optional filters
 export async function queryEvents(filters = {}) {
+  const constraints = [];
+
   if (filters.team) {
     constraints.push(where("teams", "array-contains", filters.team));
   }

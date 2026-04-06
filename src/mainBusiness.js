@@ -5,6 +5,9 @@ import { renderHostedEvents } from "./components/UpcomingEvents.js";
 import { renderMatchSchedule } from "./components/matchSchedule.js";
 import { getRegLink, getRegLinkEvent } from "./regLinks.js";
 
+let canCreateEvent = true;
+let missingBusinessFields = [];
+
 function formatDate(dateString) {
   if (!dateString) return "";
   const date = new Date(dateString);
@@ -28,6 +31,108 @@ function formatTime(timeString) {
 
 function getLoader() {
   return document.querySelector("page-loader");
+}
+
+function safeTrim(value) {
+  return typeof value === "string" ? value.trim() : value;
+}
+
+function isBusinessProfileComplete(businessData = {}) {
+  const requiredFields = [
+    "displayName",
+    "businessName",
+    "phone",
+    "businessType",
+    "website",
+    "instagram",
+    "description",
+    "address",
+    "city",
+    "province",
+    "postalCode",
+  ];
+
+  return requiredFields.every((field) =>
+    Boolean(safeTrim(businessData[field])),
+  );
+}
+
+function getMissingBusinessFields(businessData = {}) {
+  const fieldLabels = {
+    displayName: "Display Name",
+    businessName: "Business Name",
+    phone: "Phone",
+    businessType: "Business Type",
+    website: "Website",
+    instagram: "Instagram",
+    description: "Description",
+    address: "Address",
+    city: "City",
+    province: "Province",
+    postalCode: "Postal Code",
+  };
+
+  return Object.entries(fieldLabels)
+    .filter(([field]) => !safeTrim(businessData[field]))
+    .map(([, label]) => label);
+}
+
+function updateCreateEventUI() {
+  const createTargets = [
+    ...document.querySelectorAll('a[href="./createEvent.html"]'),
+    ...document.querySelectorAll('a[href="createEvent.html"]'),
+    ...document.querySelectorAll("#createEvent"),
+    ...document.querySelectorAll('[data-route="create-event"]'),
+  ];
+
+  createTargets.forEach((element) => {
+    if (canCreateEvent) {
+      element.classList.remove(
+        "opacity-50",
+        "cursor-not-allowed",
+        "pointer-events-none",
+      );
+      if ("disabled" in element) {
+        element.disabled = false;
+      }
+      element.removeAttribute("aria-disabled");
+      return;
+    }
+
+    element.classList.add("opacity-50", "cursor-not-allowed");
+    if ("disabled" in element) {
+      element.disabled = true;
+    }
+    element.setAttribute("aria-disabled", "true");
+  });
+}
+
+function installCreateEventBlocker() {
+  document.addEventListener(
+    "click",
+    (event) => {
+      if (canCreateEvent) return;
+
+      const createTrigger = event.target.closest(
+        'a[href="./createEvent.html"], a[href="createEvent.html"], #createEvent, [data-route="create-event"]',
+      );
+
+      if (!createTrigger) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+
+      const missingText = missingBusinessFields.length
+        ? ` Missing: ${missingBusinessFields.join(", ")}.`
+        : "";
+
+      alert(
+        `Please complete your business profile before creating an event.${missingText}`,
+      );
+    },
+    true,
+  );
 }
 
 function setHeroText(name, eventsCount) {
@@ -78,11 +183,11 @@ async function getHostedEventsFromBusiness(hostingEvents = []) {
       team1: event.team1,
       team2: event.team2,
       date: formatDate(event.date),
-      time: formatTime(event.time),
+      time: formatTime(event.time || event.startTime),
       fans,
       name: event.name,
       rawDate: event.date,
-      rawTime: event.time,
+      rawTime: event.time || event.startTime,
     });
   }
 
@@ -130,6 +235,10 @@ async function loadBusinessDashboard(user) {
     const businessData = businessSnap.data();
     const name =
       businessData.displayName || businessData.businessName || user.email;
+
+    canCreateEvent = isBusinessProfileComplete(businessData);
+    missingBusinessFields = getMissingBusinessFields(businessData);
+    updateCreateEventUI();
 
     const hostingEvents = businessData.hostingEvents || [];
     const hostedEvents = await getHostedEventsFromBusiness(hostingEvents);
@@ -180,25 +289,29 @@ function loadMatchSchedule() {
       team1: "Argentina",
       team2: "Mexico",
       date: "June 21, 2026",
-      time: "2:00 PM",
+      startTime: "2:00 PM",
+      endTime: "4:00 PM",
     },
     {
       team1: "England",
       team2: "France",
       date: "June 23, 2026",
-      time: "11:00 AM",
+      startTime: "11:00 AM",
+      endTime: "1:00 PM",
     },
     {
       team1: "Spain",
       team2: "Germany",
       date: "June 25, 2026",
-      time: "5:30 PM",
+      startTime: "5:30 PM",
+      endTime: "7:30 PM",
     },
     {
       team1: "Brazil",
       team2: "Uruguay",
       date: "June 28, 2026",
-      time: "8:00 PM",
+      startTime: "8:00 PM",
+      endTime: "10:00 PM",
     },
   ];
 
@@ -209,6 +322,8 @@ function initBusinessScreen() {
   const loader = getLoader();
   loader?.setText("Loading dashboard...");
   loader?.show();
+
+  installCreateEventBlocker();
 
   onAuthReady(async (user) => {
     try {
@@ -226,7 +341,5 @@ function initBusinessScreen() {
     }
   });
 }
-
-document.addEventListener("DOMContentLoaded", initBusinessScreen);
 
 document.addEventListener("DOMContentLoaded", initBusinessScreen);

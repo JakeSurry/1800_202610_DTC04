@@ -1,3 +1,8 @@
+export function buildIconRow(size = 24) {
+  return Object.values(svgs)
+    .map((fn) => fn(size, size, "currentColor"))
+    .join("");
+}
 export const svgs = {
   // 2 people icon
   people(width = 32, height = 32, stroke = "#000000") {
@@ -353,5 +358,71 @@ export const svgs = {
         <path d="M15 18c0 .796 .316 1.559 .879 2.121c.563 .563 1.326 .879 2.121 .879c.796 0 1.559 -.316 2.121 -.879c.563 -.563 .879 -1.326 .879 -2.121c0 -.796 -.316 -1.559 -.879 -2.121c-.563 -.563 -1.326 -.879 -2.121 -.879c-.796 0 -1.559 .316 -2.121 .879c-.563 .563 -.879 1.326 -.879 2.121" />
         <path d="M20.2 20.2l1.8 1.8" />
       </svg>`;
+  },
+  // Instagram
+  instagram(width = 32, height = 32, stroke = "#000000") {
+    return `
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+      width="${width}"
+      height="${height}"
+        viewBox="0 0 24 24"
+        fill="none"
+      stroke="${stroke}"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M4 4m0 4a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z" />
+        <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+        <path d="M16.5 7.5l0 .01" />
+      </svg>
+
+    `;
+  },
+  // globe icon
+  website(width = 32, height = 32, stroke = "#000000") {
+    return `
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+      width="${width}"
+      height="${height}"
+        viewBox="0 0 24 24"
+        fill="none"
+      stroke="${stroke}"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M19.5 7a9 9 0 0 0 -7.5 -4a8.991 8.991 0 0 0 -7.484 4" />
+        <path d="M11.5 3a16.989 16.989 0 0 0 -1.826 4" />
+        <path d="M12.5 3a16.989 16.989 0 0 1 1.828 4" />
+        <path d="M19.5 17a9 9 0 0 1 -7.5 4a8.991 8.991 0 0 1 -7.484 -4" />
+        <path d="M11.5 21a16.989 16.989 0 0 1 -1.826 -4" />
+        <path d="M12.5 21a16.989 16.989 0 0 0 1.828 -4" />
+        <path d="M2 10l1 4l1.5 -4l1.5 4l1 -4" />
+        <path d="M17 10l1 4l1.5 -4l1.5 4l1 -4" />
+        <path d="M9.5 10l1 4l1.5 -4l1.5 4l1 -4" />
+      </svg>
+    `;
+  },
+  // beericon
+  beer(width = 32, height = 32, stroke = "#000000") {
+    return `
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+      width="${width}"
+      height="${height}"
+        viewBox="0 0 24 24"
+        fill="none"
+      stroke="${stroke}"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M9 21h6a1 1 0 0 0 1 -1v-3.625c0 -1.397 .29 -2.775 .845 -4.025l.31 -.7c.556 -1.25 .845 -2.253 .845 -3.65v-4a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v4c0 1.397 .29 2.4 .845 3.65l.31 .7a9.931 9.931 0 0 1 .845 4.025v3.625a1 1 0 0 0 1 1z" />
+        <path d="M6 8h12" />
+      </svg>
+    `;
   },
 };

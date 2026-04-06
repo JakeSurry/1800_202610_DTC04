@@ -1,4 +1,5 @@
 import { createRegLink } from "./regLinks.js";
+import uploadImage from "./uploadImage.js";
 import { auth, db } from "/src/firebaseConfig.js";
 import {
   doc,
@@ -13,6 +14,12 @@ import {
 function initCreateEvent() {
   const form = document.getElementById("createEventForm");
   const alertEl = document.getElementById("formAlert");
+  const imageInput = document.getElementById("image");
+  const imageContainer = document.getElementById("imageContainer");
+  const coverImage = document.getElementById("coverImage");
+  const changeImageBtn = document.getElementById("changeImageBtn");
+
+  let previewUrl = "";
 
   function showError(message) {
     alertEl.textContent = message;
@@ -22,37 +29,6 @@ function initCreateEvent() {
   function hideError() {
     alertEl.textContent = "";
     alertEl.classList.add("hidden");
-  }
-
-  function prefillFromParams() {
-    const params = new URLSearchParams(window.location.search);
-
-    const team1 = params.get("team1") || "";
-    const team2 = params.get("team2") || "";
-    const date = params.get("date") || "";
-    const time = params.get("time") || "";
-
-    const team1Input = document.getElementById("team1");
-    const team2Input = document.getElementById("team2");
-    const dateInput = document.getElementById("eventDate");
-    const timeInput = document.getElementById("eventTime");
-
-    if (team1Input && team1) team1Input.value = team1;
-    if (team2Input && team2) team2Input.value = team2;
-
-    if (dateInput && date) {
-      const parsedDate = new Date(date);
-      if (!Number.isNaN(parsedDate.getTime())) {
-        dateInput.value = parsedDate.toISOString().split("T")[0];
-      } else {
-        dateInput.value = date;
-      }
-    }
-
-    if (timeInput && time) {
-      const normalizedTime = normalizeTimeForInput(time);
-      timeInput.value = normalizedTime;
-    }
   }
 
   function normalizeTimeForInput(time) {
@@ -70,6 +46,66 @@ function initCreateEvent() {
     return `${hours}:${minutes}`;
   }
 
+  function prefillFromParams() {
+    const params = new URLSearchParams(window.location.search);
+
+    const team1 = params.get("team1") || "";
+    const team2 = params.get("team2") || "";
+    const date = params.get("date") || "";
+    const startTimeParams = params.get("startTime") || "";
+    const endTimeParams = params.get("endTime") || "";
+
+    const team1Input = document.getElementById("Home_Team");
+    const team2Input = document.getElementById("Away_Team");
+    const dateInput = document.getElementById("eventDate");
+    const startTimeInput = document.getElementById("startTime");
+    const endTimeInput = document.getElementById("endTime");
+
+    if (team1Input && team1) team1Input.value = team1;
+    if (team2Input && team2) team2Input.value = team2;
+
+    if (dateInput && date) {
+      const parsedDate = new Date(date);
+      if (!Number.isNaN(parsedDate.getTime())) {
+        dateInput.value = parsedDate.toISOString().split("T")[0];
+      } else {
+        dateInput.value = date;
+      }
+    }
+
+    if (startTimeInput && startTimeParams) {
+      startTimeInput.value = normalizeTimeForInput(startTimeParams);
+    }
+
+    if (endTimeInput && endTimeParams) {
+      endTimeInput.value = normalizeTimeForInput(endTimeParams);
+    }
+  }
+
+  function showImagePicker() {
+    imageContainer.classList.add("hidden");
+    imageInput.classList.remove("hidden");
+    imageInput.click();
+  }
+
+  function showPreview(imageUrl) {
+    coverImage.src = imageUrl;
+    imageInput.classList.add("hidden");
+    imageContainer.classList.remove("hidden");
+  }
+
+  function clearPreview() {
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl);
+      previewUrl = "";
+    }
+
+    coverImage.src = "";
+    imageInput.value = "";
+    imageContainer.classList.add("hidden");
+    imageInput.classList.remove("hidden");
+  }
+
   async function ensureBusinessAccount(uid) {
     const businessRef = doc(db, "business_accounts", uid);
     const businessSnap = await getDoc(businessRef);
@@ -82,6 +118,22 @@ function initCreateEvent() {
   }
 
   prefillFromParams();
+
+  imageInput?.addEventListener("change", (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl);
+    }
+
+    previewUrl = URL.createObjectURL(file);
+    showPreview(previewUrl);
+  });
+
+  changeImageBtn?.addEventListener("click", () => {
+    clearPreview();
+  });
 
   form?.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -96,12 +148,14 @@ function initCreateEvent() {
 
     const name = document.getElementById("name")?.value?.trim() ?? "";
     const venue = document.getElementById("venue")?.value?.trim() ?? "";
-    const team1 = document.getElementById("team1")?.value?.trim() ?? "";
-    const team2 = document.getElementById("team2")?.value?.trim() ?? "";
+    const team1 = document.getElementById("Home_Team")?.value?.trim() ?? "";
+    const team2 = document.getElementById("Away_Team")?.value?.trim() ?? "";
     const eventDate = document.getElementById("eventDate")?.value ?? "";
-    const eventTime = document.getElementById("eventTime")?.value ?? "";
+    const startTime = document.getElementById("startTime")?.value ?? "";
+    const endTime = document.getElementById("endTime")?.value ?? "";
     const description =
       document.getElementById("description")?.value?.trim() ?? "";
+    const file = imageInput?.files?.[0];
 
     if (
       !name ||
@@ -109,7 +163,9 @@ function initCreateEvent() {
       !team1 ||
       !team2 ||
       !eventDate ||
-      !eventTime ||
+      !startTime ||
+      !endTime ||
+      !file ||
       !description
     ) {
       showError("Please complete all required fields.");
@@ -118,6 +174,7 @@ function initCreateEvent() {
 
     try {
       const businessData = await ensureBusinessAccount(currentUser.uid);
+      const imageUrl = await uploadImage(file);
 
       const eventRef = await addDoc(collection(db, "events"), {
         name,
@@ -125,7 +182,8 @@ function initCreateEvent() {
         team1,
         team2,
         date: eventDate,
-        time: eventTime,
+        startTime,
+        endTime,
         description,
         match: `${team1} vs ${team2}`,
         hostName:
@@ -135,6 +193,7 @@ function initCreateEvent() {
           currentUser.email,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
+        image: imageUrl,
       });
 
       const regLinkId = await createRegLink({
@@ -156,6 +215,8 @@ function initCreateEvent() {
       });
 
       form.reset();
+      clearPreview();
+
       alert("Event created successfully!");
       window.location.href = "./mainBusiness.html";
     } catch (error) {

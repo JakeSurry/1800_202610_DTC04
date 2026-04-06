@@ -23,7 +23,7 @@ class MatchSchedule extends HTMLElement {
                 ${event.team1} vs ${event.team2}
               </p>
               <p class="text-off-black subtitle md:text-base">
-                ${event.date} · ${event.time}
+                ${event.date} · ${event.startTime} - ${event.endTime}
               </p>
             </div>
 
@@ -37,7 +37,7 @@ class MatchSchedule extends HTMLElement {
           <button
             type="button"
             id="hostMatch"
-            class="shrink-0 main-blue-gradient bright-hover small-button"
+            class="default-button shrink-0 main-blue-gradient bright-hover small-button"
           >
             Host Match
           </button>
@@ -50,7 +50,8 @@ class MatchSchedule extends HTMLElement {
         team1: event.team1,
         team2: event.team2,
         date: event.date,
-        time: event.time,
+        startTime: event.startTime,
+        endTime: event.endTime,
       });
 
       window.location.href = `/createEvent.html?${params.toString()}`;

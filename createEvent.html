@@ -6,11 +6,10 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- module scripts -->
     <script type="module" src="./src/components/Header.js"></script>
     <script type="module" src="./src/components/Footer.js"></script>
+    <script type="module" src="./src/components/SelectTeamDropdown.js"></script>
     <link rel="stylesheet" href="main.css" />
   </head>
 
@@ -45,6 +44,7 @@
                 placeholder="Final Whistle Night"
               />
             </div>
+
             <div class="flex flex-col gap-2">
               <label for="venue">Venue</label>
               <input
@@ -55,27 +55,9 @@
                 placeholder="Venue name"
               />
             </div>
-            <div class="flex flex-col gap-2">
-              <label for="team1">Team 1</label>
-              <input
-                id="team1"
-                name="team1"
-                type="text"
-                class="blue-input"
-                placeholder="e.g. Canada"
-              />
-            </div>
 
-            <div class="flex flex-col gap-2">
-              <label for="team2">Team 2</label>
-              <input
-                id="team2"
-                name="team2"
-                type="text"
-                class="blue-input"
-                placeholder="e.g. Mexico"
-              />
-            </div>
+            <team-select name="Home_Team"></team-select>
+            <team-select name="Away_Team"></team-select>
 
             <div class="flex flex-col gap-2">
               <label for="eventDate">Date</label>
@@ -88,13 +70,56 @@
             </div>
 
             <div class="flex flex-col gap-2">
-              <label for="eventTime">Time</label>
+              <label for="startTime">Start Time</label>
               <input
-                id="eventTime"
-                name="eventTime"
+                id="startTime"
+                name="startTime"
                 type="time"
                 class="blue-input"
               />
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <label for="endTime">End Time</label>
+              <input
+                id="endTime"
+                name="endTime"
+                type="time"
+                class="blue-input"
+              />
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="image">Cover Image</label>
+
+            <input
+              id="image"
+              name="image"
+              type="file"
+              accept="image/*"
+              class="blue-input"
+            />
+
+            <div id="imageContainer" class="relative group hidden">
+              <img
+                id="coverImage"
+                class="rounded-xl w-full h-48 object-cover"
+                src=""
+                alt="Event cover preview"
+              />
+
+              <div
+                class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition rounded-xl flex justify-center items-center"
+              >
+                <button
+                  id="changeImageBtn"
+                  type="button"
+                  class="default-button main-blue-gradient bright-hover"
+                >
+                  Change Image
+                </button>
+              </div>
             </div>
           </div>
 
@@ -110,14 +135,17 @@
           </div>
 
           <div class="flex flex-col md:flex-row gap-3 pt-2">
-            <button type="submit" class="main-blue-gradient bright-hover">
+            <button
+              type="submit"
+              class="default-button main-blue-gradient bright-hover"
+            >
               Create Event
             </button>
 
             <button
               type="button"
               onclick="history.back()"
-              class="white-card clear-hover"
+              class="default-button white-card bright-hover"
             >
               Cancel
             </button>

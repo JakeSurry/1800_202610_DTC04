@@ -1,53 +1,87 @@
 import { svgs } from "./../svgs.js";
+import { getNumAttendees, getEventLocation } from "../events.js";
 
 export class EventCard extends HTMLElement {
   constructor() {
     super();
+    this._event = null;
+    this._visualStyle = "default";
   }
 
-  setEvent(event) {
-    this.event = event;
-    this.renderEventCard();
+  set event(value) {
+    this._event = value;
+    this.render();
+  }
+  set visualStyle(value) {
+    this._visualStyle = value || "default";
+    this.render();
   }
 
-  renderEventCard() {
-    const event = this.event;
+  async render() {
+    const event = this._event;
+    if (!event) return;
+
+    let styleClass = "";
+
+    if (this._visualStyle === "compact") {
+      styleClass = "max-w-50";
+    } else if (this._visualStyle === "long") {
+      styleClass = "min-w-90";
+    } else {
+      styleClass = "min-w-0";
+    }
 
     this.innerHTML = `
-        <div class="min-w-md md:w-xl rounded-2xl bg-gray-200 p-4 shadow-md">
-            <div class="flex items-stretch gap-3 mb-4">
-                <div class="min-w-1/2 bg-gray-700 text-white font-bold text-sm rounded-xl px-5 py-3 flex items-center">
-                ${event.name}
-                </div>
-                <div class="flex-1 bg-gray-400 text-gray-900 font-bold text-sm rounded-xl px-6 py-3 flex items-center justify-center">
-                ${event.match}
-                </div>
+        <button class="outline-hover rounded-lg" id="viewEvent">
+          <div class="white-card square-rounded-box items-start p-0 border-0 flex flex-col gap-2 pb-4 h-full  ${styleClass}" >
+            <img
+            src="${event.image ? event.image : "../images/dummyImage.jpg"}"
+            alt="${event.name}"
+            class="w-full aspect-2/1 object-cover rounded-t-lg"
+            />
+            <div class="space-y-2 px-5">
+              <h4 class="line-clamp-1">${event.name}</h4>
+              <div class="flex gap-2 items-start">
+                ${svgs.location(14, 14, "#000000")}
+                <p class="subtitle font-semibold text-left line-clamp-1">${await getEventLocation(event.id)}</p>
+              </div>
+              <div class="flex gap-2 items-center">
+                ${svgs.people(14, 14, "#000000")}
+                <p class="subtitle font-semibold">${await getNumAttendees(event.id)}</p>
+              </div>
+              <div class="flex gap-2 items-center">
+                ${svgs.calendar(14, 14, "#000000")}
+                <p class="subtitle font-semibold">${event.date}</p>
+              </div>
+              <div class="flex gap-2 items-center">
+                ${svgs.clock(14, 14, "#000000")}
+                <p class="subtitle font-semibold">${formatTime(event.time)}</p>
+              </div>
             </div>
-            <div class="flex gap-3">
-                <div class="flex flex-col gap-3 max-w-1/2 min-w-1/2">
-                <div class="bg-gray-300 rounded-xl px-4 py-2.5">
-                    <span class="text-xs font-semibold text-gray-700">${event.dateTime}</span>
-                </div>
-                <div class="bg-gray-300 rounded-xl px-4 py-2.5">
-                    <span class="text-xs font-semibold text-gray-700">${event.venue}</span>
-                </div>
-                <div class="flex items-center gap-2 mt-auto">
-                    <div class="min-w-1/4 flex items-center gap-1.5 bg-gray-700 rounded-full px-3 py-2">
-                        ${svgs.signup(32, 32, "#e5e7eb")}
-                    </div>
-                    <div class="flex items-center gap-1.5 bg-gray-300 rounded-full px-3 py-2">
-                        ${svgs.people(32, 32)}
-                    <span class="text-sm font-bold text-gray-800">${event.attendees}</span>
-                    </div>
-                </div>
-                </div>
-                <div class="flex-1 bg-gray-300 rounded-xl flex items-center justify-center min-h-full">
-                <span class="text-sm text-gray-500 font-medium">
-                    Map View of Location
-                </span>
-                </div>
-            </div>
-        </div>
-    `;
+          </div>
+        </button>
+      `;
+
+    this.querySelector("#viewEvent")?.addEventListener("click", () => {
+      if (!event.id) {
+        console.error("Event ID missing");
+        return;
+      }
+
+      window.location.href = `/eventDetails.html?eventId=${event.id}`;
+    });
   }
+}
+
+export function formatTime(time) {
+  if (!time) return "TBD";
+  const [hoursStr, minutes] = time.split(":");
+  let hours = parseInt(hoursStr, 10);
+
+  const period = hours >= 12 ? "pm" : "am";
+
+  hours = hours % 12;
+  hours = hours === 0 ? 12 : hours;
+
+  return `${hours}:${minutes}${period}`;
 }

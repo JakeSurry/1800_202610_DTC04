@@ -5,7 +5,7 @@ import { svgs } from "../svgs.js";
 
 const ROUTES = {
   guestHome: "./index.html",
-  userHome: "./main.htm",
+  userHome: "./main.html",
   businessDashboard: "./mainBusiness.html",
 
   events: "./events.html",
@@ -15,7 +15,7 @@ const ROUTES = {
   personalSignup: "./signup.html",
   businessSignup: "./signUpBusiness.html",
 
-  myEvents: "./",
+  myEvents: "./myEvents",
   userProfile: "./profile.html",
 
   hostedEvents: "./hostedEvents.html",
@@ -26,7 +26,8 @@ const ROUTES = {
 
 const ICONS = {
   home: svgs.home(22, 22, "currentColor"),
-  events: svgs.events(22, 22, "currentColor"),
+  events: svgs.stadium(22, 22, "currentColor"),
+  myEvents: svgs.events(22, 22, "currentColor"),
   login: svgs.profile(22, 22, "currentColor"),
   signup: svgs.signup(22, 22, "currentColor"),
   business: svgs.business(22, 22, "currentColor"),
@@ -101,7 +102,7 @@ const NAV_CONFIG = {
       {
         title: "Account",
         links: [
-          { name: "My Events", href: ROUTES.myEvents, svg: ICONS.events },
+          { name: "My Events", href: ROUTES.myEvents, svg: ICONS.myEvents },
           { name: "Profile", href: ROUTES.userProfile, svg: ICONS.profile },
         ],
       },
@@ -185,6 +186,9 @@ const NAV_CONFIG = {
 class SiteNavbar extends HTMLElement {
   constructor() {
     super();
+
+    this.classList.add("block", "sticky", "top-0", "z-50");
+
     this.accountState = "guest";
     this.accountInfo = {
       name: "Welcome to Fans Feast",
@@ -381,7 +385,7 @@ class SiteNavbar extends HTMLElement {
           : ROUTES.guestHome;
 
     this.innerHTML = `
-      <header class="sticky top-0 z-50 flex h-15 items-center justify-between bg-dark-blue p-6 text-white md:h-20">
+      <header class="flex h-15 items-center justify-between bg-dark-blue p-6 text-white md:h-20">
         <a href="${homeHref}" >
           <img class="h-10 object-contain md:h-12" src="images/fansFeastLogo.png" alt="Fans Feast Logo" />
         </a>
@@ -390,13 +394,13 @@ class SiteNavbar extends HTMLElement {
           ${config.desktop.map((button) => this.desktopLink(button)).join("")}
         </nav>
 
-        <button class="flex cursor-pointer items-center md:hidden" id="menu-button" aria-label="Open menu">
+        <button class="default-button flex cursor-pointer items-center md:hidden" id="menu-button" aria-label="Open menu">
           ${svgs.menu(40, 40, "#f9fafb")}
         </button>
 
         <div
           id="sidebar"
-          class="hidden absolute top-full right-0 z-50 h-[calc(100vh-100%)] w-[82%] flex-col overflow-y-auto dark-blue-gradient p-5 translate-x-full transition-transform duration-300 ease-in-out md:hidden"
+          class="hidden fixed top-0 right-0 z-60 h-screen w-[82%] max-w-105 flex-col overflow-y-auto dark-blue-gradient p-5 pt-24 translate-x-full transition-transform duration-300 ease-in-out md:hidden"
         >
           <div class="mt-5">
             ${this.accountPanel()}
@@ -413,7 +417,7 @@ class SiteNavbar extends HTMLElement {
 
         <div
           id="sidebarDimmer"
-          class="hidden absolute top-full left-0 z-40 h-[calc(100vh-100%)] w-full overlay-black-gradient backdrop-blur-[2px]"
+          class="hidden fixed inset-0 z-55 overlay-black-gradient backdrop-blur-[2px] md:hidden"
         ></div>
       </header>
     `;
@@ -429,6 +433,7 @@ class SiteNavbar extends HTMLElement {
     const openSidebar = () => {
       sidebar.classList.remove("hidden");
       sidebar.classList.add("flex");
+      document.body.classList.add("overflow-hidden");
 
       requestAnimationFrame(() => {
         sidebar.classList.remove("translate-x-full");
@@ -440,6 +445,7 @@ class SiteNavbar extends HTMLElement {
     const closeSidebar = () => {
       sidebar.classList.add("translate-x-full");
       dimmer.classList.add("hidden");
+      document.body.classList.remove("overflow-hidden");
 
       setTimeout(() => {
         if (sidebar.classList.contains("translate-x-full")) {
