@@ -1,20 +1,20 @@
 import { renderEvents } from "./components/EventsRow.js";
-import {
-  queryEvents,
-  getNumAttendees,
-  getEvent,
-  getVenueID,
-  getVenue,
-} from "./events";
+import { queryEvents, getNumAttendees, getEvent, getVenueID } from "./events";
 import { db } from "/src/firebaseConfig.js";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { arrayUnion } from "firebase/firestore";
+import {
+  arrayRemove,
+  doc,
+  getDoc,
+  updateDoc,
+  arrayUnion,
+} from "firebase/firestore";
 import { onAuthReady } from "./authentication.js";
 import { svgs } from "../src/svgs.js";
+import { formatTime } from "../src/components/EventCard.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   onAuthReady(async (user) => {
-    initEventDetails(user);
+    await initEventDetails(user);
     setup();
   });
 });
@@ -24,7 +24,7 @@ function getEventIdFromUrl() {
   return params.get("eventId");
 }
 
-function initEventDetails(user) {
+async function initEventDetails(user) {
   const alertEl = document.getElementById("formAlert");
   const joinBtn = document.getElementById("join");
   const eventId = getEventIdFromUrl();
@@ -39,6 +39,7 @@ function initEventDetails(user) {
   const venuePhone = document.getElementById("venue-phone");
   const venueWeb = document.getElementById("venue-website");
   const venueInsta = document.getElementById("venue-instagram");
+  const joinEventBtn = document.getElementById("join");
 
   function showError(message) {
     if (!alertEl) return;
@@ -68,7 +69,14 @@ function initEventDetails(user) {
       //data
       const event = eventSnap.data();
       const venue = venueSnap.data();
-      const venueLoc = `${venue.address}, ${venue.city}, ${venue.province}, ${venue.postalCode}`;
+      const venueLoc = [
+        venue.address || "TBD",
+        venue.city,
+        venue.province,
+        venue.postalCode,
+      ]
+        .filter(Boolean)
+        .join(", ");
       const attendeesCount = await getNumAttendees(eventId);
 
       //assign values
@@ -109,7 +117,7 @@ function initEventDetails(user) {
       });
 
       document.querySelectorAll(".time").forEach((el) => {
-        el.textContent = event.time || "TBD";
+        el.textContent = formatTime(event.time) || "TBD";
       });
 
       document.querySelectorAll(".location").forEach((el) => {
@@ -130,6 +138,10 @@ function initEventDetails(user) {
     }
   }
 
+  // join event button
+  let isRegistered = await checkregStatus(user, eventId);
+  formatJoinButton(joinEventBtn, user, isRegistered);
+
   joinBtn?.addEventListener("click", async () => {
     if (!eventId) {
       showError("Missing event ID.");
@@ -137,20 +149,36 @@ function initEventDetails(user) {
     }
 
     if (!user) {
-      alert("Please sign in to join this event.");
+      location.href = "../login.html";
       return;
     }
 
     const event = await getEvent(eventId);
     try {
-      await updateDoc(doc(db, "reg_links", event.regLink), {
-        attendees: arrayUnion(user.uid),
-      });
-      await updateDoc(doc(db, "users", user.uid), {
-        registeredEvents: arrayUnion(eventId),
-      });
+      if (isRegistered) {
+        await updateDoc(doc(db, "reg_links", event.regLink), {
+          attendees: arrayRemove(user.uid),
+        });
 
-      alert("Event updated successfully.");
+        await updateDoc(doc(db, "users", user.uid), {
+          registeredEvents: arrayRemove(eventId),
+        });
+
+        alert("Unregistered successfully.");
+      } else {
+        await updateDoc(doc(db, "reg_links", event.regLink), {
+          attendees: arrayUnion(user.uid),
+        });
+
+        await updateDoc(doc(db, "users", user.uid), {
+          registeredEvents: arrayUnion(eventId),
+        });
+
+        alert("Registered successfully.");
+      }
+
+      isRegistered = await checkregStatus(user, eventId);
+      formatJoinButton(joinEventBtn, user, isRegistered);
     } catch (error) {
       console.error(error);
       showError("Unable to join the event. Please try again.");
@@ -158,6 +186,34 @@ function initEventDetails(user) {
   });
 
   loadEvent();
+}
+
+async function checkregStatus(user, eventId) {
+  if (!user) return false;
+
+  const userSnap = await getDoc(doc(db, "users", user.uid));
+  const userData = userSnap.data();
+  return userData?.registeredEvents?.includes(eventId) || false;
+}
+
+function formatJoinButton(joinEventBtn, user, isRegistered) {
+  if (!joinEventBtn) return;
+
+  joinEventBtn.className = "default-button w-full";
+
+  if (!user) {
+    joinEventBtn.textContent = "Sign Up to Join!";
+    joinEventBtn.classList.add("black-gradient", "text-white");
+    return;
+  }
+
+  if (isRegistered) {
+    joinEventBtn.textContent = "Unregister";
+    joinEventBtn.classList.add("bg-red", "text-white");
+  } else {
+    joinEventBtn.textContent = "Join Event";
+    joinEventBtn.classList.add("main-blue-gradient");
+  }
 }
 
 function venueInfoTemplate(value, svg) {
