@@ -144,7 +144,7 @@ async function initEventDetails(user) {
     }
 
     if (!user) {
-      location.href = "../login.html";
+      location.href = "../signup.html";
       return;
     }
 

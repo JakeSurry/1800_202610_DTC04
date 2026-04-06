@@ -40,7 +40,7 @@ export class EventCard extends HTMLElement {
             class="w-full aspect-2/1 object-cover rounded-t-lg"
             />
             <div class="space-y-2 px-5">
-              <h4>${event.name}</h4>
+              <h4 class="line-clamp-1">${event.name}</h4>
               <div class="flex gap-2 items-start">
                 ${svgs.location(14, 14, "#000000")}
                 <p class="subtitle font-semibold text-left line-clamp-1">${await getEventLocation(event.id)}</p>
