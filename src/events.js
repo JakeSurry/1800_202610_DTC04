@@ -110,6 +110,8 @@ export async function getVenue(eventId) {
 //get venue location
 export async function getEventLocation(eventId) {
   const venue = await getVenue(eventId);
-  return `${venue.address}, ${venue.city}, ${venue.province}, ${venue.postalCode}`;
+  return [venue.address || "TBD", venue.city, venue.province, venue.postalCode]
+    .filter(Boolean)
+    .join(", ");
 }
 seedEventsAndRegLinks();

@@ -15,7 +15,7 @@ const ROUTES = {
   personalSignup: "./signup.html",
   businessSignup: "./signUpBusiness.html",
 
-  myEvents: "./",
+  myEvents: "./myEvents",
   userProfile: "./profile.html",
 
   hostedEvents: "./hostedEvents.html",
@@ -26,7 +26,8 @@ const ROUTES = {
 
 const ICONS = {
   home: svgs.home(22, 22, "currentColor"),
-  events: svgs.events(22, 22, "currentColor"),
+  events: svgs.stadium(22, 22, "currentColor"),
+  myEvents: svgs.events(22, 22, "currentColor"),
   login: svgs.profile(22, 22, "currentColor"),
   signup: svgs.signup(22, 22, "currentColor"),
   business: svgs.business(22, 22, "currentColor"),
@@ -101,7 +102,7 @@ const NAV_CONFIG = {
       {
         title: "Account",
         links: [
-          { name: "My Events", href: ROUTES.myEvents, svg: ICONS.events },
+          { name: "My Events", href: ROUTES.myEvents, svg: ICONS.myEvents },
           { name: "Profile", href: ROUTES.userProfile, svg: ICONS.profile },
         ],
       },
