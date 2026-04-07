@@ -183,11 +183,11 @@ async function getHostedEventsFromBusiness(hostingEvents = []) {
       team1: event.team1,
       team2: event.team2,
       date: formatDate(event.date),
-      time: formatTime(event.time || event.startTime),
+      time: formatTime(event.startTime),
       fans,
       name: event.name,
       rawDate: event.date,
-      rawTime: event.time || event.startTime,
+      rawTime: event.startTime,
     });
   }
 

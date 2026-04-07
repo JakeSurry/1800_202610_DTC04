@@ -124,7 +124,7 @@ async function initEventDetails(user) {
       });
 
       document.querySelectorAll(".time").forEach((el) => {
-        el.textContent = formatTimeRange(event.startTime || event.time, event.duration) || "TBD";
+        el.textContent = formatTimeRange(event.startTime, event.duration) || "TBD";
       });
 
       document.querySelectorAll(".location").forEach((el) => {

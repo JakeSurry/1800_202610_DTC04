@@ -47,7 +47,7 @@ export async function getRegLinkHost(regLinkId) {
   const regLink = await getRegLink(regLinkId);
   if (!regLink || !regLink.host) return null;
 
-  const hostRef = doc(db, "businesses", regLink.host);
+  const hostRef = doc(db, "business_accounts", regLink.host);
   const snap = await getDoc(hostRef);
   if (!snap.exists()) return null;
   return { id: snap.id, ...snap.data() };
@@ -81,9 +81,10 @@ export async function getEventLocation(eventId) {
   if (!regLinkSnap.exists()) return null;
   const regLinkData = regLinkSnap.data();
 
-  const hostRef = doc(db, "businesses", regLinkData.host);
+  const hostRef = doc(db, "business_accounts", regLinkData.host);
   const hostSnap = await getDoc(hostRef);
   if (!hostSnap.exists()) return null;
 
-  return hostSnap.data().location;
+  const biz = hostSnap.data();
+  return [biz.address, biz.city, biz.province].filter(Boolean).join(", ") || null;
 }

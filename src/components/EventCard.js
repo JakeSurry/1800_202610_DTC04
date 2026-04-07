@@ -56,7 +56,7 @@ export class EventCard extends HTMLElement {
               </div>
               <div class="flex gap-2 items-center">
                 ${svgs.clock(14, 14, "#000000")}
-                <p class="subtitle font-semibold">${formatTimeRange(event.startTime || event.time, event.duration)}</p>
+                <p class="subtitle font-semibold">${formatTimeRange(event.startTime, event.duration)}</p>
               </div>
             </div>
           </div>

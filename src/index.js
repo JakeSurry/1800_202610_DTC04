@@ -64,14 +64,14 @@ async function getEventsAfterHour(hourAfter = 19, limitCount = 4) {
 
   const afterHour = events
     .filter((e) => {
-      if (!e.time) return false;
+      if (!e.startTime) return false;
 
-      const hour = parseInt(e.time.split(":")[0], 10);
+      const hour = parseInt(e.startTime.split(":")[0], 10);
       return hour >= hourAfter;
     })
     .sort((a, b) => {
-      const hourA = parseInt(a.time.split(":")[0], 10);
-      const hourB = parseInt(b.time.split(":")[0], 10);
+      const hourA = parseInt(a.startTime.split(":")[0], 10);
+      const hourB = parseInt(b.startTime.split(":")[0], 10);
       return hourA - hourB;
     });
 

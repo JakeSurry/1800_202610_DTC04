@@ -4,7 +4,6 @@ import {
   getDoc,
   getDocs,
   addDoc,
-  where,
   query,
   orderBy,
   limit,
@@ -15,11 +14,17 @@ import { seedEventsAndRegLinks } from "./seedEvents";
 /**
   Create a single event document.
   Returns the new event's document ID.
-  
+
   @param {Object} eventData
-  @param {string} eventData.dateTime  – MMDDYYHHMM format (e.g. "0310261345" is March 10, 2026 1:45PM)
-  @param {[string,string]} eventData.teams – tuple of two team names
-  @param {string} eventData.regLink  – RegLink document ID
+  @param {string} eventData.name       – Event name
+  @param {string} eventData.venue      – Venue name
+  @param {string} eventData.team1      – Home team
+  @param {string} eventData.team2      – Away team
+  @param {string} eventData.date       – YYYY-MM-DD format
+  @param {string} eventData.startTime  – HH:MM 24-hour format
+  @param {string} eventData.endTime    – HH:MM 24-hour format
+  @param {string} eventData.duration   – e.g. "2 hrs"
+  @param {string} eventData.regLink    – RegLink document ID
    */
 export async function createEvent(eventData) {
   const docRef = await addDoc(collection(db, "events"), eventData);
@@ -39,10 +44,6 @@ export async function getEvent(eventId) {
 export async function queryEvents(filters = {}) {
   const constraints = [];
 
-  if (filters.team) {
-    constraints.push(where("teams", "array-contains", filters.team));
-  }
-
   if (filters.orderByField) {
     constraints.push(orderBy(filters.orderByField));
   }
@@ -55,7 +56,18 @@ export async function queryEvents(filters = {}) {
 
   try {
     const snapshot = await getDocs(q);
-    return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+    let events = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+
+    if (filters.team) {
+      const t = filters.team.toLowerCase();
+      events = events.filter(
+        (e) =>
+          e.team1?.toLowerCase().includes(t) ||
+          e.team2?.toLowerCase().includes(t),
+      );
+    }
+
+    return events;
   } catch (error) {
     console.error("Error querying events:", error);
     return [];
@@ -94,67 +106,13 @@ export async function getNumAttendees(eventId) {
 
 // Parse a raw event's date fields into a timestamp for sorting
 function parseDateToTimestamp(raw) {
-  if (raw.dateTime) {
-    const month = parseInt(raw.dateTime.substring(0, 2)) - 1;
-    const day = parseInt(raw.dateTime.substring(2, 4));
-    const year = 2000 + parseInt(raw.dateTime.substring(4, 6));
-    const hour = parseInt(raw.dateTime.substring(6, 8));
-    const minute = parseInt(raw.dateTime.substring(8, 10));
-    return new Date(year, month, day, hour, minute).getTime();
+  if (raw.date && raw.startTime) {
+    return new Date(`${raw.date}T${raw.startTime}`).getTime();
   }
-  if (raw.date && raw.time) {
-    return new Date(`${raw.date}T${raw.time}`).getTime();
+  if (raw.date) {
+    return new Date(raw.date).getTime();
   }
   return 0;
-}
-
-// Parse a raw event's date fileds into to readable string
-function parseSeedDateTime(dt) {
-  const month = parseInt(dt.substring(0, 2));
-  const day = parseInt(dt.substring(2, 4));
-  const year = 2000 + parseInt(dt.substring(4, 6));
-  const hour = parseInt(dt.substring(6, 8));
-  const minute = dt.substring(8, 10);
-  const months = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December",
-  ];
-  const ampm = hour >= 12 ? "PM" : "AM";
-  const displayHour = hour % 12 || 12;
-  return `${months[month - 1]} ${day}, ${year} • ${displayHour}:${minute} ${ampm}`;
-}
-
-
-// Map a Firestore event document to the format <event-card> expects
-function formatEventForCard(event) {
-  let name = "";
-  let dateStr = "";
-
-  if (event.name) {
-    // Event created via the createEvent form
-    name = event.name;
-    if (event.date && event.time) {
-      const d = new Date(`${event.date}T${event.time}`);
-      dateStr =
-        d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) +
-        " • " +
-        d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
-    }
-  } else if (event.teams && event.dateTime) {
-    // Seed event
-    name = `${event.teams[0]} vs ${event.teams[1]}`;
-    dateStr = parseSeedDateTime(event.dateTime);
-  } else {
-    return null;
-  }
-
-  return {
-    id: event.id,
-    name,
-    image: "./images/dummyImage.jpg",
-    registration: "0 Fans Going",
-    date: dateStr,
-  };
 }
 
 // All loaded events stored for client-side filtering
@@ -170,14 +128,10 @@ async function loadEventsPage() {
   await Promise.all(
     snapshot.docs.map(async (docSnap) => {
       const event = { id: docSnap.id, ...docSnap.data() };
-      const formatted = formatEventForCard(event);
-      if (!formatted) return;
+      if (!event.name && !event.team1) return;
 
-      // Get attendee count using getNumAttendees
       const attendeeCount = await getNumAttendees(event.id);
-      formatted.registration = `${attendeeCount} Fans Going`;
-
-      allEvents.push({ raw: event, formatted, attendeeCount });
+      allEvents.push({ raw: event, attendeeCount });
     }),
   );
 
@@ -201,21 +155,23 @@ function filterAndRender(searchQuery, teamFilter, orderByField) {
   if (!container) return;
   container.innerHTML = "";
 
-  let filtered = allEvents.filter(({ raw, formatted }) => {
+  let filtered = allEvents.filter(({ raw }) => {
     // Text search — match against event name or team names
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
-      const nameMatch = formatted.name.toLowerCase().includes(q);
-      const teamMatch = raw.teams?.some((t) => t.toLowerCase().includes(q));
+      const nameMatch = (raw.name || "").toLowerCase().includes(q);
+      const teamMatch =
+        (raw.team1 || "").toLowerCase().includes(q) ||
+        (raw.team2 || "").toLowerCase().includes(q);
       if (!nameMatch && !teamMatch) return false;
     }
 
     // Team filter
     if (teamFilter) {
       const t = teamFilter.toLowerCase();
-      const hasTeam = raw.teams?.some((team) =>
-        team.toLowerCase().includes(t),
-      );
+      const hasTeam =
+        (raw.team1 || "").toLowerCase().includes(t) ||
+        (raw.team2 || "").toLowerCase().includes(t);
       if (!hasTeam) return false;
     }
 
@@ -227,16 +183,16 @@ function filterAndRender(searchQuery, teamFilter, orderByField) {
     filtered.sort((a, b) => parseDateToTimestamp(a.raw) - parseDateToTimestamp(b.raw));
   } else if (orderByField === "name") {
     filtered.sort((a, b) =>
-      a.formatted.name.localeCompare(b.formatted.name),
+      (a.raw.name || "").localeCompare(b.raw.name || ""),
     );
   } else if (orderByField === "attendees") {
     filtered.sort((a, b) => b.attendeeCount - a.attendeeCount);
   }
 
   // Render
-  for (const { formatted } of filtered) {
+  for (const { raw } of filtered) {
     const eventCard = document.createElement("event-card");
-    eventCard.event = formatted;
+    eventCard.event = raw;
     container.appendChild(eventCard);
   }
 }

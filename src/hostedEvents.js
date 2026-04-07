@@ -64,7 +64,7 @@ async function buildHostedEvents(hostingEvents = []) {
       team1: event.team1,
       team2: event.team2,
       date: formatDate(event.date),
-      time: formatTime(event.time),
+      time: formatTime(event.startTime),
       fans,
       rawDate: event.date,
     });
