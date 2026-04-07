@@ -17,4 +17,3 @@ export const db = getFirestore(app);
 if (location.hostname === "localhost") {
   connectFirestoreEmulator(db, "localhost", 8080);
 }
-
