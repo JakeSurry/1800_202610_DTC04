@@ -1,5 +1,6 @@
 import { renderEvents } from "./components/EventsRow.js";
-import { queryEvents, getNumAttendees, getEvent, getVenueID } from "./events";
+import { queryEvents, getNumAttendees, getEvent } from "./events";
+import { getRegLink, getRegLinkHost } from "./regLinks.js";
 import { db } from "/src/firebaseConfig.js";
 import {
   arrayRemove,
@@ -10,7 +11,7 @@ import {
 } from "firebase/firestore";
 import { onAuthReady } from "./authentication.js";
 import { svgs } from "../src/svgs.js";
-import { formatTime } from "../src/components/EventCard.js";
+import { formatTimeRange } from "../src/components/EventCard.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   onAuthReady(async (user) => {
@@ -18,6 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
     setup();
   });
 });
+
+async function getVenueID(eventId) {
+    const event = await getEvent(eventId)
+    const regLink = await getRegLink(event.regLink)
+    return regLink.host
+}
 
 function getEventIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
@@ -117,7 +124,7 @@ async function initEventDetails(user) {
       });
 
       document.querySelectorAll(".time").forEach((el) => {
-        el.textContent = formatTime(event.time) || "TBD";
+        el.textContent = formatTimeRange(event.startTime || event.time, event.duration) || "TBD";
       });
 
       document.querySelectorAll(".location").forEach((el) => {

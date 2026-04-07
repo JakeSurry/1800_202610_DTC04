@@ -1,5 +1,6 @@
 import { svgs } from "./../svgs.js";
-import { getNumAttendees, getEventLocation } from "../events.js";
+import { getNumAttendees } from "../events.js";
+import { getEventLocation } from "../regLinks.js";
 
 export class EventCard extends HTMLElement {
   constructor() {
@@ -55,7 +56,7 @@ export class EventCard extends HTMLElement {
               </div>
               <div class="flex gap-2 items-center">
                 ${svgs.clock(14, 14, "#000000")}
-                <p class="subtitle font-semibold">${formatTime(event.time)}</p>
+                <p class="subtitle font-semibold">${formatTimeRange(event.startTime || event.time, event.duration)}</p>
               </div>
             </div>
           </div>
@@ -84,4 +85,25 @@ export function formatTime(time) {
   hours = hours === 0 ? 12 : hours;
 
   return `${hours}:${minutes}${period}`;
+}
+
+export function formatTimeRange(startTime, duration) {
+  if (!startTime) return "TBD";
+  const start = formatTime(startTime);
+  if (!duration) return start;
+
+  const [hoursStr, minutes] = startTime.split(":");
+  let totalMinutes = parseInt(hoursStr, 10) * 60 + parseInt(minutes, 10);
+
+  const durationMatch = duration.match(/([\d.]+)/);
+  if (!durationMatch) return start;
+
+  const durationValue = parseFloat(durationMatch[1]);
+  totalMinutes += durationValue * 60;
+
+  const endHours = String(Math.floor(totalMinutes / 60) % 24).padStart(2, "0");
+  const endMinutes = String(totalMinutes % 60).padStart(2, "0");
+  const end = formatTime(`${endHours}:${endMinutes}`);
+
+  return `${start} - ${end}`;
 }

@@ -11,7 +11,6 @@ import {
 } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 import { seedEventsAndRegLinks } from "./seedEvents";
-import "./components/EventsRow.js";
 
 /**
   Create a single event document.

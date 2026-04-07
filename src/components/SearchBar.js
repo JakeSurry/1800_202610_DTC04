@@ -35,7 +35,15 @@ class SearchBar extends HTMLElement {
 
   render() {
     const f = this._filters;
-    const teams = ["Canada", "United States", "Brazil", "Argentina"];
+    const teams = [
+      "Algeria", "Argentina", "Australia", "Austria", "Belgium", "Brazil",
+      "Canada", "Cape Verde", "Colombia", "Croatia", "Curaçao", "Ecuador",
+      "Egypt", "England", "France", "Germany", "Ghana", "Haiti", "Iran",
+      "Ivory Coast", "Japan", "Jordan", "Mexico", "Morocco", "Netherlands",
+      "New Zealand", "Norway", "Panama", "Paraguay", "Portugal", "Qatar",
+      "Saudi Arabia", "Scotland", "Senegal", "South Africa", "South Korea",
+      "Spain", "Switzerland", "Tunisia", "United States", "Uruguay", "Uzbekistan",
+    ];
     const teamOptions = teams
       .map(
         (t) =>
@@ -76,8 +84,7 @@ class SearchBar extends HTMLElement {
 
         </div>
 
-        <!-- Filter dropdown menu -->
-        <div id="filterMenu" class="hidden absolute left-0 right-0 mt-2 bg-white rounded-xl shadow-lg p-4 z-50">
+        <div id="filterMenu" class="hidden absolute left-0 right-0 mt-2 bg-white border-2 border-gray-600 rounded-xl shadow-lg p-4 z-50">
           <p class="text-sm font-bold text-gray-700 mb-3">Filter Events</p>
           <div class="flex flex-col gap-3">
             <div>
@@ -126,13 +133,11 @@ class SearchBar extends HTMLElement {
 
     if (!input || !searchBtn) return;
 
-    // Toggle filter menu
     filterBtn.addEventListener("click", () => {
       this._filterOpen = !this._filterOpen;
       filterMenu.classList.toggle("hidden", !this._filterOpen);
     });
 
-    // Track filter input values
     filterTeam.addEventListener("change", (e) => {
       this._filters.team = e.target.value;
     });
@@ -140,7 +145,6 @@ class SearchBar extends HTMLElement {
       this._filters.orderBy = e.target.value;
     });
 
-    // Search text input
     input.addEventListener("input", (e) => {
       this._value = e.target.value;
       this.dispatchEvent(
@@ -151,7 +155,6 @@ class SearchBar extends HTMLElement {
       );
     });
 
-    // Submit handler
     const doSubmit = () => {
       this._filterOpen = false;
       filterMenu.classList.add("hidden");
@@ -166,7 +169,6 @@ class SearchBar extends HTMLElement {
     searchBtn.addEventListener("click", doSubmit);
     applyBtn.addEventListener("click", doSubmit);
 
-    // Enter key in search input triggers submit
     input.addEventListener("keydown", (e) => {
       if (e.key === "Enter") doSubmit();
     });

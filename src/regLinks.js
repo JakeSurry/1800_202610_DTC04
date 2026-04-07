@@ -76,7 +76,7 @@ export async function getEventLocation(eventId) {
   if (!eventSnap.exists()) return null;
   const eventData = eventSnap.data();
 
-  const regLinkRef = doc(db, "reg_links", eventData.reg_link);
+  const regLinkRef = doc(db, "reg_links", eventData.regLink);
   const regLinkSnap = await getDoc(regLinkRef);
   if (!regLinkSnap.exists()) return null;
   const regLinkData = regLinkSnap.data();

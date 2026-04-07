@@ -72,6 +72,7 @@ function initEditEvent() {
       document.getElementById("eventDate").value = event.date || "";
       document.getElementById("startTime").value = event.startTime || "";
       document.getElementById("endTime").value = event.endTime || "";
+      document.getElementById("duration").value = event.duration || "";
       document.getElementById("description").value = event.description || "";
       let coverImage = document.getElementById("coverImage");
       coverImage.src = event.image;
@@ -105,6 +106,7 @@ function initEditEvent() {
     const eventDate = document.getElementById("eventDate")?.value ?? "";
     const startTime = document.getElementById("startTime")?.value ?? "";
     const endTime = document.getElementById("endTime")?.value ?? "";
+    const duration = document.getElementById("duration")?.value ?? "";
     const description =
       document.getElementById("description")?.value?.trim() ?? "";
     const coverImage = document.getElementById("image");
@@ -117,6 +119,7 @@ function initEditEvent() {
       !eventDate ||
       !startTime ||
       !endTime ||
+      !duration ||
       !description
     ) {
       showError("Please complete all required fields.");
@@ -132,6 +135,7 @@ function initEditEvent() {
       date: eventDate,
       startTime,
       endTime,
+      duration,
       description,
       match: `${team1} vs ${team2}`,
     };

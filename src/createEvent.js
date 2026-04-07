@@ -153,6 +153,7 @@ function initCreateEvent() {
     const eventDate = document.getElementById("eventDate")?.value ?? "";
     const startTime = document.getElementById("startTime")?.value ?? "";
     const endTime = document.getElementById("endTime")?.value ?? "";
+    const duration = document.getElementById("duration")?.value ?? "";
     const description =
       document.getElementById("description")?.value?.trim() ?? "";
     const file = imageInput?.files?.[0];
@@ -165,6 +166,7 @@ function initCreateEvent() {
       !eventDate ||
       !startTime ||
       !endTime ||
+      !duration ||
       !file ||
       !description
     ) {
@@ -184,6 +186,7 @@ function initCreateEvent() {
         date: eventDate,
         startTime,
         endTime,
+        duration,
         description,
         match: `${team1} vs ${team2}`,
         hostName:

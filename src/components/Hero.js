@@ -10,7 +10,7 @@ class Hero extends HTMLElement {
 
     this.innerHTML = `
       <section
-        class="relative min-h-105 bg-no-repeat bg-center bg-cover overflow-hidden flex items-center justify-center px-6 py-10"
+        class="relative min-h-105 bg-no-repeat bg-center bg-cover overflow-visible flex items-center justify-center px-6 py-10"
         style="background-image: url('images/hero.png');"
       >
         <div class="absolute inset-0 hero-blue-gradient"></div>
