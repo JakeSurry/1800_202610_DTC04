@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Fans Feast</title>
@@ -15,6 +15,7 @@
     <script type="module" src="./src/components/SearchBar.js"></script>
     <script type="module" src="./src/components/Hero.js"></script>
     <script type="module" src="./src/components/Footer.js"></script>
+    <script type="module" src="./src/components/Loader.js"></script>
     <link rel="stylesheet" href="main.css" />
     <script type="module">
       import { svgs } from "./src/svgs.js";
@@ -26,6 +27,7 @@
   </head>
 
   <body class="bg-off-white min-h-screen flex flex-col">
+    <page-loader></page-loader>
     <!-- header -->
     <site-navbar></site-navbar>
     <hero-section></hero-section>

@@ -14,6 +14,6 @@ export const auth = getAuth(app);
 
 import { connectFirestoreEmulator } from "firebase/firestore";
 export const db = getFirestore(app);
-if (location.hostname === "localhost") {
-  connectFirestoreEmulator(db, "localhost", 8080);
-}
+// if (location.hostname === "localhost") {
+//   connectFirestoreEmulator(db, "localhost", 8080);
+// }

@@ -12,6 +12,7 @@
     <!-- module scripts -->
     <script type="module" src="./src/components/Header.js"></script>
     <script type="module" src="./src/components/Footer.js"></script>
+    <script type="module" src="./src/components/Loader.js"></script>
     <link rel="stylesheet" href="main.css" />
     <script type="module">
       import { svgs } from "./src/svgs.js";
@@ -31,6 +32,7 @@
   </head>
 
   <body class="bg-off-white min-h-screen flex flex-col">
+    <page-loader></page-loader>
     <site-navbar></site-navbar>
 
     <!-- main content -->
