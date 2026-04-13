@@ -19,6 +19,7 @@ import {
 import { onAuthReady } from "./authentication.js";
 import { svgs } from "../src/svgs.js";
 import { formatTimeRange } from "../src/components/EventCard.js";
+import { getLoader } from "./components/Loader.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   onAuthReady(async (user) => {
@@ -29,9 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /** Resolve the hosting business's ID by traversing event → regLink → host. */
 async function getVenueID(eventId) {
-    const event = await getEvent(eventId)
-    const regLink = await getRegLink(event.regLink)
-    return regLink.host
+  const event = await getEvent(eventId);
+  const regLink = await getRegLink(event.regLink);
+  return regLink.host;
 }
 
 /** Extract the eventId query parameter from the current URL. */
@@ -107,7 +108,7 @@ async function initEventDetails(user) {
         venueType.innerHTML =
           venueInfoTemplate(
             venue.businessType,
-            svgs.beer(25, 25, "currentColor"),
+            svgs.beer(25, 25, "currentColor")
           ) || "";
       if (venuePhone && venue.phone)
         venuePhone.innerHTML =
@@ -117,13 +118,13 @@ async function initEventDetails(user) {
         venueWeb.innerHTML =
           venueInfoTemplate(
             venue.website,
-            svgs.website(25, 25, "currentColor"),
+            svgs.website(25, 25, "currentColor")
           ) || "";
       if (venueInsta && venue.instagram)
         venueInsta.innerHTML =
           venueInfoTemplate(
             venue.instagram,
-            svgs.instagram(25, 25, "currentColor"),
+            svgs.instagram(25, 25, "currentColor")
           ) || "";
 
       document.querySelectorAll(".event-name").forEach((el) => {
@@ -134,7 +135,8 @@ async function initEventDetails(user) {
       });
 
       document.querySelectorAll(".time").forEach((el) => {
-        el.textContent = formatTimeRange(event.startTime, event.duration) || "TBD";
+        el.textContent =
+          formatTimeRange(event.startTime, event.duration) || "TBD";
       });
 
       document.querySelectorAll(".location").forEach((el) => {
@@ -146,8 +148,9 @@ async function initEventDetails(user) {
       });
 
       if (event.image) {
-        document.getElementById("event-bg").style.backgroundImage =
-          `url("${event.image}")`;
+        document.getElementById(
+          "event-bg"
+        ).style.backgroundImage = `url("${event.image}")`;
       }
     } catch (error) {
       console.error(error);
@@ -178,7 +181,7 @@ async function initEventDetails(user) {
         });
 
         await updateDoc(doc(db, "users", user.uid), {
-          registeredEvents: arrayRemove(eventId),
+          registeredEvents: arrayRemove(event.regLink),
         });
 
         alert("Unregistered successfully.");
@@ -186,9 +189,8 @@ async function initEventDetails(user) {
         await updateDoc(doc(db, "reg_links", event.regLink), {
           attendees: arrayUnion(user.uid),
         });
-
         await updateDoc(doc(db, "users", user.uid), {
-          registeredEvents: arrayUnion(eventId),
+          registeredEvents: arrayUnion(event.regLink),
         });
 
         alert("Registered successfully.");
@@ -209,9 +211,10 @@ async function initEventDetails(user) {
 async function checkregStatus(user, eventId) {
   if (!user) return false;
 
+  const event = await getEvent(eventId);
   const userSnap = await getDoc(doc(db, "users", user.uid));
   const userData = userSnap.data();
-  return userData?.registeredEvents?.includes(eventId) || false;
+  return userData?.registeredEvents?.includes(event.regLink) || false;
 }
 
 /** Update the join button's text and styling based on auth and registration state. */
@@ -255,17 +258,25 @@ async function getOtherEvents() {
     events.map(async (e) => {
       const venue = await getVenueID(e.id);
       return { ...e, venue };
-    }),
+    })
   );
 
   const otherEvents = eventsWithVenue.filter(
-    (e) => e.venue === currentVenue && e.id !== currentEvent.id,
+    (e) => e.venue === currentVenue && e.id !== currentEvent.id
   );
 
   return otherEvents;
 }
 /** Render the "other events at this venue" row. */
 async function setup() {
-  const week = await getOtherEvents();
-  renderEvents(week, "venue-events", "long");
+  const loader = getLoader();
+  loader?.setText("Loading Event Details...");
+  loader?.show();
+  try {
+    const week = await getOtherEvents();
+    renderEvents(week, "venue-events", "long");
+  } catch (error) {
+  } finally {
+    loader?.hide();
+  }
 }

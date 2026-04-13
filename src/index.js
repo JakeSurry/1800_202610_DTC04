@@ -11,6 +11,7 @@
 import { renderEvents } from "./components/EventsRow.js";
 import { renderMatches } from "./components/MatchCard.js";
 import { queryEvents, getNumAttendees } from "./events";
+import { getLoader } from "./components/Loader.js";
 
 // Hard-coded featured matches displayed in the hero carousel
 const matches = [
@@ -65,7 +66,7 @@ async function getMostPopularEvents(limitCount = 4) {
     events.map(async (event) => {
       const numAttendees = await getNumAttendees(event.id);
       return { ...event, numAttendees };
-    }),
+    })
   );
 
   eventsWithCounts.sort((a, b) => b.numAttendees - a.numAttendees);
@@ -141,6 +142,14 @@ document.addEventListener("search:submit", (e) => {
   window.location.href = qs ? `events.html?${qs}` : "events.html";
 });
 
-$(document).ready(function () {
-  setup();
+$(document).ready(async function () {
+  const loader = getLoader()
+  loader?.setText("Loading dashboard...");
+  loader?.show();
+  try {
+    await setup();
+  } catch (error) {
+  } finally {
+    loader?.hide();
+  }
 });

@@ -16,7 +16,7 @@ import { svgs } from "../svgs.js";
 // Centralized route map for all navigation links
 const ROUTES = {
   guestHome: "./index.html",
-  userHome: "./main.html",
+  userHome: "./index.html",
   businessDashboard: "./mainBusiness.html",
 
   events: "./events.html",
@@ -394,8 +394,8 @@ class SiteNavbar extends HTMLElement {
       this.accountState === "business"
         ? ROUTES.businessDashboard
         : this.accountState === "user"
-          ? ROUTES.userHome
-          : ROUTES.guestHome;
+        ? ROUTES.userHome
+        : ROUTES.guestHome;
 
     this.innerHTML = `
       <header class="flex h-15 items-center justify-between bg-dark-blue p-6 text-white md:h-20">
@@ -420,11 +420,15 @@ class SiteNavbar extends HTMLElement {
           </div>
 
           <div class="mt-4 flex gap-3">
-            ${config.quickActions.map((action) => this.quickActionButton(action)).join("")}
+            ${config.quickActions
+              .map((action) => this.quickActionButton(action))
+              .join("")}
           </div>
 
           <div class="mt-4 border-t border-white-t4 pt-2">
-            ${config.sections.map((section) => this.sectionBlock(section)).join("")}
+            ${config.sections
+              .map((section) => this.sectionBlock(section))
+              .join("")}
           </div>
         </div>
 

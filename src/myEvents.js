@@ -9,6 +9,7 @@ import { onAuthReady } from "./authentication.js";
 import { db } from "./firebaseConfig.js";
 import { doc, getDoc } from "firebase/firestore";
 import { queryEvents } from "./events";
+import { getLoader } from "./components/Loader.js";
 import { renderEvents } from "./components/EventsRow.js";
 
 async function ShowProfileEvents() {
@@ -24,7 +25,7 @@ async function ShowProfileEvents() {
       // Filter all events down to only those the user has registered for
       const allEvents = await queryEvents();
       const myEvents = allEvents.filter((e) =>
-        registeredEventIds.includes(e.id),
+        registeredEventIds.includes(e.regLink)
       );
 
       renderEvents(myEvents, "events", "full");
@@ -34,4 +35,14 @@ async function ShowProfileEvents() {
   });
 }
 
-ShowProfileEvents();
+$(document).ready(async function () {
+  const loader = getLoader();
+  loader?.setText("Loading My Events...");
+  loader?.show();
+  try {
+    await ShowProfileEvents();
+  } catch (error) {
+  } finally {
+    loader?.hide();
+  }
+});

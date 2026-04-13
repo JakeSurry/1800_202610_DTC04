@@ -36,5 +36,8 @@ class PageLoader extends HTMLElement {
     }
   }
 }
+export function getLoader() {
+  return document.querySelector("page-loader");
+}
 
 customElements.define("page-loader", PageLoader);
