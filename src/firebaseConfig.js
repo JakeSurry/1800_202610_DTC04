@@ -22,7 +22,7 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 
 // Use local Firestore emulator during development
-if (location.hostname === "localhost") {
-  connectFirestoreEmulator(db, "localhost", 8080);
-}
+// if (location.hostname === "localhost") {
+//   connectFirestoreEmulator(db, "localhost", 8080);
+// }
 
