@@ -1,3 +1,12 @@
+/**
+ * svgs.js
+ * Centralized SVG icon library.
+ * Each icon is a function that returns an SVG string with configurable
+ * width, height, and stroke/fill color. Used throughout components
+ * for consistent iconography without external icon font dependencies.
+ */
+
+/** Render all icons in a single row (utility for previewing the icon set). */
 export function buildIconRow(size = 24) {
   return Object.values(svgs)
     .map((fn) => fn(size, size, "currentColor"))

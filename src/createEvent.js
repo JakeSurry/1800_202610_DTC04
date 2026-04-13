@@ -1,3 +1,11 @@
+/**
+ * createEvent.js
+ * Handles the "Create Event" form (createEvent.html).
+ * Validates inputs, uploads the cover image to Cloudinary, creates the event
+ * and its reg_link in Firestore, and links both to the business account.
+ * Supports URL-based pre-fill for team, date, and time fields (from match schedule).
+ */
+
 import { createRegLink } from "./regLinks.js";
 import uploadImage from "./uploadImage.js";
 import { auth, db } from "/src/firebaseConfig.js";
@@ -31,6 +39,7 @@ function initCreateEvent() {
     alertEl.classList.add("hidden");
   }
 
+  /** Convert various time formats to HH:MM for the time input element. */
   function normalizeTimeForInput(time) {
     if (!time) return "";
 
@@ -46,6 +55,7 @@ function initCreateEvent() {
     return `${hours}:${minutes}`;
   }
 
+  /** Pre-fill form fields from URL query params (e.g. from "Host Match" on match schedule). */
   function prefillFromParams() {
     const params = new URLSearchParams(window.location.search);
 
@@ -106,6 +116,7 @@ function initCreateEvent() {
     imageInput.classList.remove("hidden");
   }
 
+  /** Verify the current user has a business account; throw if not. */
   async function ensureBusinessAccount(uid) {
     const businessRef = doc(db, "business_accounts", uid);
     const businessSnap = await getDoc(businessRef);

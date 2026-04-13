@@ -1,3 +1,8 @@
+/**
+ * uploadImage.js
+ * Uploads an image file to Cloudinary via their unsigned upload API.
+ * Returns the public URL of the uploaded image.
+ */
 export default async function uploadImage(file) {
   const formData = new FormData();
   formData.append("file", file);

@@ -1,3 +1,13 @@
+/**
+ * events.js
+ * Core event data layer — CRUD operations, querying, and the events listing page logic.
+ * Also powers client-side filtering/sorting on events.html via the SearchBar component.
+ *
+ * Firestore collections used:
+ *   - "events"     — event documents
+ *   - "reg_links"  — registration links tying events to businesses and attendees
+ */
+
 import {
   collection,
   doc,
@@ -104,7 +114,7 @@ export async function getNumAttendees(eventId) {
   return regLink.attendees.length;
 }
 
-// Parse a raw event's date fields into a timestamp for sorting
+/** Combine a raw event's date and startTime into a numeric timestamp for sorting. */
 function parseDateToTimestamp(raw) {
   if (raw.date && raw.startTime) {
     return new Date(`${raw.date}T${raw.startTime}`).getTime();
@@ -115,10 +125,10 @@ function parseDateToTimestamp(raw) {
   return 0;
 }
 
-// All loaded events stored for client-side filtering
+/** All loaded events cached in-memory for client-side filtering on events.html. */
 let allEvents = [];
 
-// Fetch all events from Firestore and store them for filtering
+/** Fetch every event from Firestore (with attendee counts) and apply URL-based filters. */
 async function loadEventsPage() {
   const container = document.getElementById("events-list");
   if (!container) return;
@@ -139,7 +149,7 @@ async function loadEventsPage() {
   applyFiltersFromURL();
 }
 
-// Read current URL params and render filtered events
+/** Read current URL search params and apply them to the cached event list. */
 function applyFiltersFromURL() {
   const params = new URLSearchParams(window.location.search);
   filterAndRender(
@@ -149,7 +159,7 @@ function applyFiltersFromURL() {
   );
 }
 
-// Filter, sort, and render events into the container
+/** Filter cached events by text/team, sort by the chosen field, and render EventCards. */
 function filterAndRender(searchQuery, teamFilter, orderByField) {
   const container = document.getElementById("events-list");
   if (!container) return;
@@ -197,7 +207,7 @@ function filterAndRender(searchQuery, teamFilter, orderByField) {
   }
 }
 
-// Listen for search:submit from the SearchBar component
+// Listen for search:submit from the <search-bar> component and re-filter in-place
 document.addEventListener("search:submit", (e) => {
   const { value, filters } = e.detail;
 
@@ -217,4 +227,5 @@ document.addEventListener("search:submit", (e) => {
   filterAndRender(value, filters.team, filters.orderBy);
 });
 
+// Ensure seed data exists (no-op if events collection already has data), then load the page
 seedEventsAndRegLinks().then(() => loadEventsPage());

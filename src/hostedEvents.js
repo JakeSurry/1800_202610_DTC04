@@ -1,3 +1,10 @@
+/**
+ * hostedEvents.js
+ * Full-page listing of all events hosted by the logged-in business account.
+ * Traverses the business's hostingEvents array → reg_links → events
+ * and renders them as HostedEvent cards with edit/view actions.
+ */
+
 import { onAuthReady } from "./authentication.js";
 import { db } from "/src/firebaseConfig.js";
 import { doc, getDoc } from "firebase/firestore";
@@ -20,6 +27,7 @@ function hideError() {
   alertEl.classList.add("hidden");
 }
 
+/** Format a YYYY-MM-DD string into a readable date (e.g. "April 26, 2026"). */
 function formatDate(dateString) {
   if (!dateString) return "";
   const date = new Date(dateString);
@@ -30,6 +38,7 @@ function formatDate(dateString) {
   });
 }
 
+/** Convert 24h "HH:MM" to a locale time string (e.g. "2:00 PM"). */
 function formatTime(timeString) {
   if (!timeString) return "";
   const [hours, minutes] = String(timeString).split(":");
@@ -42,6 +51,7 @@ function formatTime(timeString) {
   });
 }
 
+/** Resolve each regLink ID into a display-ready event object with attendee counts. */
 async function buildHostedEvents(hostingEvents = []) {
   const events = [];
 
@@ -77,6 +87,7 @@ function getLoader() {
   return document.querySelector("page-loader");
 }
 
+/** Fetch the business account's hosted events and render them. */
 async function loadHostedEventsScreen(user) {
   hideError();
 
@@ -100,6 +111,7 @@ async function loadHostedEventsScreen(user) {
   }
 }
 
+/** Page entry point: show loader, wait for auth, load events, then hide loader. */
 function initHostedEventsScreen() {
   const loader = getLoader();
   loader?.setText("Loading hosted events...");

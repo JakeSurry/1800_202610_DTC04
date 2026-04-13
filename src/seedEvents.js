@@ -1,8 +1,16 @@
+/**
+ * seedEvents.js
+ * Seeds demo data into Firestore when the events collection is empty.
+ * Creates sample business accounts, events, and reg_links so the app
+ * has content to display during development or first-time setup.
+ */
+
 import { collection, getDocs, updateDoc, setDoc, doc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 import { createEvent } from "./events";
 import { createRegLink } from "./regLinks";
 
+// Demo business accounts to seed
 const SEED_BUSINESSES = [
   {
     id: "BIZ_SPORTSBAR",
@@ -50,6 +58,7 @@ const SEED_BUSINESSES = [
   },
 ];
 
+// Demo events with their associated reg_link data
 const SEED_DATA = [
   {
     regLink: {
@@ -94,7 +103,10 @@ const SEED_DATA = [
   },
 ];
 
-// Seeds the events and reg_links collections if events is empty
+/**
+ * Check if the events collection is empty; if so, seed business accounts,
+ * events, and reg_links. Skips entirely if any events already exist.
+ */
 export async function seedEventsAndRegLinks() {
   const eventsSnap = await getDocs(collection(db, "events"));
 

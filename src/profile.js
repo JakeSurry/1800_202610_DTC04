@@ -1,19 +1,29 @@
+/**
+ * profile.js
+ * Manages the personal user profile page (profile.html).
+ * Displays user info with real-time Firestore updates (onSnapshot),
+ * handles the edit profile form, and renders the user's registered events.
+ */
+
 import { onAuthReady } from "./authentication.js";
 import { db } from "./firebaseConfig.js";
 import { doc, onSnapshot, getDoc, setDoc } from "firebase/firestore";
 import { queryEvents } from "./events.js";
 import { renderEvents } from "./components/EventsRow.js";
 
+/** Convert underscored team names to display format (e.g. "New_Zealand" → "New Zealand"). */
 function formatTeamName(team) {
   return team ? team.replaceAll("_", " ") : "";
 }
 
+/** Extract up to two initials from a name for avatar fallback. */
 function getInitials(name) {
   if (!name) return "FF";
   const parts = String(name).trim().split(/\s+/).slice(0, 2);
   return parts.map((part) => part[0]?.toUpperCase() || "").join("") || "FF";
 }
 
+/** Wire up the profile view / edit view toggle and the edit form submission. */
 function initAuthUI() {
   const profileView = document.getElementById("profileView");
   const editProfileView = document.getElementById("editProfileView");
@@ -100,6 +110,7 @@ function initAuthUI() {
   });
 }
 
+/** Subscribe to the user's Firestore document and update all profile fields in real time. */
 function ShowProfileInfo() {
   const nameElement = document.getElementById("full-name");
   const displayElement = document.getElementById("display-name");
@@ -171,6 +182,7 @@ function ShowProfileInfo() {
   });
 }
 
+/** Load and render the events the user has registered for. */
 async function ShowProfileEvents() {
   onAuthReady(async (user) => {
     if (!user) return;

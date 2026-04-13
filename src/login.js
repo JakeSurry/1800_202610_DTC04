@@ -1,3 +1,10 @@
+/**
+ * login.js
+ * Handles the login form on login.html.
+ * Authenticates the user, then checks whether they are a business or personal
+ * account to redirect to the appropriate dashboard.
+ */
+
 import { loginUser, authErrorMessage } from "./authentication.js";
 import { db } from "/src/firebaseConfig.js";
 import { doc, getDoc } from "firebase/firestore";
@@ -7,6 +14,8 @@ function initLoginAuth() {
   const loginForm = document.getElementById("login");
 
   let errorTimeout;
+
+  // Show an error banner for 5 seconds
   function showError(msg) {
     alertEl.textContent = msg || "";
     alertEl.classList.remove("d-none");
@@ -33,6 +42,7 @@ function initLoginAuth() {
       const res = await loginUser(email, password);
       const user = res.user;
 
+      // Route business accounts to their dashboard, personal users to home
       const businessRef = doc(db, "business_accounts", user.uid);
       const businessSnap = await getDoc(businessRef);
 

@@ -1,3 +1,10 @@
+/**
+ * businessProfile.js
+ * Manages the business profile page (businessProfile.html).
+ * Loads the business account from Firestore, renders read-only profile fields,
+ * and handles the edit form for updating business details.
+ */
+
 import { db } from "/src/firebaseConfig.js";
 import { onAuthReady } from "./authentication.js";
 import { doc, getDoc, updateDoc, serverTimestamp } from "firebase/firestore";
@@ -20,16 +27,19 @@ function hideError() {
   alertEl.classList.add("hidden");
 }
 
+/** Return the value if truthy, otherwise a fallback string. */
 function safeText(value, fallback = "Not added") {
   return value && String(value).trim() ? value : fallback;
 }
 
+/** Extract up to two initials from a name for avatar fallback. */
 function getInitials(name) {
   if (!name) return "FF";
   const parts = String(name).trim().split(/\s+/).slice(0, 2);
   return parts.map((part) => part[0]?.toUpperCase() || "").join("") || "FF";
 }
 
+/** Render a profile picture or initials-based avatar into the avatar container. */
 function renderBusinessAvatar(data) {
   const avatarContainer = document.getElementById("business-avatar");
   if (!avatarContainer) return;
@@ -55,6 +65,7 @@ function renderBusinessAvatar(data) {
     `;
 }
 
+/** Fetch the business document from Firestore and populate both display and form fields. */
 async function loadBusinessProfile(user) {
   const businessRef = doc(db, "business_accounts", user.uid);
   const businessSnap = await getDoc(businessRef);
@@ -124,6 +135,7 @@ async function loadBusinessProfile(user) {
   document.getElementById("postalCode").value = data.postalCode || "";
 }
 
+/** Toggle visibility between the profile display and the edit form. */
 function wireViewToggle() {
   const editView = document.getElementById("editBusinessView");
   const toEdit = document.getElementById("toEdit");
@@ -139,6 +151,7 @@ function wireViewToggle() {
   });
 }
 
+/** Attach the submit handler that saves edited fields back to Firestore. */
 function wireFormSubmit(user) {
   const form = document.getElementById("editBusinessProfile");
   const editView = document.getElementById("editBusinessView");
@@ -177,6 +190,7 @@ function wireFormSubmit(user) {
   });
 }
 
+/** Page entry point: wait for auth, load profile data, and wire up UI interactions. */
 function initBusinessProfile() {
   const loader = getLoader();
   loader?.setText("Loading business profile...");

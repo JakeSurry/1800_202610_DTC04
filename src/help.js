@@ -1,5 +1,12 @@
+/**
+ * help.js
+ * Entry script for the Help / FAQ page (help.html).
+ * Renders FAQ cards into three sections: General, Fan, and Organization questions.
+ */
+
 import { renderQuestions } from "./components/FaqCards";
 
+// Placeholder FAQ content (to be replaced with real Q&A)
 const dummyQuestions = [
   {
     question: "Question 1",
@@ -23,6 +30,7 @@ const dummyQuestions = [
   },
 ];
 
+/** Render FAQ cards into each accordion section. */
 function setup() {
   renderQuestions(dummyQuestions, "general-questions");
   renderQuestions(dummyQuestions, "fan-questions");

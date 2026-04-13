@@ -1,3 +1,10 @@
+/**
+ * authentication.js
+ * Central authentication module for Fans Feast.
+ * Provides login, signup, logout, and auth-state helpers used across all pages.
+ * Handles both personal ("users") and business ("business_accounts") Firestore documents.
+ */
+
 import { auth, db } from "/src/firebaseConfig.js";
 import {
   signInWithEmailAndPassword,
@@ -8,14 +15,21 @@ import {
 } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
+/** Sign in an existing user with email + password. */
 export async function loginUser(email, password) {
   return signInWithEmailAndPassword(auth, email, password);
 }
 
+/** Subscribe to auth state changes; fires callback immediately with current user (or null). */
 export function onAuthReady(callback) {
   return onAuthStateChanged(auth, callback);
 }
 
+/**
+ * Auth-state guard for main.html.
+ * Redirects unauthenticated users to the landing page and
+ * displays a personalized welcome message based on account type.
+ */
 export function checkAuthState() {
   onAuthStateChanged(auth, async (user) => {
     if (!window.location.pathname.endsWith("main.html")) return;
@@ -32,6 +46,7 @@ export function checkAuthState() {
       const businessSnap = await getDoc(businessRef);
       const userSnap = await getDoc(userRef);
 
+      // Prioritize business account name, then personal account name
       if (businessSnap.exists()) {
         const businessData = businessSnap.data();
         $("#welcomeMessage").text(
@@ -56,6 +71,11 @@ export function checkAuthState() {
   });
 }
 
+/**
+ * Create a new account (personal or business).
+ * Registers the user with Firebase Auth, sets their display name,
+ * and writes the initial Firestore document to the appropriate collection.
+ */
 export async function signupUser(data) {
   const {
     accountType,
@@ -129,11 +149,13 @@ export async function signupUser(data) {
   return user;
 }
 
+/** Sign out the current user and redirect to the landing page. */
 export async function logoutUser() {
   await signOut(auth);
   window.location.href = "index.html";
 }
 
+/** Map Firebase Auth error codes to user-friendly messages. */
 export function authErrorMessage(error) {
   const code = (error?.code || "").toLowerCase();
 

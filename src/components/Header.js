@@ -1,21 +1,32 @@
+/**
+ * Header.js
+ * <site-navbar> web component — the main navigation header.
+ * Renders different navigation layouts based on account state:
+ *   - guest    — public links + login/signup
+ *   - user     — home, events, my events, profile, logout
+ *   - business — dashboard, hosted events, business profile, logout
+ * Includes a responsive sidebar (mobile) and desktop inline nav.
+ */
+
 import { logoutUser, onAuthReady } from "../authentication.js";
 import { db } from "/src/firebaseConfig.js";
 import { doc, getDoc } from "firebase/firestore";
 import { svgs } from "../svgs.js";
 
+// Centralized route map for all navigation links
 const ROUTES = {
   guestHome: "./index.html",
   userHome: "./main.html",
   businessDashboard: "./mainBusiness.html",
 
   events: "./events.html",
-  helpCenter: "./help",
+  helpCenter: "./help.html",
 
   login: "./login.html",
   personalSignup: "./signup.html",
   businessSignup: "./signUpBusiness.html",
 
-  myEvents: "./myEvents",
+  myEvents: "./myEvents.html",
   userProfile: "./profile.html",
 
   hostedEvents: "./hostedEvents.html",
@@ -24,6 +35,7 @@ const ROUTES = {
   createEvent: "./createEvent.html",
 };
 
+// Pre-rendered SVG icons for navigation items
 const ICONS = {
   home: svgs.home(22, 22, "currentColor"),
   events: svgs.stadium(22, 22, "currentColor"),
@@ -38,9 +50,7 @@ const ICONS = {
   matches: svgs.stadium(22, 22, "currentColor"),
 };
 
-/* =========================
-   NAV BY STATE
-========================= */
+// Navigation configuration per account state — defines quick actions, sidebar sections, and desktop links
 const NAV_CONFIG = {
   guest: {
     quickActions: [
@@ -199,6 +209,7 @@ class SiteNavbar extends HTMLElement {
     this.init();
   }
 
+  /** Render initial state then update once Firebase Auth resolves the current user. */
   async init() {
     this.renderTopBar();
     this.wireEvents();
@@ -211,6 +222,7 @@ class SiteNavbar extends HTMLElement {
     });
   }
 
+  /** Determine if the user is a guest, personal user, or business account. */
   async resolveAccountState(user) {
     if (!user) return "guest";
 
@@ -230,6 +242,7 @@ class SiteNavbar extends HTMLElement {
     }
   }
 
+  /** Fetch display name, subtitle, and avatar data for the sidebar account panel. */
   async resolveAccountInfo(user, state) {
     if (!user || state === "guest") {
       return {

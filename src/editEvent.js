@@ -1,20 +1,30 @@
+/**
+ * editEvent.js
+ * Handles the "Edit Event" form (editEvent.html).
+ * Loads existing event data into the form, allows updating fields and cover image,
+ * and supports event deletion. Requires an eventId URL parameter.
+ */
+
 import uploadImage from "./uploadImage";
 import { db } from "/src/firebaseConfig.js";
 import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 
+/** Extract the eventId query parameter from the current URL. */
 function getEventIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return params.get("eventId");
 }
 
+// Hide the image preview and show the file input picker
 function showImagePicker() {
   let imageInput = document.getElementById("image");
   let imageContainer = document.getElementById("imageContainer");
 
   imageContainer.classList.add("hidden");
-  imageInput.classList.toggle("hidden");
+  imageInput.classList.remove("hidden");
 }
 
+// Display the selected image preview and hide the file input
 function showPreview(image) {
   let imageInput = document.getElementById("image");
   let imageContainer = document.getElementById("imageContainer");
@@ -23,9 +33,10 @@ function showPreview(image) {
   coverImage.src = image;
 
   imageInput.classList.add("hidden");
-  imageContainer.classList.toggle("hidden");
+  imageContainer.classList.remove("hidden");
 }
 
+/** Initialize the edit event page: load data, wire image picker, form submit, and delete. */
 function initEditEvent() {
   const form = document.getElementById("editEventForm");
   const alertEl = document.getElementById("formAlert");

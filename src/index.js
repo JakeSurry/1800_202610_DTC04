@@ -1,7 +1,18 @@
+/**
+ * index.js
+ * Entry script for the public landing / logged-in home page (index.html).
+ * Renders featured match cards and three rows of curated events:
+ *   1. Most Popular  — sorted by attendee count
+ *   2. Night Events  — events starting at or after 7 PM
+ *   3. This Week     — events within the current calendar week
+ * Also wires the search bar to redirect to events.html with query params.
+ */
+
 import { renderEvents } from "./components/EventsRow.js";
 import { renderMatches } from "./components/MatchCard.js";
 import { queryEvents, getNumAttendees } from "./events";
 
+// Hard-coded featured matches displayed in the hero carousel
 const matches = [
   {
     image: "images/stadium1.png",
@@ -33,6 +44,7 @@ const matches = [
   },
 ];
 
+/** Set the hero banner's "Next Match" display. */
 function addMatch() {
   const match = {
     team1: "Brazil",
@@ -45,6 +57,7 @@ function addMatch() {
   heroSection.hero = match;
 }
 
+/** Fetch all events and return the top N sorted by attendee count (descending). */
 async function getMostPopularEvents(limitCount = 4) {
   const events = await queryEvents();
 
@@ -59,6 +72,7 @@ async function getMostPopularEvents(limitCount = 4) {
   return eventsWithCounts.slice(0, limitCount);
 }
 
+/** Return events whose start time is at or after the given hour (24h format). */
 async function getEventsAfterHour(hourAfter = 19, limitCount = 4) {
   const events = await queryEvents();
 
@@ -78,6 +92,7 @@ async function getEventsAfterHour(hourAfter = 19, limitCount = 4) {
   return afterHour.slice(0, limitCount);
 }
 
+/** Return events occurring within the current Sunday–Saturday calendar week. */
 async function getWeekEvents(limitCount = 4) {
   const events = await queryEvents();
   const now = new Date();
@@ -100,6 +115,7 @@ async function getWeekEvents(limitCount = 4) {
   return thisWeek.slice(0, limitCount);
 }
 
+/** Initialize the page: render match cards, curated event rows, and the hero. */
 async function setup() {
   renderMatches(matches, "matches-row");
 
@@ -113,6 +129,7 @@ async function setup() {
   addMatch();
 }
 
+// Forward search submissions to the events page with query parameters
 document.addEventListener("search:submit", (e) => {
   const { value, filters } = e.detail;
   const params = new URLSearchParams();

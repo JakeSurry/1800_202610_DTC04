@@ -1,3 +1,12 @@
+/**
+ * mainBusiness.js
+ * Entry script for the business dashboard (mainBusiness.html).
+ * Loads the business account, computes dashboard stats (hosted events,
+ * fans registered, events this week), renders the hero, hosted event
+ * cards, and the upcoming match schedule.
+ * Also gates "Create Event" behind a complete-profile check.
+ */
+
 import { onAuthReady } from "./authentication.js";
 import { db } from "/src/firebaseConfig.js";
 import { doc, getDoc } from "firebase/firestore";
@@ -5,9 +14,11 @@ import { renderHostedEvents } from "./components/UpcomingEvents.js";
 import { renderMatchSchedule } from "./components/matchSchedule.js";
 import { getRegLink, getRegLinkEvent } from "./regLinks.js";
 
+// Flags for the "Create Event" gate — set after profile completeness check
 let canCreateEvent = true;
 let missingBusinessFields = [];
 
+/** Format a YYYY-MM-DD string into a readable date (e.g. "April 26, 2026"). */
 function formatDate(dateString) {
   if (!dateString) return "";
   const date = new Date(dateString);
@@ -18,6 +29,7 @@ function formatDate(dateString) {
   });
 }
 
+/** Convert 24h "HH:MM" to a locale time string (e.g. "2:00 PM"). */
 function formatTime(timeString) {
   if (!timeString) return "";
   const [hours, minutes] = timeString.split(":");
@@ -33,10 +45,12 @@ function getLoader() {
   return document.querySelector("page-loader");
 }
 
+/** Safely trim a string value; returns non-strings as-is. */
 function safeTrim(value) {
   return typeof value === "string" ? value.trim() : value;
 }
 
+/** Check that all required business profile fields are filled in. */
 function isBusinessProfileComplete(businessData = {}) {
   const requiredFields = [
     "displayName",
@@ -57,6 +71,7 @@ function isBusinessProfileComplete(businessData = {}) {
   );
 }
 
+/** Return human-readable labels for any incomplete required profile fields. */
 function getMissingBusinessFields(businessData = {}) {
   const fieldLabels = {
     displayName: "Display Name",
@@ -77,6 +92,7 @@ function getMissingBusinessFields(businessData = {}) {
     .map(([, label]) => label);
 }
 
+/** Disable/enable all "Create Event" links based on profile completeness. */
 function updateCreateEventUI() {
   const createTargets = [
     ...document.querySelectorAll('a[href="./createEvent.html"]'),
@@ -107,6 +123,7 @@ function updateCreateEventUI() {
   });
 }
 
+/** Capture-phase click handler that blocks navigation to createEvent when profile is incomplete. */
 function installCreateEventBlocker() {
   document.addEventListener(
     "click",
@@ -135,6 +152,7 @@ function installCreateEventBlocker() {
   );
 }
 
+/** Set the business hero banner's welcome text and event count subtitle. */
 function setHeroText(name, eventsCount) {
   const hero = document.querySelector("hero-section-buisness");
   if (!hero) return;
@@ -163,6 +181,7 @@ function setHeroText(name, eventsCount) {
   }, 0);
 }
 
+/** Resolve each regLink ID into a display-ready event object with fan counts. */
 async function getHostedEventsFromBusiness(hostingEvents = []) {
   const hostedEvents = [];
 
@@ -194,6 +213,7 @@ async function getHostedEventsFromBusiness(hostingEvents = []) {
   return hostedEvents;
 }
 
+/** Count how many events fall within the next 7 days. */
 function getEventsThisWeekCount(events) {
   const now = new Date();
   const nextWeek = new Date();
@@ -206,6 +226,7 @@ function getEventsThisWeekCount(events) {
   }).length;
 }
 
+/** Return the soonest upcoming event by date+time. */
 function getNextMatch(events) {
   const upcoming = events
     .filter((event) => event.rawDate)
@@ -218,6 +239,7 @@ function getNextMatch(events) {
   return upcoming[0] || null;
 }
 
+/** Load all dashboard data: stats, hero, hosted events, and next match. */
 async function loadBusinessDashboard(user) {
   const eventNumber = document.getElementById("hostedNumber");
   const fansRegistered = document.getElementById("fansRegistered");
@@ -283,6 +305,7 @@ async function loadBusinessDashboard(user) {
   }
 }
 
+/** Render the hardcoded upcoming match schedule section. */
 function loadMatchSchedule() {
   const dummySchedule = [
     {
@@ -318,6 +341,7 @@ function loadMatchSchedule() {
   renderMatchSchedule(dummySchedule, "matches");
 }
 
+/** Page entry point: show loader, check auth, load dashboard, then hide loader. */
 function initBusinessScreen() {
   const loader = getLoader();
   loader?.setText("Loading dashboard...");

@@ -1,3 +1,12 @@
+/**
+ * regLinks.js
+ * Data access layer for the "reg_links" Firestore collection.
+ * Reg_links are the glue between events and businesses — each reg_link
+ * tracks which business hosts which event and stores the attendees list.
+ *
+ * Relationship: business_account ←(host)— reg_link —(event)→ event
+ */
+
 import {
   collection,
   doc,

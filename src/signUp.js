@@ -1,3 +1,10 @@
+/**
+ * signUp.js
+ * Handles personal account sign-up form submission.
+ * Validates inputs, creates a personal account via Firebase Auth + Firestore,
+ * and redirects to the home page on success.
+ */
+
 import { signupUser, authErrorMessage } from "./authentication.js";
 
 function signUpAuth() {
@@ -6,15 +13,17 @@ function signUpAuth() {
   const redirectUrl = "./index.html";
 
   let errorTimeout;
+
+  // Display an error message for 5 seconds, then auto-hide
   function showError(msg) {
     alertEl.textContent = msg || "";
-    alertEl.classList.remove("d-none");
+    alertEl.classList.remove("hidden");
     clearTimeout(errorTimeout);
     errorTimeout = setTimeout(hideError, 5000);
   }
 
   function hideError() {
-    alertEl.classList.add("d-none");
+    alertEl.classList.add("hidden");
     alertEl.textContent = "";
     clearTimeout(errorTimeout);
   }
@@ -22,29 +31,29 @@ function signUpAuth() {
   signupForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     hideError();
+
     const name = document.querySelector("#full_name")?.value?.trim() ?? "";
     const email = document.querySelector("#email")?.value?.trim() ?? "";
     const password = document.querySelector("#password")?.value ?? "";
     const phone = document.querySelector("#phoneNumber")?.value ?? "";
+
     if (!name || !email || !password) {
       showError("Please fill in name, email, phone number and password.");
       return;
     }
+
     try {
-      const res = await signupUser({
+      await signupUser({
         accountType: "personal",
         name,
         email,
         password,
         phone,
       });
-      console.log(res);
       location.href = redirectUrl;
     } catch (err) {
       showError(authErrorMessage(err));
       console.error(err);
-    } finally {
-      setSubmitDisabled(signupForm, false);
     }
   });
 }

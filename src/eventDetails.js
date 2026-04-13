@@ -1,3 +1,10 @@
+/**
+ * eventDetails.js
+ * Powers the single-event detail page (eventDetails.html).
+ * Loads event + venue data from Firestore, displays match info and venue details,
+ * handles join/unregister toggling, and shows other events at the same venue.
+ */
+
 import { renderEvents } from "./components/EventsRow.js";
 import { queryEvents, getNumAttendees, getEvent } from "./events";
 import { getRegLink, getRegLinkHost } from "./regLinks.js";
@@ -20,17 +27,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+/** Resolve the hosting business's ID by traversing event → regLink → host. */
 async function getVenueID(eventId) {
     const event = await getEvent(eventId)
     const regLink = await getRegLink(event.regLink)
     return regLink.host
 }
 
+/** Extract the eventId query parameter from the current URL. */
 function getEventIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return params.get("eventId");
 }
 
+/** Main initialization: load event/venue data, wire the join button, and render the page. */
 async function initEventDetails(user) {
   const alertEl = document.getElementById("formAlert");
   const joinBtn = document.getElementById("join");
@@ -195,6 +205,7 @@ async function initEventDetails(user) {
   loadEvent();
 }
 
+/** Check whether the current user is already registered for this event. */
 async function checkregStatus(user, eventId) {
   if (!user) return false;
 
@@ -203,6 +214,7 @@ async function checkregStatus(user, eventId) {
   return userData?.registeredEvents?.includes(eventId) || false;
 }
 
+/** Update the join button's text and styling based on auth and registration state. */
 function formatJoinButton(joinEventBtn, user, isRegistered) {
   if (!joinEventBtn) return;
 
@@ -223,6 +235,7 @@ function formatJoinButton(joinEventBtn, user, isRegistered) {
   }
 }
 
+/** Return an HTML snippet for a venue detail row (icon + text). */
 function venueInfoTemplate(value, svg) {
   return `<div class="flex gap-2">
             ${svg}
@@ -230,6 +243,7 @@ function venueInfoTemplate(value, svg) {
           </div>`;
 }
 
+/** Fetch other events hosted at the same venue (excluding the current one). */
 async function getOtherEvents() {
   const eventId = getEventIdFromUrl();
 
@@ -250,6 +264,7 @@ async function getOtherEvents() {
 
   return otherEvents;
 }
+/** Render the "other events at this venue" row. */
 async function setup() {
   const week = await getOtherEvents();
   renderEvents(week, "venue-events", "long");

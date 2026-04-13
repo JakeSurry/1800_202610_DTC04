@@ -1,10 +1,20 @@
+/**
+ * EventsRow.js
+ * Registers the <event-card> custom element and provides a helper
+ * to render an array of events into any container by ID.
+ */
+
 import { EventCard } from "./EventCard";
 
 customElements.define("event-card", EventCard);
 
+/**
+ * Render event cards into a container.
+ * @param {Array}  events             - Array of event objects from Firestore
+ * @param {string} eventsContainerId  - DOM id of the target container
+ * @param {string} cardType           - Visual style: "default", "compact", or "long"
+ */
 export function renderEvents(events, eventsContainerId, cardType = "default") {
-  /* This function takes an array of event objects and the id of the container where 
-  the events should be rendered and appends the rendered events to that container */
   const eventsContainer = $(`#${eventsContainerId}`);
   for (let event of events) {
     const eventCard = document.createElement("event-card");

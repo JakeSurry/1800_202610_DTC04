@@ -1,3 +1,13 @@
+/**
+ * EventCard.js
+ * <event-card> web component — renders a clickable event card with image,
+ * location, attendee count, date, and time. Supports visual styles:
+ *   - "default"  — fluid width
+ *   - "compact"  — constrained max-width (for profile sidebar)
+ *   - "long"     — wider minimum (for horizontal scroll rows)
+ * Navigates to eventDetails.html on click.
+ */
+
 import { svgs } from "./../svgs.js";
 import { getNumAttendees } from "../events.js";
 import { getEventLocation } from "../regLinks.js";
@@ -74,6 +84,7 @@ export class EventCard extends HTMLElement {
   }
 }
 
+/** Convert 24h "HH:MM" to 12h format (e.g. "2:00pm"). */
 export function formatTime(time) {
   if (!time) return "TBD";
   const [hoursStr, minutes] = time.split(":");
@@ -87,6 +98,7 @@ export function formatTime(time) {
   return `${hours}:${minutes}${period}`;
 }
 
+/** Format a start time + duration into a range string (e.g. "2:00pm - 4:00pm"). */
 export function formatTimeRange(startTime, duration) {
   if (!startTime) return "TBD";
   const start = formatTime(startTime);

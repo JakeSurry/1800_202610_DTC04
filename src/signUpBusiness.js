@@ -1,3 +1,10 @@
+/**
+ * signUpBusiness.js
+ * Handles business account sign-up form submission.
+ * Validates inputs, creates a business account via Firebase Auth + Firestore,
+ * and redirects to the business dashboard on success.
+ */
+
 import { signupUser, authErrorMessage } from "./authentication.js";
 
 function signUpAuth() {
@@ -7,6 +14,7 @@ function signUpAuth() {
 
   let errorTimeout;
 
+  // Display an error message for 5 seconds, then auto-hide
   function showError(msg) {
     alertEl.textContent = msg || "";
     alertEl.classList.remove("hidden");
