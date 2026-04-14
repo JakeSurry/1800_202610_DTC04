@@ -195,7 +195,7 @@ async function ShowProfileEvents() {
 
       const allEvents = await queryEvents();
       const myEvents = allEvents.filter((event) =>
-        registeredEventIds.includes(event.id),
+        registeredEventIds.includes(event.regLink),
       );
 
       renderEvents(myEvents, "events", "compact");
