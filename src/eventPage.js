@@ -6,6 +6,9 @@
 
 import { queryEvents } from "./events";
 import { getLoader } from "./components/Loader";
+import { EventCard } from "./components/EventCard";
+
+customElements.define("event-card", EventCard);
 
 const container = document.getElementById("events-list");
 
