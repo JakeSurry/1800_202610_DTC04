@@ -43,12 +43,12 @@ export class EventCard extends HTMLElement {
     }
 
     this.innerHTML = `
-        <button class="outline-hover rounded-lg" id="viewEvent">
+        <button class="outline-hover rounded-lg h-full w-70" id="viewEvent">
           <div class="white-card square-rounded-box items-start p-0 border-0 flex flex-col gap-2 pb-4 h-full  ${styleClass}" >
             <img
             src="${event.image ? event.image : "../images/dummyImage.jpg"}"
             alt="${event.name}"
-            class="w-full aspect-2/1 object-cover rounded-t-lg"
+            class="w-full aspect-2/1 object-cover rounded-t-lg h-[40%]"
             />
             <div class="space-y-2 px-5">
               <h4 class="line-clamp-1">${event.name}</h4>
