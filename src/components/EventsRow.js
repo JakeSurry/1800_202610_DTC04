@@ -14,7 +14,7 @@ customElements.define("event-card", EventCard);
  * @param {string} eventsContainerId  - DOM id of the target container
  * @param {string} cardType           - Visual style: "default", "compact", or "long"
  */
-export function renderEvents(events, eventsContainerId, cardType = "default") {
+export function renderEvents(events, eventsContainerId, cardType = "compact") {
   const eventsContainer = $(`#${eventsContainerId}`);
   for (let event of events) {
     const eventCard = document.createElement("event-card");

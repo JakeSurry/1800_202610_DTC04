@@ -66,7 +66,7 @@ async function getMostPopularEvents(limitCount = 4) {
     events.map(async (event) => {
       const numAttendees = await getNumAttendees(event.id);
       return { ...event, numAttendees };
-    })
+    }),
   );
 
   eventsWithCounts.sort((a, b) => b.numAttendees - a.numAttendees);
@@ -74,7 +74,7 @@ async function getMostPopularEvents(limitCount = 4) {
 }
 
 /** Return events whose start time is at or after the given hour (24h format). */
-async function getEventsAfterHour(hourAfter = 19, limitCount = 4) {
+async function getEventsAfterHour(hourAfter = 13, limitCount = 4) {
   const events = await queryEvents();
 
   const afterHour = events
@@ -121,7 +121,7 @@ async function setup() {
   renderMatches(matches, "matches-row");
 
   const mostPopular = await getMostPopularEvents();
-  const afterHour = await getEventsAfterHour(19);
+  const afterHour = await getEventsAfterHour(13);
   const week = await getWeekEvents();
 
   renderEvents(mostPopular, "first-row");
@@ -143,7 +143,7 @@ document.addEventListener("search:submit", (e) => {
 });
 
 $(document).ready(async function () {
-  const loader = getLoader()
+  const loader = getLoader();
   loader?.setText("Loading dashboard...");
   loader?.show();
   try {

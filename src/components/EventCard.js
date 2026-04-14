@@ -39,12 +39,12 @@ export class EventCard extends HTMLElement {
     } else if (this._visualStyle === "long") {
       styleClass = "min-w-90";
     } else {
-      styleClass = "min-w-0";
+      styleClass = "w-full";
     }
 
     this.innerHTML = `
-        <button class="outline-hover rounded-lg h-full w-70" id="viewEvent">
-          <div class="white-card square-rounded-box items-start p-0 border-0 flex flex-col gap-2 pb-4 h-full  ${styleClass}" >
+        <button class="outline-hover rounded-lg h-full ${styleClass}" id="viewEvent">
+          <div class="white-card square-rounded-box items-start p-0 border-0 flex flex-col gap-2 pb-4 h-full" >
             <img
             src="${event.image ? event.image : "../images/dummyImage.jpg"}"
             alt="${event.name}"
